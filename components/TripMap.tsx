@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { spotEmoji } from "@/lib/categories";
 import { boundsOf, pointAlong, sliceLine, type LngLat } from "@/lib/geo";
 import { findStop, legKey } from "@/lib/itinerary";
 import {
   cityColor,
   followZoom,
+  followZoomAt,
   iconRotation,
   legDuration,
   modeStyle,
@@ -17,6 +19,7 @@ import type { RouteSet } from "@/lib/routes";
 import {
   createMap,
   lineFeature,
+  readCamera,
   type Basemap,
   type MapEngine,
   type MarkerHandle,
@@ -64,11 +67,10 @@ function saveMessage(status: SaveStatus): string {
 
 function legIsVisible(
   day: number | null,
-  playing: boolean,
   fromDay: number | undefined,
   toDay: number | undefined,
 ): boolean {
-  if (playing || day === null) return true;
+  if (day === null) return true;
   return fromDay === day || toDay === day;
 }
 
@@ -111,6 +113,11 @@ function setLayerVisibility(engine: MapEngine, id: string, visible: boolean) {
   } catch {
     // Layers are added once the style has loaded.
   }
+}
+
+function smoothstep(value: number): number {
+  const t = Math.min(1, Math.max(0, value));
+  return t * t * (3 - 2 * t);
 }
 
 function wait(ms: number): Promise<void> {
@@ -306,20 +313,17 @@ export function TripMap({
         });
       }
 
-      const orderOnDay = new Map<number, number>();
       for (const stop of itinerary.stops) {
-        const order = (orderOnDay.get(stop.day) ?? 0) + 1;
-        orderOnDay.set(stop.day, order);
         const button = document.createElement("button");
         button.type = "button";
         button.className = "stop-marker";
         button.style.setProperty("--city", cityColor(stop.city));
-        button.setAttribute("aria-label", `${stop.name}, ${stop.city}, stop ${order}`);
+        button.setAttribute("aria-label", `${stop.name}, ${stop.city}`);
         const pulse = document.createElement("span");
         pulse.className = "pulse";
         const core = document.createElement("span");
         core.className = "core";
-        core.textContent = String(order);
+        core.textContent = spotEmoji(stop);
         button.append(pulse, core);
         button.addEventListener("click", (event) => {
           event.stopPropagation();
@@ -474,25 +478,40 @@ export function TripMap({
         return;
       }
       setLine(key, sliceLine(route.coordinates, 0));
-      let lastFollow = 0;
+      const travelStarted = performance.now();
+      const opening = readCamera(engine.map);
       await tween(legDuration(leg.mode, route.distanceMeters), isCurrent, (progress) => {
         const along = playbackProgress(leg.mode, progress);
         setLine(key, sliceLine(route.coordinates, along));
         const point = placeVehicle(index, along);
-        const now = performance.now();
-        if (point && now - lastFollow > 680) {
-          lastFollow = now;
-          engine.map.easeTo({
-            center: point,
-            zoom: followZoom(leg.mode, route.distanceMeters),
-            pitch: 42,
-            duration: 680,
-            essential: true,
-          });
-        }
+        if (!point) return;
+        const catchUp = smoothstep((performance.now() - travelStarted) / 240);
+        const locked = progress >= 1 || catchUp >= 1;
+        const zoom = followZoomAt(leg.mode, route.distanceMeters, along);
+        const pitch = locked ? 42 : opening.pitch + (42 - opening.pitch) * catchUp;
+        engine.map.jumpTo({
+          center: locked
+            ? point
+            : [
+                opening.center[0] + (point[0] - opening.center[0]) * catchUp,
+                opening.center[1] + (point[1] - opening.center[1]) * catchUp,
+              ],
+          zoom: locked ? zoom : opening.zoom + (zoom - opening.zoom) * catchUp,
+          pitch,
+          padding: PADDING,
+        });
       });
       if (!isCurrent()) return;
       setLine(key, route.coordinates);
+      const end = route.coordinates[route.coordinates.length - 1];
+      if (end) {
+        engine.map.jumpTo({
+          center: end,
+          zoom: followZoom(leg.mode, route.distanceMeters),
+          pitch: 42,
+          padding: PADDING,
+        });
+      }
       if (vehicleEl.current) vehicleEl.current.hidden = true;
     };
 
@@ -543,7 +562,7 @@ export function TripMap({
     for (const leg of itinerary.legs) {
       const from = findStop(itinerary, leg.from);
       const to = findStop(itinerary, leg.to);
-      const visible = legIsVisible(day, playing, from?.day, to?.day);
+      const visible = legIsVisible(day, from?.day, to?.day);
       const key = legKey(leg.from, leg.to);
       setLayerVisibility(engine, `leg-${key}`, visible);
       setLayerVisibility(engine, `leg-${key}-casing`, visible);
@@ -561,7 +580,7 @@ export function TripMap({
     for (const leg of itinerary.legs) {
       const from = findStop(itinerary, leg.from);
       const to = findStop(itinerary, leg.to);
-      const visible = legIsVisible(day, false, from?.day, to?.day);
+      const visible = legIsVisible(day, from?.day, to?.day);
       const route = routes[legKey(leg.from, leg.to)];
       if (!visible || !route) continue;
       engine.map.getSource(`leg-${legKey(leg.from, leg.to)}`)?.setData(lineFeature(route.coordinates));

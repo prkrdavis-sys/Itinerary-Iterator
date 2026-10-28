@@ -142,6 +142,18 @@ export function followZoom(mode: Mode, meters: number): number {
   }
 }
 
+function zoomPullback(meters: number): number {
+  const kilometers = Math.max(0, meters) / 1000;
+  const scaled = Math.log10(1 + kilometers) / Math.log10(1 + 280);
+  return 0.22 + Math.min(1, scaled) * 1.55;
+}
+
+export function followZoomAt(mode: Mode, meters: number, along: number): number {
+  const t = Math.min(1, Math.max(0, along));
+  const bulge = Math.sin(Math.PI * t);
+  return followZoom(mode, meters) - zoomPullback(meters) * bulge;
+}
+
 const cityColors: Record<string, string> = {
   Amsterdam: "#e07a3d",
   Rotterdam: "#2b6f9a",

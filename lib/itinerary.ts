@@ -72,6 +72,18 @@ function dateParts(iso: string): { year: number; month: number; day: number } {
   return { year, month, day };
 }
 
+export function formatClock(value: string): string {
+  const [hourText, minute] = value.split(":");
+  const hour = Number(hourText);
+  const meridiem = hour >= 12 ? "PM" : "AM";
+  const hour12 = hour % 12 || 12;
+  return `${hour12}:${minute} ${meridiem}`;
+}
+
+export function formatClockRange(start: string, end: string): string {
+  return `${formatClock(start)}–${formatClock(end)}`;
+}
+
 export function formatRange(start: string, end: string): string {
   const from = dateParts(start);
   const to = dateParts(end);

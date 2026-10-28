@@ -264,14 +264,13 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
     const leg = itinerary.legs[outgoingIndex];
     const destination = leg ? findStop(itinerary, leg.to) : undefined;
     setPlaying(true);
-    if (destination && day !== null && destination.day !== day) {
-      setDay(destination.day);
-    }
     await playLeg(outgoingIndex);
     if (playToken.current !== token) return;
+    const nextDay = destination && day !== null && destination.day !== day ? destination.day : day;
+    if (nextDay !== day) setDay(nextDay);
     if (leg) setSelectedId(leg.to);
     setPlaying(false);
-    setStatus(tripStatus(destination && day !== null && destination.day !== day ? destination.day : day));
+    setStatus(tripStatus(nextDay));
   }
 
   function togglePlay() {
@@ -279,7 +278,11 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
       stopPlayback();
       return;
     }
-    void playTrip(outgoingIndex >= 0 ? outgoingIndex : 0);
+    if (selectedId) {
+      void playNext();
+      return;
+    }
+    void playTrip(0);
   }
 
   return (
@@ -433,6 +436,7 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
               <button
                 type="button"
                 onClick={togglePlay}
+                disabled={!playing && selectedId !== null && outgoingIndex < 0}
                 aria-pressed={playing}
                 className={playing ? "dock-button is-play is-pause" : "dock-button is-play"}
               >

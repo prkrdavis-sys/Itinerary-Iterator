@@ -2,7 +2,7 @@
   "trip": {
     "title": "Rotterdam Halloween",
     "subtitle": "Late October from Amsterdam to a Rotterdam Halloween night, then Ghent, Damme, and Bruges by rental car.",
-    "start": "2026-10-29",
+    "start": "2026-10-30",
     "end": "2026-11-04",
     "travelers": "Two travelers",
     "note": "Partner joins in Amsterdam on Friday 10/30. Tuesday night in Amsterdam is still being chosen."
@@ -12,8 +12,11 @@
       "id": "schiphol-arrival",
       "city": "Amsterdam",
       "name": "Schiphol",
-      "coords": [4.7639, 52.3086],
-      "day": 2,
+      "coords": [
+        4.7639,
+        52.3086
+      ],
+      "day": 1,
       "start": "14:15",
       "end": "14:45",
       "category": "transit",
@@ -27,8 +30,11 @@
       "id": "holiday-inn-sloterdijk",
       "city": "Amsterdam",
       "name": "Holiday Inn Sloterdijk Station",
-      "coords": [4.8384, 52.3892],
-      "day": 2,
+      "coords": [
+        4.8384,
+        52.3892
+      ],
+      "day": 1,
       "start": "15:00",
       "end": "17:00",
       "category": "stay",
@@ -42,8 +48,11 @@
       "id": "amsterdam-first-evening",
       "city": "Amsterdam",
       "name": "Amsterdam evening",
-      "coords": [4.8836, 52.3724],
-      "day": 2,
+      "coords": [
+        4.8836,
+        52.3724
+      ],
+      "day": 1,
       "start": "17:30",
       "end": "22:00",
       "category": "neighborhood",
@@ -57,8 +66,11 @@
       "id": "amsterdam-saturday",
       "city": "Amsterdam",
       "name": "Amsterdam by bike",
-      "coords": [4.8867, 52.3794],
-      "day": 3,
+      "coords": [
+        4.8867,
+        52.3794
+      ],
+      "day": 2,
       "start": "09:30",
       "end": "16:00",
       "category": "activity",
@@ -72,8 +84,11 @@
       "id": "amsterdam-centraal",
       "city": "Amsterdam",
       "name": "Amsterdam Centraal",
-      "coords": [4.9003, 52.378],
-      "day": 3,
+      "coords": [
+        4.9003,
+        52.378
+      ],
+      "day": 2,
       "start": "16:45",
       "end": "17:10",
       "category": "transit",
@@ -87,8 +102,11 @@
       "id": "rotterdam-centraal",
       "city": "Rotterdam",
       "name": "Rotterdam Centraal",
-      "coords": [4.4699, 51.9244],
-      "day": 3,
+      "coords": [
+        4.4699,
+        51.9244
+      ],
+      "day": 2,
       "start": "18:15",
       "end": "18:35",
       "category": "transit",
@@ -102,8 +120,11 @@
       "id": "rotterdam-airbnb",
       "city": "Rotterdam",
       "name": "Rotterdam Airbnb",
-      "coords": [4.4772, 51.9225],
-      "day": 3,
+      "coords": [
+        4.4772,
+        51.9225
+      ],
+      "day": 2,
       "start": "18:45",
       "end": "22:00",
       "category": "stay",
@@ -117,8 +138,11 @@
       "id": "rotterdam-halloween-rave",
       "city": "Rotterdam",
       "name": "Rotterdam Halloween rave",
-      "coords": [4.4886, 51.9012],
-      "day": 3,
+      "coords": [
+        4.4886,
+        51.9012
+      ],
+      "day": 2,
       "start": "23:00",
       "end": "23:59",
       "category": "activity",
@@ -132,8 +156,11 @@
       "id": "kinderdijk",
       "city": "Kinderdijk",
       "name": "Kinderdijk",
-      "coords": [4.6336, 51.8838],
-      "day": 4,
+      "coords": [
+        4.6336,
+        51.8838
+      ],
+      "day": 3,
       "start": "10:00",
       "end": "12:15",
       "category": "activity",
@@ -147,8 +174,11 @@
       "id": "rotterdam-sunday",
       "city": "Rotterdam",
       "name": "Rotterdam",
-      "coords": [4.4869, 51.92],
-      "day": 4,
+      "coords": [
+        4.4869,
+        51.92
+      ],
+      "day": 3,
       "start": "13:30",
       "end": "18:00",
       "category": "neighborhood",
@@ -162,8 +192,11 @@
       "id": "heroine",
       "city": "Rotterdam",
       "name": "Heroine",
-      "coords": [4.4508, 51.9189],
-      "day": 4,
+      "coords": [
+        4.4508,
+        51.9189
+      ],
+      "day": 3,
       "start": "19:00",
       "end": "21:00",
       "category": "food",
@@ -177,8 +210,11 @@
       "id": "rotterdam-airbnb-sunday",
       "city": "Rotterdam",
       "name": "Rotterdam Airbnb",
-      "coords": [4.4772, 51.9225],
-      "day": 4,
+      "coords": [
+        4.4772,
+        51.9225
+      ],
+      "day": 3,
       "start": "21:30",
       "end": "23:30",
       "category": "stay",
@@ -192,8 +228,11 @@
       "id": "rtm-sixt-pickup",
       "city": "Rotterdam",
       "name": "Rotterdam The Hague Airport",
-      "coords": [4.4372, 51.9569],
-      "day": 5,
+      "coords": [
+        4.4372,
+        51.9569
+      ],
+      "day": 4,
       "start": "09:00",
       "end": "09:35",
       "category": "transit",
@@ -207,8 +246,11 @@
       "id": "ghent",
       "city": "Ghent",
       "name": "Gravensteen and Graslei",
-      "coords": [3.7184, 51.0574],
-      "day": 5,
+      "coords": [
+        3.7184,
+        51.0574
+      ],
+      "day": 4,
       "start": "11:30",
       "end": "15:00",
       "category": "sight",
@@ -222,8 +264,11 @@
       "id": "damme",
       "city": "Damme",
       "name": "Damme",
-      "coords": [3.2834, 51.2514],
-      "day": 5,
+      "coords": [
+        3.2834,
+        51.2514
+      ],
+      "day": 4,
       "start": "16:10",
       "end": "16:50",
       "category": "sight",
@@ -237,8 +282,11 @@
       "id": "bruges-markt",
       "city": "Bruges",
       "name": "Markt and Burg",
-      "coords": [3.2243, 51.2084],
-      "day": 5,
+      "coords": [
+        3.2243,
+        51.2084
+      ],
+      "day": 4,
       "start": "17:15",
       "end": "18:30",
       "category": "sight",
@@ -252,8 +300,11 @@
       "id": "bruges-dinner",
       "city": "Bruges",
       "name": "Dinner in Bruges",
-      "coords": [3.2261, 51.2092],
-      "day": 5,
+      "coords": [
+        3.2261,
+        51.2092
+      ],
+      "day": 4,
       "start": "19:00",
       "end": "20:30",
       "category": "food",
@@ -267,8 +318,11 @@
       "id": "bruges-guesthouse",
       "city": "Bruges",
       "name": "Bruges guesthouse (requested)",
-      "coords": [3.2272, 51.2076],
-      "day": 5,
+      "coords": [
+        3.2272,
+        51.2076
+      ],
+      "day": 4,
       "start": "21:00",
       "end": "23:30",
       "category": "stay",
@@ -282,8 +336,11 @@
       "id": "bruges-tuesday-morning",
       "city": "Bruges",
       "name": "Belfry and canals",
-      "coords": [3.2249, 51.208],
-      "day": 6,
+      "coords": [
+        3.2249,
+        51.208
+      ],
+      "day": 5,
       "start": "08:30",
       "end": "12:00",
       "category": "sight",
@@ -297,8 +354,11 @@
       "id": "lissewege",
       "city": "Lissewege",
       "name": "Lissewege",
-      "coords": [3.1958, 51.2949],
-      "day": 6,
+      "coords": [
+        3.1958,
+        51.2949
+      ],
+      "day": 5,
       "start": "12:25",
       "end": "13:05",
       "category": "neighborhood",
@@ -312,8 +372,11 @@
       "id": "de-fonteintjes",
       "city": "Zuienkerke",
       "name": "De Fonteintjes",
-      "coords": [3.1428, 51.3215],
-      "day": 6,
+      "coords": [
+        3.1428,
+        51.3215
+      ],
+      "day": 5,
       "start": "13:20",
       "end": "14:45",
       "category": "activity",
@@ -327,8 +390,11 @@
       "id": "blankenberge-lighthouse",
       "city": "Blankenberge",
       "name": "Blankenberge lighthouse",
-      "coords": [3.1542, 51.3134],
-      "day": 6,
+      "coords": [
+        3.1542,
+        51.3134
+      ],
+      "day": 5,
       "start": "15:00",
       "end": "15:35",
       "category": "sight",
@@ -342,8 +408,11 @@
       "id": "sixt-drop-amsterdam",
       "city": "Amsterdam",
       "name": "Sixt drop-off (De Ruijterkade)",
-      "coords": [4.8948, 52.3772],
-      "day": 6,
+      "coords": [
+        4.8948,
+        52.3772
+      ],
+      "day": 5,
       "start": "20:30",
       "end": "21:30",
       "category": "transit",
@@ -357,8 +426,11 @@
       "id": "amsterdam-tuesday-draft",
       "city": "Amsterdam",
       "name": "Amsterdam (draft)",
-      "coords": [4.8852, 52.36],
-      "day": 6,
+      "coords": [
+        4.8852,
+        52.36
+      ],
+      "day": 5,
       "start": "22:00",
       "end": "23:30",
       "category": "stay",
@@ -372,8 +444,11 @@
       "id": "schiphol-departure",
       "city": "Amsterdam",
       "name": "Schiphol",
-      "coords": [4.7639, 52.3086],
-      "day": 7,
+      "coords": [
+        4.7639,
+        52.3086
+      ],
+      "day": 6,
       "start": "08:00",
       "end": "10:30",
       "category": "transit",
@@ -393,9 +468,18 @@
       "arrive": "15:00",
       "notes": "One stop toward Amsterdam on the Sprinter or Intercity.",
       "via": [
-        [4.79, 52.322],
-        [4.82, 52.355],
-        [4.838, 52.389]
+        [
+          4.79,
+          52.322
+        ],
+        [
+          4.82,
+          52.355
+        ],
+        [
+          4.838,
+          52.389
+        ]
       ]
     },
     {
@@ -406,9 +490,18 @@
       "arrive": "17:25",
       "notes": "Back toward Centraal, then walk into the canal belt.",
       "via": [
-        [4.838, 52.389],
-        [4.868, 52.388],
-        [4.9003, 52.378]
+        [
+          4.838,
+          52.389
+        ],
+        [
+          4.868,
+          52.388
+        ],
+        [
+          4.9003,
+          52.378
+        ]
       ]
     },
     {
@@ -419,10 +512,22 @@
       "arrive": "09:25",
       "notes": "Morning train from Sloterdijk to Centraal to pick up bikes.",
       "via": [
-        [4.9003, 52.378],
-        [4.868, 52.388],
-        [4.838, 52.389],
-        [4.8867, 52.3794]
+        [
+          4.9003,
+          52.378
+        ],
+        [
+          4.868,
+          52.388
+        ],
+        [
+          4.838,
+          52.389
+        ],
+        [
+          4.8867,
+          52.3794
+        ]
       ]
     },
     {
@@ -441,12 +546,30 @@
       "arrive": "18:15",
       "notes": "NS Intercity toward Rotterdam, about one hour ten.",
       "via": [
-        [4.9003, 52.378],
-        [4.86, 52.35],
-        [4.75, 52.28],
-        [4.65, 52.05],
-        [4.55, 51.92],
-        [4.4699, 51.9244]
+        [
+          4.9003,
+          52.378
+        ],
+        [
+          4.86,
+          52.35
+        ],
+        [
+          4.75,
+          52.28
+        ],
+        [
+          4.65,
+          52.05
+        ],
+        [
+          4.55,
+          51.92
+        ],
+        [
+          4.4699,
+          51.9244
+        ]
       ]
     },
     {
@@ -473,11 +596,26 @@
       "arrive": "10:45",
       "notes": "Sunday morning: metro and bus toward the Kinderdijk ferry.",
       "via": [
-        [4.488, 51.901],
-        [4.477, 51.922],
-        [4.52, 51.91],
-        [4.58, 51.89],
-        [4.6336, 51.8838]
+        [
+          4.488,
+          51.901
+        ],
+        [
+          4.477,
+          51.922
+        ],
+        [
+          4.52,
+          51.91
+        ],
+        [
+          4.58,
+          51.89
+        ],
+        [
+          4.6336,
+          51.8838
+        ]
       ]
     },
     {
@@ -488,10 +626,22 @@
       "arrive": "13:25",
       "notes": "Same corridor back toward the city.",
       "via": [
-        [4.6336, 51.8838],
-        [4.58, 51.89],
-        [4.52, 51.91],
-        [4.4869, 51.92]
+        [
+          4.6336,
+          51.8838
+        ],
+        [
+          4.58,
+          51.89
+        ],
+        [
+          4.52,
+          51.91
+        ],
+        [
+          4.4869,
+          51.92
+        ]
       ]
     },
     {
@@ -518,9 +668,18 @@
       "arrive": "08:55",
       "notes": "Metro or taxi toward RTM for the nine o'clock pickup.",
       "via": [
-        [4.477, 51.922],
-        [4.46, 51.935],
-        [4.4372, 51.9569]
+        [
+          4.477,
+          51.922
+        ],
+        [
+          4.46,
+          51.935
+        ],
+        [
+          4.4372,
+          51.9569
+        ]
       ]
     },
     {
@@ -619,9 +778,18 @@
       "arrive": "08:05",
       "notes": "Early train to the airport for the ten-thirty flight.",
       "via": [
-        [4.885, 52.36],
-        [4.83, 52.34],
-        [4.7639, 52.3086]
+        [
+          4.885,
+          52.36
+        ],
+        [
+          4.83,
+          52.34
+        ],
+        [
+          4.7639,
+          52.3086
+        ]
       ]
     }
   ]

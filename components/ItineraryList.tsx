@@ -2,7 +2,15 @@
 
 import { motion } from "framer-motion";
 import { categoryLabel, stopPhotos } from "@/lib/categories";
-import { dateForDay, dayCities, daysOf, legInto, stopsOnDay } from "@/lib/itinerary";
+import {
+  dateForDay,
+  dayCities,
+  daysOf,
+  formatClock,
+  formatClockRange,
+  legInto,
+  stopsOnDay,
+} from "@/lib/itinerary";
 import { modeStyle } from "@/lib/modes";
 import type { Itinerary } from "@/lib/schema";
 
@@ -55,7 +63,7 @@ export function ItineraryList({ itinerary, day, onClose, onPick }: ItineraryList
                         <span aria-hidden="true">{style.emoji} </span>
                         {style.label}
                         {incoming.depart && incoming.arrive
-                          ? `, ${incoming.depart}–${incoming.arrive}`
+                          ? `, ${formatClockRange(incoming.depart, incoming.arrive)}`
                           : ""}
                       </p>
                     ) : null}
@@ -75,7 +83,7 @@ export function ItineraryList({ itinerary, day, onClose, onPick }: ItineraryList
                           {categoryLabel(stop.category)}
                         </span>
                       </span>
-                      <span className="stop-time">{stop.start}</span>
+                      <span className="stop-time">{formatClock(stop.start)}</span>
                     </button>
                   </li>
                 );

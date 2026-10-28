@@ -44,12 +44,21 @@ type MapLike = {
       absolutePadding?: boolean;
     },
   ) => void;
+  getCenter: () => { lng: number; lat: number };
+  getZoom: () => number;
+  getPitch: () => number;
   easeTo: (options: {
     center: LngLat;
     zoom?: number;
     pitch?: number;
     duration?: number;
     essential?: boolean;
+  }) => void;
+  jumpTo: (options: {
+    center: LngLat;
+    zoom?: number;
+    pitch?: number;
+    padding?: { top: number; bottom: number; left: number; right: number };
   }) => void;
   flyTo: (options: {
     center: LngLat;
@@ -193,6 +202,15 @@ export function createMap(container: HTMLElement, basemap: Basemap): MapEngine {
       return neverBasemap;
     }
   }
+}
+
+export function readCamera(map: MapLike): { center: LngLat; zoom: number; pitch: number } {
+  const center = map.getCenter();
+  return {
+    center: [center.lng, center.lat],
+    zoom: map.getZoom(),
+    pitch: map.getPitch(),
+  };
 }
 
 export function lineFeature(coordinates: LngLat[]): LineFeature {

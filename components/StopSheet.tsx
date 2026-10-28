@@ -3,6 +3,7 @@
 import { useDragControls, motion } from "framer-motion";
 import { categoryLabel, stopPhotos } from "@/lib/categories";
 import { appleMapsUrl } from "@/lib/geo";
+import { formatClockRange } from "@/lib/itinerary";
 import { modeStyle } from "@/lib/modes";
 import type { Leg, Stop } from "@/lib/schema";
 
@@ -33,7 +34,7 @@ export function StopSheet({
   const arrived =
     incoming && incomingStyle
       ? incoming.depart && incoming.arrive
-        ? `${incomingStyle.label} ${incoming.depart}–${incoming.arrive}`
+        ? `${incomingStyle.label} ${formatClockRange(incoming.depart, incoming.arrive)}`
         : incomingStyle.label
       : null;
   const photos = stopPhotos(stop);
@@ -79,7 +80,7 @@ export function StopSheet({
               {stop.name}
             </h2>
             <p className="mt-2 font-display text-[1.65rem] leading-none text-gold tabular-nums">
-              {stop.start}–{stop.end}
+              {formatClockRange(stop.start, stop.end)}
             </p>
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <span className={`cat-pill cat-${stop.category}`}>{categoryLabel(stop.category)}</span>

@@ -215,39 +215,31 @@ body {
 }
 
 .stop-marker .core {
-  inset: 8px;
+  inset: 7px;
   display: grid;
   place-items: center;
-  background: #f4efe6;
-  color: #100e0c;
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
+  background: var(--city);
+  font-size: 16px;
   line-height: 1;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
   box-shadow:
-    0 0 0 3px var(--city),
-    0 8px 16px rgba(8, 6, 4, 0.35);
+    0 0 0 2px rgba(12, 10, 8, 0.85),
+    0 0 12px var(--city);
 }
 
 .stop-marker .pulse {
   inset: 6px;
   background: var(--city);
-  opacity: 0;
-}
-
-.stop-marker.is-active .pulse {
   opacity: 0.45;
   animation: marker-pulse 2.4s ease-out infinite;
 }
 
 .stop-marker.is-active .core {
-  inset: 6px;
-  background: #f0b429;
-  font-size: 14px;
+  inset: 4px;
+  font-size: 18px;
   box-shadow:
-    0 0 0 3px #100e0c,
-    0 0 0 6px #f0b429;
+    0 0 0 3px #f0b429,
+    0 0 16px var(--city);
 }
 
 .stop-marker.is-dim,
