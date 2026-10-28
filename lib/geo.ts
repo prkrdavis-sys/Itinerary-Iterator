@@ -116,6 +116,57 @@ export function densify(points: LngLat[], wobble: number): LngLat[] {
   return line;
 }
 
+function catmull(
+  p0: number,
+  p1: number,
+  p2: number,
+  p3: number,
+  t: number,
+): number {
+  const t2 = t * t;
+  const t3 = t2 * t;
+  return (
+    0.5 *
+    (2 * p1 +
+      (-p0 + p2) * t +
+      (2 * p0 - 5 * p1 + 4 * p2 - p3) * t2 +
+      (-p0 + 3 * p1 - 3 * p2 + p3) * t3)
+  );
+}
+
+export function smoothThrough(points: LngLat[], samples = 8): LngLat[] {
+  if (points.length < 2) return points.slice();
+  if (points.length === 2) return points.slice();
+  const line: LngLat[] = [];
+  for (let index = 0; index < points.length - 1; index += 1) {
+    const p0 = points[Math.max(0, index - 1)];
+    const p1 = points[index];
+    const p2 = points[index + 1];
+    const p3 = points[Math.min(points.length - 1, index + 2)];
+    for (let step = 0; step < samples; step += 1) {
+      const t = step / samples;
+      line.push([
+        catmull(p0[0], p1[0], p2[0], p3[0], t),
+        catmull(p0[1], p1[1], p2[1], p3[1], t),
+      ]);
+    }
+  }
+  line.push(points[points.length - 1]);
+  return line;
+}
+
+export function sketchArc(a: LngLat, b: LngLat): LngLat[] {
+  const dx = b[0] - a[0];
+  const dy = b[1] - a[1];
+  const length = Math.hypot(dx, dy) || 1;
+  const bend = Math.min(0.2, length * 0.16);
+  const mid: LngLat = [
+    (a[0] + b[0]) / 2 + (-dy / length) * bend,
+    (a[1] + b[1]) / 2 + (dx / length) * bend,
+  ];
+  return smoothThrough([a, mid, b], 14);
+}
+
 export function boundsOf(
   coords: LngLat[],
 ): [[number, number], [number, number]] {

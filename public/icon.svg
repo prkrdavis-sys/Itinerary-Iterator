@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Canals to Canals">
+  <rect width="64" height="64" rx="16" fill="#100e0c"/>
+  <path d="M12 48c8-16 12-18 20-8s8 4 20-16" fill="none" stroke="#f0b429" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="12" cy="48" r="3.2" fill="#f0b429"/>
+  <circle cx="52" cy="24" r="3.2" fill="#e07a6a"/>
+</svg>

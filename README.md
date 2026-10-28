@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Canals to Canals
 
-## Getting Started
+An iPhone-first trip map for a long weekend from Amsterdam to Rotterdam to Bruges. The route draws itself, then a car, train, bike, bus, or walk moves along each leg.
 
-First, run the development server:
+The live site uses a dark OpenFreeMap style when no Mapbox token is set, so it works as soon as it is deployed.
+
+## Edit the trip
+
+`data/itinerary.json` is the only itinerary. Zod in `lib/schema.ts` checks it.
 
 ```bash
+npm run validate
+npm run routes
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`npm run build` validates the JSON and rebuilds route geometry before Next compiles. Bad data fails the build.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## What Grokbot can read
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This GitHub repository is public. Grokbot can read the current plan from the raw file:
 
-## Learn More
+https://raw.githubusercontent.com/prkrdavis-sys/Itinerary-Iterator/main/data/itinerary.json
 
-To learn more about Next.js, take a look at the following resources:
+Paste `GROKBOT_PROMPT.md` into Grokbot when you want a replacement JSON file. Commit the result to `data/itinerary.json`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+A Cursor-hosted copy of this repo is not public. Grokbot cannot read that remote. Use the GitHub raw URL above.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Mapbox
 
-## Deploy on Vercel
+The map and the route build both work without a token.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Create a token at [mapbox.com](https://account.mapbox.com/access-tokens/).
+2. For the dusk Mapbox Standard style in the browser, set `NEXT_PUBLIC_MAPBOX_TOKEN`.
+3. For driving, cycling, and walking geometry at build time, set `MAPBOX_TOKEN`. The route script also accepts `NEXT_PUBLIC_MAPBOX_TOKEN` if that is the only one you have.
+4. Put them in `.env.local` for local builds, and in the Vercel project for production. Do not commit either value.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Without those variables the site uses [OpenFreeMap](https://openfreemap.org/) dark tiles and [OSRM](https://project-osrm.org/) for car, bike, and walk. Train and bus legs follow the `via` waypoints in the JSON (the Schiphol–Centraal railway, and the ferry across the IJ).
+
+Rebuild routes after changing stops:
+
+```bash
+npm run routes
+```
+
+Committed geometry lives in `data/routes.generated.json`. If a directions request fails, the script keeps the previous line for that leg, or draws a simple arc.

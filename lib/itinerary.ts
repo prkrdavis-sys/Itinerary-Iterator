@@ -50,13 +50,47 @@ export function dayCities(itinerary: Itinerary, day: number): string {
   return cities.join(" · ");
 }
 
+const MONTHS = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+] as const;
+
+const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"] as const;
+
+function dateParts(iso: string): { year: number; month: number; day: number } {
+  const [year, month, day] = iso.split("-").map(Number);
+  return { year, month, day };
+}
+
 export function formatRange(start: string, end: string): string {
-  const startDate = new Date(`${start}T00:00:00`);
-  const endDate = new Date(`${end}T00:00:00`);
-  const startMonth = startDate.toLocaleDateString("en-GB", { month: "short" });
-  const endMonth = endDate.toLocaleDateString("en-GB", { month: "short" });
-  if (startDate.getMonth() === endDate.getMonth()) {
-    return `${startDate.getDate()}–${endDate.getDate()} ${startMonth} ${startDate.getFullYear()}`;
+  const from = dateParts(start);
+  const to = dateParts(end);
+  const startMonth = MONTHS[from.month - 1] ?? "";
+  const endMonth = MONTHS[to.month - 1] ?? "";
+  if (from.month === to.month && from.year === to.year) {
+    return `${from.day}–${to.day} ${startMonth} ${from.year}`;
   }
-  return `${startDate.getDate()} ${startMonth} – ${endDate.getDate()} ${endMonth} ${endDate.getFullYear()}`;
+  return `${from.day} ${startMonth} – ${to.day} ${endMonth} ${to.year}`;
+}
+
+export function dateForDay(start: string, day: number): string {
+  const parts = dateParts(start);
+  const utc = new Date(Date.UTC(parts.year, parts.month - 1, parts.day + day - 1));
+  const weekday = WEEKDAYS[utc.getUTCDay()];
+  const month = MONTHS[utc.getUTCMonth()];
+  return `${weekday} ${utc.getUTCDate()} ${month}`;
+}
+
+export function legIndexFrom(itinerary: Itinerary, stopId: string): number {
+  return itinerary.legs.findIndex((leg) => leg.from === stopId);
 }

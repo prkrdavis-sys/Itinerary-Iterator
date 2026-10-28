@@ -1,26 +1,217 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-outfit), "Avenir Next", sans-serif;
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --color-gold: #f0b429;
+  --color-cream: #f4efe6;
+  --color-mist: #cbbba6;
+  --color-ink: #100e0c;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
+  background: #0c0a08;
+  color: var(--color-cream);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100dvh;
+  font-family: var(--font-sans);
+  overscroll-behavior: none;
+}
+
+.stage {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(880px 480px at 50% -10%, #4a3418 0%, transparent 58%),
+    #0c0a08;
+}
+
+.phone {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: #14110e;
+  overscroll-behavior: none;
+}
+
+@media (min-width: 900px) {
+  .phone {
+    width: 390px;
+    height: min(844px, calc(100dvh - 32px));
+    border-radius: 42px;
+    box-shadow:
+      0 0 0 11px #1c1712,
+      0 0 0 12px rgba(240, 180, 41, 0.42),
+      0 36px 80px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.glass {
+  background: rgba(18, 14, 11, 0.74);
+  border: 1px solid rgba(240, 180, 41, 0.24);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+}
+
+.chip-row {
+  display: flex;
+  gap: 0.4rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.chip-row::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex: 0 0 auto;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #f4efe6;
+  padding: 0.45rem 0.8rem 0.4rem;
+  font-size: 12px;
+  line-height: 1.1;
+  text-align: left;
+}
+
+.chip-on {
+  background: #f0b429;
+  border-color: #f0b429;
+  color: #100e0c;
+}
+
+.chip-on span {
+  color: rgba(16, 14, 12, 0.62);
+}
+
+.dock-button {
+  height: 3rem;
+  min-width: 0;
+  flex: 1;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.stop-marker {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.stop-marker .pulse,
+.stop-marker .core {
+  position: absolute;
+  border-radius: 999px;
+}
+
+.stop-marker .core {
+  inset: 10px;
+  background: var(--city);
+  box-shadow:
+    0 0 0 2px rgba(12, 10, 8, 0.85),
+    0 0 12px var(--city);
+}
+
+.stop-marker .pulse {
+  inset: 8px;
+  background: var(--city);
+  opacity: 0.45;
+  animation: marker-pulse 2.4s ease-out infinite;
+}
+
+.stop-marker.is-active .core {
+  inset: 7px;
+  box-shadow:
+    0 0 0 3px #f0b429,
+    0 0 16px var(--city);
+}
+
+.stop-marker.is-dim {
+  opacity: 0.28;
+}
+
+.vehicle {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.55));
+  transform-origin: center;
+}
+
+.vehicle-train {
+  animation: train-shimmer 0.7s linear infinite;
+}
+
+.maplibregl-ctrl-attrib,
+.mapboxgl-ctrl-attrib {
+  background: rgba(16, 12, 9, 0.72) !important;
+  color: #cbbba6 !important;
+  font-size: 10px !important;
+}
+
+.maplibregl-ctrl-attrib a,
+.mapboxgl-ctrl-attrib a {
+  color: #f0b429 !important;
+}
+
+.maplibregl-ctrl-bottom-right,
+.mapboxgl-ctrl-bottom-right,
+.maplibregl-ctrl-bottom-left,
+.mapboxgl-ctrl-bottom-left {
+  bottom: 5.6rem !important;
+}
+
+.maplibregl-ctrl-compass,
+.mapboxgl-ctrl-compass {
+  display: none !important;
+}
+
+.phone .map-canvas.maplibregl-map,
+.phone .map-canvas.mapboxgl-map {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@keyframes marker-pulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes train-shimmer {
+  50% {
+    filter: drop-shadow(0 0 8px #f0b429);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stop-marker .pulse,
+  .vehicle-train {
+    animation: none;
+  }
 }

@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "prebuild": "tsx scripts/validate.ts && tsx scripts/build-routes.ts",
+    "postinstall": "node scripts/copy-workers.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
