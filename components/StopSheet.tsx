@@ -68,8 +68,8 @@ export function StopSheet({
         <button type="button" onClick={onClose} className="back-button">
           Back
         </button>
-        <p className="text-[11px] tracking-[0.22em] text-gold uppercase">
-          {stop.city} · Day {stop.day}
+        <p className="text-sm text-mist">
+          Day {stop.day}, {stop.city}
         </p>
       </div>
       <div className="min-h-0 overflow-y-auto px-5 pt-1 pb-3">
@@ -78,13 +78,13 @@ export function StopSheet({
             <h2 id="stop-title" className="font-display text-[2rem] leading-none text-cream">
               {stop.name}
             </h2>
-            <p className="mt-2 font-display text-[1.7rem] leading-none text-gold tabular-nums">
+            <p className="mt-2 font-display text-[1.65rem] leading-none text-gold tabular-nums">
               {stop.start}–{stop.end}
             </p>
-            <p className="mt-2 text-sm text-mist">
-              {categoryLabel(stop.category)}
-              {arrived ? ` · ${arrived}` : ""}
-            </p>
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <span className={`cat-pill cat-${stop.category}`}>{categoryLabel(stop.category)}</span>
+              {arrived ? <span className="text-sm text-mist">{arrived}</span> : null}
+            </div>
           </div>
           <div className="flex shrink-0 gap-2">
             <a
@@ -149,8 +149,21 @@ export function StopSheet({
             {photos.map((src) => (
               // Place photos can come from any https host, so they stay outside the image optimizer.
               // eslint-disable-next-line @next/next/no-img-element
-              <img key={src} src={src} alt="" className="h-28 w-full rounded-2xl object-cover" />
+              <img key={src} src={src} alt="" className="h-36 w-full rounded-2xl object-cover" />
             ))}
+          </div>
+        ) : null}
+        <p className="mt-4 text-sm leading-6 text-cream">{stop.description}</p>
+        {stop.tips.length > 0 ? (
+          <div className="mt-4">
+            <h3 className="text-sm font-semibold text-cream">Notes</h3>
+            <ul className="mt-2 space-y-2">
+              {stop.tips.map((tip) => (
+                <li key={tip} className="note-card">
+                  {tip}
+                </li>
+              ))}
+            </ul>
           </div>
         ) : null}
       </div>

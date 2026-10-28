@@ -36,9 +36,7 @@ export function IntroCard({ itinerary, onOpen }: IntroCardProps) {
           height={88}
           className="mb-5 h-[4.5rem] w-[4.5rem] rounded-[22px]"
         />
-        <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
-          {formatRange(trip.start, trip.end)}
-        </p>
+        <p className="text-sm text-mist">{formatRange(trip.start, trip.end)}</p>
         <h1 className="mt-3 font-display text-[3.1rem] leading-[0.9] font-medium text-cream">
           {trip.title}
         </h1>
@@ -58,7 +56,7 @@ export function IntroCard({ itinerary, onOpen }: IntroCardProps) {
         <button
           type="button"
           onClick={onOpen}
-          className="mt-7 flex h-12 w-full items-center justify-center rounded-full bg-gold text-sm font-semibold tracking-wide text-ink"
+          className="primary-cta mt-7 flex h-12 w-full items-center justify-center rounded-full bg-gold text-sm font-semibold text-ink"
         >
           Unroll the map
         </button>

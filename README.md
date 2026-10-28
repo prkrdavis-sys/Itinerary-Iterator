@@ -1,4 +1,4 @@
-# Canals to Canals
+# Rotterdam Halloween
 
 An iPhone-first trip map for a late-October run from Amsterdam through a Rotterdam Halloween night, Kinderdijk, Ghent, Damme, and Bruges, with a rental car on the Flemish days. The route draws itself, then a car, train, bike, bus, or walk moves along each leg.
 

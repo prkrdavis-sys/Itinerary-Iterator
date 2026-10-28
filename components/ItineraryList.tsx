@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { categoryLabel } from "@/lib/categories";
+import { categoryLabel, stopPhotos } from "@/lib/categories";
 import { dateForDay, dayCities, daysOf, legInto, stopsOnDay } from "@/lib/itinerary";
 import { modeStyle } from "@/lib/modes";
 import type { Itinerary } from "@/lib/schema";
@@ -26,8 +26,11 @@ export function ItineraryList({ itinerary, day, onClose, onPick }: ItineraryList
     >
       <header className="flex items-center justify-between gap-3 px-4 pt-4 pb-3">
         <div className="min-w-0">
-          <p className="text-[11px] tracking-[0.22em] text-gold uppercase">The days</p>
-          <h2 className="font-display text-3xl text-cream">List</h2>
+          <h2 className="font-display text-[1.85rem] leading-none text-cream">Itinerary</h2>
+          <p className="mt-1 truncate text-sm text-mist">
+            {days.length} {days.length === 1 ? "day" : "days"},{" "}
+            {days.reduce((count, value) => count + stopsOnDay(itinerary, value).length, 0)} stops
+          </p>
         </div>
         <button type="button" onClick={onClose} className="back-button shrink-0">
           Back
@@ -36,41 +39,43 @@ export function ItineraryList({ itinerary, day, onClose, onPick }: ItineraryList
       <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-4">
         {days.map((value) => (
           <section key={value} className="mb-4">
-            <h3 className="px-2 pt-2 pb-2 font-display text-lg text-cream">
-              Day {value}
-              <span className="ml-2 font-sans text-xs tracking-normal text-mist">
-                {dateForDay(itinerary.trip.start, value)} · {dayCities(itinerary, value)}
-              </span>
-            </h3>
+            <h3 className="px-2 pt-2 pb-1 font-display text-xl text-cream">Day {value}</h3>
+            <p className="px-2 pb-2 text-xs text-mist">
+              {dateForDay(itinerary.trip.start, value)}, {dayCities(itinerary, value).split(" · ").join(", ")}
+            </p>
             <ol>
-              {stopsOnDay(itinerary, value).map((stop) => {
+              {stopsOnDay(itinerary, value).map((stop, index) => {
                 const incoming = legInto(itinerary, stop.id);
                 const style = incoming ? modeStyle(incoming.mode) : null;
+                const photo = stopPhotos(stop)[0];
                 return (
                   <li key={stop.id}>
                     {style && incoming ? (
-                      <p className="px-3 py-1 text-[11px] tracking-[0.16em] text-mist uppercase">
+                      <p className="leg-note">
                         <span aria-hidden="true">{style.emoji} </span>
                         {style.label}
                         {incoming.depart && incoming.arrive
-                          ? ` · ${incoming.depart}–${incoming.arrive}`
+                          ? `, ${incoming.depart}–${incoming.arrive}`
                           : ""}
                       </p>
                     ) : null}
-                    <button
-                      type="button"
-                      onClick={() => onPick(stop.id)}
-                      className="flex w-full items-baseline gap-3 rounded-2xl px-3 py-2.5 text-left hover:bg-white/5"
-                    >
-                      <span className="w-12 shrink-0 text-xs text-gold tabular-nums">
-                        {stop.start}
-                      </span>
-                      <span className="min-w-0">
-                        <span className="block truncate text-[15px] text-cream">{stop.name}</span>
-                        <span className="text-xs text-mist">
-                          {categoryLabel(stop.category)} · until {stop.end}
+                    <button type="button" onClick={() => onPick(stop.id)} className="stop-row">
+                      {photo ? (
+                        // Place photos can come from any https host, so they stay outside the image optimizer.
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={photo} alt="" className="stop-thumb" />
+                      ) : (
+                        <span className={`stop-thumb cat-${stop.category}`}>{index + 1}</span>
+                      )}
+                      <span className="min-w-0 flex-1">
+                        <span className="block truncate text-[15px] font-medium text-cream">
+                          {stop.name}
+                        </span>
+                        <span className={`cat-pill cat-${stop.category} mt-1`}>
+                          {categoryLabel(stop.category)}
                         </span>
                       </span>
+                      <span className="stop-time">{stop.start}</span>
                     </button>
                   </li>
                 );

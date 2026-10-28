@@ -54,11 +54,13 @@ body {
 }
 
 .glass {
-  background: rgba(18, 14, 11, 0.74);
-  border: 1px solid rgba(240, 180, 41, 0.24);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
-  backdrop-filter: blur(18px) saturate(1.25);
-  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  background: rgba(22, 18, 14, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    0 16px 36px rgba(8, 6, 4, 0.36);
+  backdrop-filter: blur(22px) saturate(1.35);
+  -webkit-backdrop-filter: blur(22px) saturate(1.35);
 }
 
 .chip-row {
@@ -75,33 +77,124 @@ body {
 .chip {
   cursor: pointer;
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.08);
   color: #f4efe6;
-  padding: 0.45rem 0.8rem 0.4rem;
-  font-size: 12px;
-  line-height: 1.1;
+  padding: 0.42rem 0.62rem;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1;
   text-align: left;
 }
 
-.chip-on {
-  background: #f0b429;
-  border-color: #f0b429;
+.chip span {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(244, 239, 230, 0.58);
+}
+
+.chip-row .chip {
+  background: transparent;
+}
+
+.chip-on,
+.chip-row .chip-on {
+  background: #f4efe6;
   color: #100e0c;
 }
 
 .chip-on span {
-  color: rgba(16, 14, 12, 0.62);
+  color: rgba(16, 14, 12, 0.55);
+}
+
+.cat-pill {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.16rem 0.48rem 0.12rem;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.cat-museum {
+  background: #d7e4f7;
+  color: #1d3a5f;
+}
+
+.cat-food {
+  background: #f8d7b0;
+  color: #6a3410;
+}
+
+.cat-sight {
+  background: #f7c9d4;
+  color: #6e2438;
+}
+
+.cat-stay {
+  background: #e3d4f7;
+  color: #432863;
+}
+
+.cat-transit {
+  background: #d9e0e8;
+  color: #2c3642;
+}
+
+.cat-neighborhood {
+  background: #d5ead4;
+  color: #234628;
+}
+
+.cat-activity {
+  background: #f7e3a8;
+  color: #5c4310;
 }
 
 .dock-button {
-  height: 3rem;
+  height: 2.85rem;
   min-width: 0;
   flex: 1;
   border-radius: 999px;
+  padding: 0 0.85rem;
   font-size: 0.95rem;
-  font-weight: 600;
+  font-weight: 650;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.play-dock {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.28rem;
+  border-radius: 999px;
+}
+
+.play-dock .dock-button {
+  background: transparent;
+  color: #f4efe6;
+}
+
+.play-dock .dock-button:hover:not(:disabled):not(.is-play) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.play-dock .is-play {
+  flex: 1.35;
+  background: #f0b429;
+  color: #100e0c;
+}
+
+.play-dock .is-pause {
+  background: #f4efe6;
 }
 
 .stop-marker {
@@ -122,31 +215,39 @@ body {
 }
 
 .stop-marker .core {
-  inset: 7px;
+  inset: 8px;
   display: grid;
   place-items: center;
-  background: var(--city);
-  font-size: 16px;
+  background: #f4efe6;
+  color: #100e0c;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
   line-height: 1;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
   box-shadow:
-    0 0 0 2px rgba(12, 10, 8, 0.85),
-    0 0 12px var(--city);
+    0 0 0 3px var(--city),
+    0 8px 16px rgba(8, 6, 4, 0.35);
 }
 
 .stop-marker .pulse {
   inset: 6px;
   background: var(--city);
+  opacity: 0;
+}
+
+.stop-marker.is-active .pulse {
   opacity: 0.45;
   animation: marker-pulse 2.4s ease-out infinite;
 }
 
 .stop-marker.is-active .core {
-  inset: 4px;
-  font-size: 18px;
+  inset: 6px;
+  background: #f0b429;
+  font-size: 14px;
   box-shadow:
-    0 0 0 3px #f0b429,
-    0 0 16px var(--city);
+    0 0 0 3px #100e0c,
+    0 0 0 6px #f0b429;
 }
 
 .stop-marker.is-dim,
@@ -250,6 +351,14 @@ body {
   overflow: hidden;
 }
 
+.stop-sheet.glass,
+.under-chrome.glass,
+.settings-sheet.glass {
+  background: #161310;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
 .stop-sheet {
   bottom: calc(max(0.75rem, env(safe-area-inset-bottom)) + 4.15rem);
   max-height: calc(
@@ -274,27 +383,117 @@ body {
 .settings-launch,
 .back-button,
 .icon-button {
-  min-height: 2.75rem;
+  min-height: 2.5rem;
   border-radius: 999px;
-  border: 1px solid rgba(240, 180, 41, 0.45);
-  background: rgba(240, 180, 41, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
   color: #f4efe6;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
 }
 
 .settings-launch,
 .icon-button {
-  width: 2.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
   display: grid;
   place-items: center;
   flex: 0 0 auto;
 }
 
 .icon-button {
-  height: 2.75rem;
-  color: #f0b429;
+  color: #f4efe6;
   text-decoration: none;
+}
+
+.stop-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.75rem;
+  border-radius: 18px;
+  padding: 0.4rem 0.45rem;
+  text-align: left;
+}
+
+.stop-row:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.stop-thumb {
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 14px;
+  object-fit: cover;
+  font-size: 14px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.stop-time {
+  margin-left: auto;
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  color: #f0b429;
+}
+
+.leg-note {
+  margin: 0.2rem 0.4rem 0.15rem 3.55rem;
+  font-size: 12px;
+  color: #cbbba6;
+}
+
+.note-card {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.7rem 0.85rem;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #f4efe6;
+}
+
+.chip,
+.dock-button,
+.settings-launch,
+.back-button,
+.icon-button,
+.stop-row,
+.play-dock .is-play {
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    opacity 180ms ease;
+}
+
+.chip:active,
+.dock-button:active:not(:disabled),
+.settings-launch:active,
+.back-button:active,
+.icon-button:active,
+.stop-row:active,
+.primary-cta:active {
+  transform: scale(0.98);
+}
+
+.primary-cta {
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+
+.chip:focus-visible,
+.dock-button:focus-visible,
+.settings-launch:focus-visible,
+.back-button:focus-visible,
+.icon-button:focus-visible,
+.stop-row:focus-visible,
+.settings-input:focus-visible {
+  outline: 2px solid #f0b429;
+  outline-offset: 2px;
 }
 
 .back-button {

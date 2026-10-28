@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { spotEmoji } from "@/lib/categories";
 import { boundsOf, pointAlong, sliceLine, type LngLat } from "@/lib/geo";
 import { findStop, legKey } from "@/lib/itinerary";
 import {
@@ -44,7 +43,7 @@ type TripMapProps = {
   onReady: (handle: TripMapHandle | null) => void;
 };
 
-const PADDING = { top: 188, bottom: 168, left: 28, right: 28 };
+const PADDING = { top: 156, bottom: 148, left: 28, right: 28 };
 
 type SaveStatus = "saving" | "saved" | "error";
 
@@ -307,17 +306,20 @@ export function TripMap({
         });
       }
 
+      const orderOnDay = new Map<number, number>();
       for (const stop of itinerary.stops) {
+        const order = (orderOnDay.get(stop.day) ?? 0) + 1;
+        orderOnDay.set(stop.day, order);
         const button = document.createElement("button");
         button.type = "button";
         button.className = "stop-marker";
         button.style.setProperty("--city", cityColor(stop.city));
-        button.setAttribute("aria-label", `${stop.name}, ${stop.city}`);
+        button.setAttribute("aria-label", `${stop.name}, ${stop.city}, stop ${order}`);
         const pulse = document.createElement("span");
         pulse.className = "pulse";
         const core = document.createElement("span");
         core.className = "core";
-        core.textContent = spotEmoji(stop);
+        core.textContent = String(order);
         button.append(pulse, core);
         button.addEventListener("click", (event) => {
           event.stopPropagation();

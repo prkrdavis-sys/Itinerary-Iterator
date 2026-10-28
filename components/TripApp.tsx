@@ -55,7 +55,10 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
   const [listOpen, setListOpen] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [celebrate, setCelebrate] = useState(false);
-  const [status, setStatus] = useState("Northwestern Europe");
+  const [status, setStatus] = useState(
+    () =>
+      `${daysOf(itinerary).length} days · ${formatRange(itinerary.trip.start, itinerary.trip.end)}`,
+  );
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [settings, setSettings] = useState<MapSettings>({ token: "", dusk: false });
   const [mapReady, setMapReady] = useState(false);
@@ -74,7 +77,9 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
   const mapboxToken = settings.dusk ? publicMapboxToken(settings.token) : null;
 
   function tripStatus(nextDay: number | null): string {
-    if (nextDay === null) return formatRange(itinerary.trip.start, itinerary.trip.end);
+    if (nextDay === null) {
+      return `${days.length} days · ${formatRange(itinerary.trip.start, itinerary.trip.end)}`;
+    }
     return `Day ${nextDay} · ${dayCities(itinerary, nextDay)}`;
   }
 
@@ -120,9 +125,7 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
       await wait(50);
     }
     await mapRef.current?.showOverview();
-    setStatus((current) =>
-      current === "Drawing the route" ? formatRange(itinerary.trip.start, itinerary.trip.end) : current,
-    );
+    setStatus((current) => (current === "Drawing the route" ? tripStatus(null) : current));
   }
 
   function chooseStop(id: string) {
@@ -308,70 +311,60 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
           {phase === "ready" ? (
             <header
               ref={chromeRef}
-              className="chrome absolute inset-x-0 top-0 px-3 pt-[max(0.7rem,env(safe-area-inset-top))]"
+              className="chrome absolute inset-x-0 top-0 px-3 pt-[max(0.65rem,env(safe-area-inset-top))]"
             >
-              <div className="glass rounded-[24px] px-4 pt-3 pb-3">
-                <div className="flex items-start gap-3">
-                  <img
-                    src="/logo.png"
-                    alt=""
-                    width={44}
-                    height={44}
-                    className="mt-0.5 h-11 w-11 shrink-0 rounded-2xl"
-                  />
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-2">
-                      <p className="min-w-0 truncate text-[11px] tracking-[0.22em] text-gold uppercase">
-                        {status}
-                      </p>
-                      <button
-                        type="button"
-                        className="settings-launch"
-                        aria-label="Settings"
-                        aria-expanded={settingsOpen}
-                        onClick={openSettings}
-                      >
-                        <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
-                          <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth="1.7" />
-                          <path
-                            d="M12 3.5v2.2M12 18.3V20.5M3.5 12h2.2M18.3 12H20.5M5.8 5.8l1.6 1.6M16.6 16.6l1.6 1.6M18.2 5.8l-1.6 1.6M7.4 16.6l-1.6 1.6"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.7"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                    <h1 className="font-display text-[1.7rem] leading-none text-cream">
-                      {itinerary.trip.title}
-                    </h1>
-                    <div className="chip-row mt-3">
-                      <button
-                        type="button"
-                        aria-pressed={day === null}
-                        onClick={() => chooseDay(null)}
-                        className={day === null ? "chip chip-on" : "chip"}
-                      >
-                        All
-                      </button>
-                      {days.map((value) => (
-                        <button
-                          key={value}
-                          type="button"
-                          aria-pressed={day === value}
-                          onClick={() => chooseDay(value)}
-                          className={day === value ? "chip chip-on" : "chip"}
-                        >
-                          Day {value}
-                          <span className="mt-0.5 block text-[10px] font-normal tracking-normal text-mist normal-case">
-                            {dateForDay(itinerary.trip.start, value).slice(0, 3)} ·{" "}
-                            {dayCities(itinerary, value).split(" · ")[0]}
-                          </span>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+              <div className="glass flex items-center gap-3 rounded-[22px] py-2.5 pr-2.5 pl-3">
+                <img
+                  src="/logo.png"
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 shrink-0 rounded-[14px]"
+                />
+                <div className="min-w-0 flex-1">
+                  <h1 className="font-display text-[1.28rem] leading-[1.05] text-balance text-cream">
+                    {itinerary.trip.title}
+                  </h1>
+                  <p className="mt-1 truncate text-[13px] text-mist">{status}</p>
+                </div>
+                <button
+                  type="button"
+                  className="settings-launch"
+                  aria-label="Settings"
+                  aria-expanded={settingsOpen}
+                  onClick={openSettings}
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+                    <path
+                      fill="currentColor"
+                      fillRule="evenodd"
+                      d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7 7 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.5-.42h-3.84a.5.5 0 0 0-.5.42L9.25 5.32c-.58.22-1.12.53-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32c.13.22.4.31.6.22l2.39-.96c.5.41 1.05.72 1.63.94l.36 2.54c.05.24.26.42.5.42h3.84c.24 0 .45-.18.5-.42l.36-2.54c.58-.22 1.13-.53 1.63-.94l2.39.96c.22.09.47 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <div className="glass mt-2 rounded-full px-1.5 py-1.5">
+                <div className="chip-row">
+                  <button
+                    type="button"
+                    aria-pressed={day === null}
+                    onClick={() => chooseDay(null)}
+                    className={day === null ? "chip chip-on" : "chip"}
+                  >
+                    All
+                  </button>
+                  {days.map((value) => (
+                    <button
+                      key={value}
+                      type="button"
+                      aria-pressed={day === value}
+                      onClick={() => chooseDay(value)}
+                      className={day === value ? "chip chip-on" : "chip"}
+                    >
+                      Day {value}
+                      <span>{dateForDay(itinerary.trip.start, value).split(" ")[0]}</span>
+                    </button>
+                  ))}
                 </div>
               </div>
             </header>
@@ -427,13 +420,13 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
           </AnimatePresence>
 
           {phase === "ready" && !listOpen && !settingsOpen ? (
-            <div className="absolute inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[32] flex items-center gap-2">
+            <div className="play-dock glass absolute inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[32]">
               <button
                 type="button"
                 onClick={goPrevious}
                 disabled={stopIndex === 0}
                 aria-label="Previous stop"
-                className="dock-button glass text-cream"
+                className="dock-button"
               >
                 Prev
               </button>
@@ -441,7 +434,7 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
                 type="button"
                 onClick={togglePlay}
                 aria-pressed={playing}
-                className={playing ? "dock-button bg-cream text-ink" : "dock-button bg-gold text-ink"}
+                className={playing ? "dock-button is-play is-pause" : "dock-button is-play"}
               >
                 {playing ? "Pause" : "Play"}
               </button>
@@ -450,7 +443,7 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
                 onClick={goNext}
                 disabled={stopIndex >= 0 && outgoingIndex < 0}
                 aria-label="Next stop"
-                className="dock-button glass text-cream"
+                className="dock-button"
               >
                 Next
               </button>
@@ -462,7 +455,7 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
                   setListOpen(true);
                   setSelectedId(null);
                 }}
-                className="dock-button glass text-cream"
+                className="dock-button"
               >
                 List
               </motion.button>
