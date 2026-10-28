@@ -21,6 +21,9 @@
       "end": "14:45",
       "category": "transit",
       "description": "Land from Copenhagen on the connecting flight and follow the signs to the train hall. The trip on the map starts here, with your partner meeting you on the ground.",
+      "photos": [
+        "/photos/schiphol-terminal.jpg"
+      ],
       "tips": [
         "Buy or tap for the train before you leave the terminal.",
         "Sloterdijk is one stop toward the city on the Sprinter or Intercity."
@@ -39,6 +42,9 @@
       "end": "17:00",
       "category": "stay",
       "description": "Check in at the hotel on the station side of Sloterdijk. Drop the bags, then head back toward the center when you are ready for the first evening.",
+      "photos": [
+        "/photos/sloterdijk.jpg"
+      ],
       "tips": [
         "The front desk can hold bags on Saturday if you check out early for Rotterdam.",
         "One stop on the train puts you at Amsterdam Centraal in a few minutes."
@@ -57,6 +63,9 @@
       "end": "22:00",
       "category": "neighborhood",
       "description": "Coffee shops, thrift stops, and canals without a fixed list. Let the neighborhoods choose the route and end when the bars feel right.",
+      "photos": [
+        "/photos/herengracht-evening.jpg"
+      ],
       "tips": [
         "Trams and trains run late back to Sloterdijk.",
         "Keep dinner loose; nothing is booked for this night."
@@ -75,6 +84,9 @@
       "end": "16:00",
       "category": "activity",
       "description": "A full day on rental bikes through the Jordaan, thrift shops, and whatever side street catches your eye. Leave time to pack before the train south.",
+      "photos": [
+        "/photos/amsterdam-bike.jpg"
+      ],
       "tips": [
         "Lock bikes properly; the city is full of polite thieves.",
         "A late lunch in town beats rushing to the station hungry."
@@ -93,6 +105,9 @@
       "end": "17:10",
       "category": "transit",
       "description": "The hall under the old roof, with the IJ out back. Find the Rotterdam-bound Intercity on the departure boards.",
+      "photos": [
+        "/photos/amsterdam-centraal.jpg"
+      ],
       "tips": [
         "Tap out when you leave Rotterdam; OVpay needs a check-out at the gates.",
         "Halloween evening trains can fill up; stand near the doors if it is busy."
@@ -111,6 +126,9 @@
       "end": "18:35",
       "category": "transit",
       "description": "Step out under the angular roof into a city that looks nothing like Amsterdam. The Airbnb is a short ride or walk from here.",
+      "photos": [
+        "/photos/rotterdam-centraal.jpg"
+      ],
       "tips": [
         "Metro and tram stops are on the station square.",
         "Drop bags at the Airbnb before you think about the rave."
@@ -129,6 +147,9 @@
       "end": "22:00",
       "category": "stay",
       "description": "Home base for two nights in Rotterdam. Unpack the Halloween costume, eat something sensible, and leave for the party around ten-fifteen.",
+      "photos": [
+        "/photos/hofplein.jpg"
+      ],
       "tips": [
         "How you get home after the rave is still an open question.",
         "Sunday and Monday mornings both start from here."
@@ -147,6 +168,9 @@
       "end": "23:59",
       "category": "activity",
       "description": "The locked-in Halloween night set, starting at eleven. Dance until you are done—likely well past midnight—then figure out the ride back to the Airbnb.",
+      "photos": [
+        "/photos/erasmusbrug-night.jpg"
+      ],
       "tips": [
         "Earplugs and water are not optional.",
         "Save an offline map for the return trip."
@@ -165,6 +189,9 @@
       "end": "12:15",
       "category": "activity",
       "description": "Windmills along the polder canals, a slow walk on a sleep-in Sunday. Go before the coach groups if you can.",
+      "photos": [
+        "/photos/kinderdijk.jpg"
+      ],
       "tips": [
         "Reach it by bus and ferry from Rotterdam, or drive if you prefer.",
         "The path is flat and exposed; bring a layer."
@@ -183,6 +210,10 @@
       "end": "18:00",
       "category": "neighborhood",
       "description": "Afternoon back in the city after the mills: Markthal, the cube houses, or the waterfront without a fixed checklist.",
+      "photos": [
+        "/photos/markthal.jpg",
+        "/photos/cube-houses.jpg"
+      ],
       "tips": [
         "The Markthal stalls close earlier than the restaurants upstairs.",
         "Save energy; the car pickup is tomorrow morning."
@@ -201,6 +232,9 @@
       "end": "21:00",
       "category": "food",
       "description": "A proper Sunday dinner at Heroine before another quiet night at the Airbnb. Book if they still take reservations.",
+      "photos": [
+        "/photos/heroine.jpg"
+      ],
       "tips": [
         "Dress a notch above casual.",
         "Walk or tram back toward your stay afterward."
@@ -219,6 +253,9 @@
       "end": "23:30",
       "category": "stay",
       "description": "Second night in the same flat. Pack a day bag for Monday; the big luggage rides in the car to Bruges.",
+      "photos": [
+        "/photos/hofplein.jpg"
+      ],
       "tips": [
         "Set an alarm for the airport pickup.",
         "Charge everything for the driving day."
@@ -237,6 +274,9 @@
       "end": "09:35",
       "category": "transit",
       "description": "Pick up the Sixt car at RTM and point it southeast toward Ghent. Traffic and coffee stops belong in the two-and-a-half-hour window.",
+      "photos": [
+        "/photos/rtm-airport.jpg"
+      ],
       "tips": [
         "Photograph the fuel gauge and any existing dents.",
         "Have whoever is not driving ready with navigation."
@@ -255,6 +295,10 @@
       "end": "15:00",
       "category": "sight",
       "description": "The Castle of the Counts, then the Graslei and Korenlei quays for lunch between eleven-thirty and three. Medieval squares instead of motorways.",
+      "photos": [
+        "/photos/gravensteen.jpg",
+        "/photos/graslei.jpg"
+      ],
       "tips": [
         "Castle tickets are worth buying if the queue is moving.",
         "Parking garages sit just outside the pedestrian core."
@@ -273,6 +317,10 @@
       "end": "16:50",
       "category": "sight",
       "description": "Scenic back roads through Eeklo and Maldegem, then the tree-lined canal and windmill in Damme. The schedule is tight; expect Damme closer to four-ten than four on the dot.",
+      "photos": [
+        "/photos/damme-windmill.jpg",
+        "/photos/damme-market.jpg"
+      ],
       "tips": [
         "The Meetjesland lanes are pretty but narrow.",
         "Photos beat rushing to the next town."
@@ -291,6 +339,10 @@
       "end": "18:30",
       "category": "sight",
       "description": "Park near the ring and walk into the Markt and Burg as the lights come on. Rozenhoedkaai is the postcard angle if you still have daylight.",
+      "photos": [
+        "/photos/bruges-markt.jpg",
+        "/photos/bruges-burg.jpg"
+      ],
       "tips": [
         "Guesthouse check-in time is still pending.",
         "Leave the car where the host said parking is free."
@@ -309,6 +361,9 @@
       "end": "20:30",
       "category": "food",
       "description": "A sit-down dinner in the old center. Bruut is the leading idea at seven, but the Grok plan still marks the restaurant as to be decided.",
+      "photos": [
+        "/photos/rozenhoedkaai.jpg"
+      ],
       "tips": [
         "Reserve if you settle on Bruut or anywhere near the Markt.",
         "Monday nights can fill up fast."
@@ -327,6 +382,9 @@
       "end": "23:30",
       "category": "stay",
       "description": "Private studio guesthouse with bikes and parking for the rental, still awaiting host confirmation. Address and exact check-in time are not locked yet.",
+      "photos": [
+        "/photos/bruges-canal.jpg"
+      ],
       "tips": [
         "Free parking matters with the car outside.",
         "Host bikes beat haggling with taxis in the morning."
@@ -345,6 +403,10 @@
       "end": "12:00",
       "category": "sight",
       "description": "The Belfry opens at ten on winter hours, so canals and Boniface Bridge first, then the climb if tickets allow. Rozenhoedkaai again in softer morning light.",
+      "photos": [
+        "/photos/bruges-belfry.jpg",
+        "/photos/bruges-morning.jpg"
+      ],
       "tips": [
         "Belfry tickets are still on the to-do list.",
         "Last entry is an hour before closing."
@@ -363,6 +425,10 @@
       "end": "13:05",
       "category": "neighborhood",
       "description": "Whitewashed Flemish houses and a village church, twenty minutes from Bruges. A short photo stop before the coast.",
+      "photos": [
+        "/photos/lissewege.jpg",
+        "/photos/lissewege-tower.jpg"
+      ],
       "tips": [
         "Street parking is usually enough.",
         "Respect driveways; people live here."
@@ -381,6 +447,9 @@
       "end": "14:45",
       "category": "activity",
       "description": "Coastal nature walk through dunes, ponds, and reeds toward the North Sea beach. Blocked out from about one-twenty to two-forty-five.",
+      "photos": [
+        "/photos/fonteintjes.jpg"
+      ],
       "tips": [
         "Trails can be sandy; wear shoes you do not mind.",
         "Wind off the sea is colder than Bruges."
@@ -399,6 +468,9 @@
       "end": "15:35",
       "category": "sight",
       "description": "The lighthouse from the outside only; the tower is not open to visitors. Photos and a breath of sea air before the long drive north.",
+      "photos": [
+        "/photos/blankenberge-lighthouse.jpg"
+      ],
       "tips": [
         "Timing here feeds the three-fifty-hour run to Amsterdam.",
         "Leaving around five from the coast targets a nine-ish arrival at drop-off."
@@ -417,6 +489,9 @@
       "end": "21:30",
       "category": "transit",
       "description": "Return the car at the Sixt desk on De Ruijterkade before eleven pm. Fill the tank per the contract and keep the receipt.",
+      "photos": [
+        "/photos/de-ruijterkade.jpg"
+      ],
       "tips": [
         "Allow time for traffic on the A10 ring.",
         "Tuesday dinner is still open: on the road or back in town afterward."
@@ -435,6 +510,9 @@
       "end": "23:30",
       "category": "stay",
       "description": "Draft: where to sleep in Amsterdam after the car is back is not chosen yet. Treat this pin as a placeholder until a hotel or flat is booked.",
+      "photos": [
+        "/photos/rijksmuseum.jpg"
+      ],
       "tips": [
         "Early night before the ten-thirty flight.",
         "Schiphol is reachable by train from most central stays."
@@ -453,6 +531,9 @@
       "end": "10:30",
       "category": "transit",
       "description": "Check in for the ten-thirty departure to Copenhagen and on to Dulles. Leave the draft stay in time for security on a weekday morning.",
+      "photos": [
+        "/photos/schiphol-departures.jpg"
+      ],
       "tips": [
         "SAS Light means paid bags and seats if you want them.",
         "The train from Centraal takes about fifteen minutes when it is running clean."

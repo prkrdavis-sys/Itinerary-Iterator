@@ -1,0 +1,152 @@
+{
+  "/photos/schiphol-terminal.jpg": {
+    "author": "Andrzej Otrębski",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:AMS_terminal_3.jpg"
+  },
+  "/photos/schiphol-departures.jpg": {
+    "author": "Bramkicken",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Schiphol_Departures3.jpg"
+  },
+  "/photos/sloterdijk.jpg": {
+    "author": "Andy Li",
+    "license": "CC0",
+    "source": "https://commons.wikimedia.org/wiki/File:Dawn_at_Station_Amsterdam_Sloterdijk_2024-11-30.jpg"
+  },
+  "/photos/herengracht-evening.jpg": {
+    "author": "Anne Dirkse",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Herengracht,_Amsterdam_in_the_Blue_Hour.jpg"
+  },
+  "/photos/amsterdam-bike.jpg": {
+    "author": "Sumit Surai",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Amsterdam_-_Canal,_Bridge_and_Bike.jpg"
+  },
+  "/photos/amsterdam-centraal.jpg": {
+    "author": "Renée Kools",
+    "license": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Amsterdam_Centraal_2024-12-02-1.jpg"
+  },
+  "/photos/rotterdam-centraal.jpg": {
+    "author": "Sjaak Kempe",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:20180225_004_Rotterdam_-_Centraal_Station.jpg"
+  },
+  "/photos/hofplein.jpg": {
+    "author": "Michielverbeek",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Rotterdam,_het_Hofplein_met_het_zicht_naar_de_Weena_foto10_2016-02-28_09.47.jpg"
+  },
+  "/photos/erasmusbrug-night.jpg": {
+    "author": "Steven Lek",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Erasmusbrug_Rotterdam_night_2018.jpg"
+  },
+  "/photos/kinderdijk.jpg": {
+    "author": "John Samuel",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Kinderdijk_windmills_07.jpg"
+  },
+  "/photos/markthal.jpg": {
+    "author": "Thomas Dahlstrøm Nielsen",
+    "license": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Interior_of_Markthal_(Rotterdam).jpg"
+  },
+  "/photos/cube-houses.jpg": {
+    "author": "Jan Geerling",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:1503_Kubuswoningen,_Rotterdam_020.jpg"
+  },
+  "/photos/heroine.jpg": {
+    "author": "Steven Lek",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Heemraadssingel_Rotterdam_2019.jpg"
+  },
+  "/photos/rtm-airport.jpg": {
+    "author": "flightlog",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Rotterdam_The_Hague_Airport_2014.jpg"
+  },
+  "/photos/gravensteen.jpg": {
+    "author": "Ad Meskens",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Gent_Gravensteen_01.jpg"
+  },
+  "/photos/graslei.jpg": {
+    "author": "Giles Laurent",
+    "license": "CC BY-SA 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:1007_Graslei,_Clock_tower_of_the_Post_Office,_Church_of_Saint-Nicolas_in_Ghent_and_Belfry_of_Ghent_Photo_by_Giles_Laurent.jpg"
+  },
+  "/photos/damme-windmill.jpg": {
+    "author": "Marc Ryckaert",
+    "license": "CC BY 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Damme_Schellemolen_R01.jpg"
+  },
+  "/photos/damme-market.jpg": {
+    "author": "LimoWreck",
+    "license": "CC BY 2.5",
+    "source": "https://commons.wikimedia.org/wiki/File:Damme_-_Market_square.jpg"
+  },
+  "/photos/bruges-markt.jpg": {
+    "author": "Marc Ryckaert",
+    "license": "CC BY 4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Brugge_Markt_R04.jpg"
+  },
+  "/photos/bruges-burg.jpg": {
+    "author": "Paul Lakin",
+    "license": "CC BY 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Burg_Square,_Bruges_IMG_8716_-_panoramio.jpg"
+  },
+  "/photos/rozenhoedkaai.jpg": {
+    "author": "Marc Ryckaert",
+    "license": "CC BY 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Brugge_Rozenhoedkaai_R02.jpg"
+  },
+  "/photos/bruges-canal.jpg": {
+    "author": "Thomas Quine",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Brick_houses_by_canal_in_Bruges_(29626143162).jpg"
+  },
+  "/photos/bruges-belfry.jpg": {
+    "author": "Adiel lo",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Brugge_Belfort_HDR.jpg"
+  },
+  "/photos/bruges-morning.jpg": {
+    "author": "rb-photo*",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Morning_in_Bruges_-_41555950550.jpg"
+  },
+  "/photos/lissewege.jpg": {
+    "author": "Marc Ryckaert",
+    "license": "CC BY 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Lissewege_Dorp_R02.jpg"
+  },
+  "/photos/lissewege-tower.jpg": {
+    "author": "Marc Ryckaert",
+    "license": "CC BY 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Lissewege_Toren_R01.jpg"
+  },
+  "/photos/fonteintjes.jpg": {
+    "author": "Ø11",
+    "license": "CC0",
+    "source": "https://commons.wikimedia.org/wiki/File:De_Fonteintjes_01.jpg"
+  },
+  "/photos/blankenberge-lighthouse.jpg": {
+    "author": "Marc Ryckaert",
+    "license": "CC BY 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Blankenberge_Lighthouse_R02.jpg"
+  },
+  "/photos/de-ruijterkade.jpg": {
+    "author": "Guilhem Vellut",
+    "license": "CC BY 2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Centraal_Station_@_IJ_River_@_Amsterdam_(21777762710).jpg"
+  },
+  "/photos/rijksmuseum.jpg": {
+    "author": "Markus Würfel",
+    "license": "CC BY-SA 3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Rijksmuseum_Amsterdam.jpg"
+  }
+}

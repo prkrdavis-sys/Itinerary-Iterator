@@ -31,6 +31,17 @@ export const coordSchema = z
     "Coordinates must be [longitude, latitude]",
   );
 
+const imageRef = z.string().refine((value) => {
+  if (value.startsWith("/photos/")) {
+    return /^\/photos\/[a-z0-9]+(?:-[a-z0-9]+)*\.(?:jpe?g|png|webp)$/.test(value);
+  }
+  try {
+    return new URL(value).protocol === "https:";
+  } catch {
+    return false;
+  }
+}, "Use an https image URL or a /photos/ file");
+
 export const stopSchema = z.object({
   id: z
     .string()
@@ -44,8 +55,8 @@ export const stopSchema = z.object({
   category: z.enum(categories),
   description: z.string().min(1),
   url: z.url().optional(),
-  photo: z.url().optional(),
-  photos: z.array(z.url()).max(4).default([]),
+  photo: imageRef.optional(),
+  photos: z.array(imageRef).max(4).default([]),
   tips: z.array(z.string().min(1)).default([]),
   emoji: z.string().min(1).optional(),
 });

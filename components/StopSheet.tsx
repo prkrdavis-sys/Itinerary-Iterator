@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { useDragControls, motion } from "framer-motion";
+import { PhotoViewer } from "@/components/PhotoViewer";
 import { categoryLabel, stopPhotos } from "@/lib/categories";
 import { appleMapsUrl } from "@/lib/geo";
 import { formatClockRange } from "@/lib/itinerary";
 import { modeStyle } from "@/lib/modes";
+import { photoCredit } from "@/lib/photo-credits";
 import type { Leg, Stop } from "@/lib/schema";
 
 type StopSheetProps = {
@@ -29,6 +32,7 @@ export function StopSheet({
   onNext,
 }: StopSheetProps) {
   const dragControls = useDragControls();
+  const [photosOpen, setPhotosOpen] = useState(false);
   const outgoingStyle = outgoing ? modeStyle(outgoing.mode) : null;
   const incomingStyle = incoming ? modeStyle(incoming.mode) : null;
   const arrived =
@@ -38,6 +42,8 @@ export function StopSheet({
         : incomingStyle.label
       : null;
   const photos = stopPhotos(stop);
+  const cover = photos[0];
+  const coverCredit = cover ? photoCredit(cover) : null;
 
   return (
     <motion.section
@@ -57,37 +63,64 @@ export function StopSheet({
       exit={{ y: 320 }}
       transition={{ type: "spring", stiffness: 340, damping: 34 }}
     >
+      {cover ? (
+        <>
+          {/* Place photos are local files or any https host, so they stay outside the image optimizer. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={cover} alt="" className="pointer-events-none absolute inset-0 z-0 h-full w-full rounded-[inherit] object-cover" />
+          <div className="stop-sheet-scrim pointer-events-none absolute inset-0 z-0 rounded-[inherit]" />
+        </>
+      ) : null}
       <button
         type="button"
-        className="flex w-full justify-center pt-3 pb-2"
+        className="relative z-[1] flex w-full justify-center pt-3 pb-2"
         aria-label="Drag to close"
         onPointerDown={(event) => dragControls.start(event)}
       >
         <span className="h-1.5 w-10 rounded-full bg-white/25" />
       </button>
-      <div className="flex items-center justify-between gap-3 px-4 pb-2">
+      <div className="relative z-[1] flex items-center gap-2 px-4 pb-2">
         <button type="button" onClick={onClose} className="back-button">
           Back
         </button>
-        <p className="text-sm text-mist">
+        <p className="min-w-0 flex-1 truncate text-right text-sm text-mist">
           Day {stop.day}, {stop.city}
         </p>
-      </div>
-      <div className="min-h-0 overflow-y-auto px-5 pt-1 pb-3">
-        <div className="flex items-start gap-3">
-          <div className="min-w-0 flex-1">
-            <h2 id="stop-title" className="font-display text-[2rem] leading-none text-cream">
-              {stop.name}
-            </h2>
-            <p className="mt-2 font-display text-[1.65rem] leading-none text-gold tabular-nums">
-              {formatClockRange(stop.start, stop.end)}
-            </p>
-            <div className="mt-3 flex flex-wrap items-center gap-2">
-              <span className={`cat-pill cat-${stop.category}`}>{categoryLabel(stop.category)}</span>
-              {arrived ? <span className="text-sm text-mist">{arrived}</span> : null}
-            </div>
-          </div>
-          <div className="flex shrink-0 gap-2">
+        <div className="flex shrink-0 gap-2">
+            {photos.length > 0 ? (
+              <button
+                type="button"
+                className="icon-button"
+                aria-label={
+                  photos.length === 1
+                    ? `View photo of ${stop.name}`
+                    : `View ${photos.length} photos of ${stop.name}`
+                }
+                onClick={() => setPhotosOpen(true)}
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" className="h-5 w-5">
+                  <rect
+                    x="3.5"
+                    y="5"
+                    width="17"
+                    height="14"
+                    rx="2.2"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                  />
+                  <circle cx="9" cy="10" r="1.35" fill="currentColor" />
+                  <path
+                    d="m4.2 16.2 4.2-4.1 3.2 3 2.6-2.4 5.6 4.3"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </button>
+            ) : null}
             <a
               href={appleMapsUrl(stop.name, stop.coords)}
               target="_blank"
@@ -141,20 +174,19 @@ export function StopSheet({
               </a>
             ) : null}
           </div>
+      </div>
+      <div className="relative z-[1] min-h-0 overflow-y-auto px-5 pt-1 pb-3">
+        <h2 id="stop-title" className="font-display text-[2rem] leading-none text-cream">
+          {stop.name}
+        </h2>
+        <p className="stop-copy mt-2 font-display text-[1.65rem] leading-none whitespace-nowrap text-gold tabular-nums">
+          {formatClockRange(stop.start, stop.end)}
+        </p>
+        <div className="mt-3 flex flex-wrap items-center gap-2">
+          <span className={`cat-pill cat-${stop.category}`}>{categoryLabel(stop.category)}</span>
+          {arrived ? <span className="text-sm text-mist">{arrived}</span> : null}
         </div>
-        {photos.length > 0 ? (
-          <div
-            className={photos.length > 1 ? "mt-3 grid grid-cols-2 gap-2" : "mt-3"}
-            aria-label={`Photos of ${stop.name}`}
-          >
-            {photos.map((src) => (
-              // Place photos can come from any https host, so they stay outside the image optimizer.
-              // eslint-disable-next-line @next/next/no-img-element
-              <img key={src} src={src} alt="" className="h-36 w-full rounded-2xl object-cover" />
-            ))}
-          </div>
-        ) : null}
-        <p className="mt-4 text-sm leading-6 text-cream">{stop.description}</p>
+        <p className="stop-copy mt-4 text-sm leading-6 text-cream">{stop.description}</p>
         {stop.tips.length > 0 ? (
           <div className="mt-4">
             <h3 className="text-sm font-semibold text-cream">Notes</h3>
@@ -167,8 +199,13 @@ export function StopSheet({
             </ul>
           </div>
         ) : null}
+        {coverCredit ? (
+          <a className="photo-credit" href={coverCredit.source} target="_blank" rel="noreferrer">
+            Photo: {coverCredit.author}, {coverCredit.license}
+          </a>
+        ) : null}
       </div>
-      <div className="flex gap-2 px-4 pt-2 pb-4">
+      <div className="relative z-[1] flex gap-2 px-4 pt-2 pb-4">
         {onPrevious ? (
           <button type="button" onClick={onPrevious} className="dock-button glass text-cream">
             Previous
@@ -189,6 +226,9 @@ export function StopSheet({
           </p>
         )}
       </div>
+      {photosOpen && photos.length > 0 ? (
+        <PhotoViewer name={stop.name} photos={photos} onClose={() => setPhotosOpen(false)} />
+      ) : null}
     </motion.section>
   );
 }
