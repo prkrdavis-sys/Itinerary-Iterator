@@ -5,7 +5,7 @@
     "start": "2026-10-30",
     "end": "2026-11-04",
     "travelers": "Two travelers",
-    "note": "Partner joins in Amsterdam on Friday 10/30. Tuesday sleep in Amsterdam is still being chosen after dinner."
+    "note": "Partner joins in Amsterdam on Friday 10/30. Tuesday night is the confirmed Badhoevedorp studio near Schiphol."
   },
   "stops": [
     {
@@ -708,46 +708,46 @@
       ]
     },
     {
-      "id": "amsterdam-tuesday-draft",
-      "city": "Amsterdam",
-      "name": "Amsterdam (draft)",
+      "id": "badhoevedorp-studio",
+      "city": "Badhoevedorp",
+      "name": "Badhoevedorp studio stay",
       "coords": [
-        4.8852,
-        52.36
+        4.777,
+        52.333
       ],
       "day": 5,
       "start": "22:15",
       "end": "23:30",
       "category": "stay",
-      "description": "Draft: where to sleep after dinner is not booked yet. Treat this pin as a placeholder near the canal belt until you pick a hotel or flat.",
+      "description": "Confirmed studio in Badhoevedorp, the village west of Schiphol. Check-in Tuesday after one pm; you arrive after dinner. Checkout Wednesday by ten am before the flight.",
+      "note": "Stay confirmed.",
       "photos": [
-        "/photos/rijksmuseum.jpg"
+        "/photos/schiphol-terminal.jpg"
       ],
-      "note": "Draft stay.",
       "tips": [
-        "Early night before the ten-thirty flight.",
-        "Schiphol is reachable by train from most central stays."
+        "Pin is the approximate village area, not the exact door.",
+        "A short hop to the airport Wednesday morning."
       ]
     },
     {
       "id": "schiphol-departure",
       "city": "Amsterdam",
-      "name": "Schiphol",
+      "name": "Schiphol (AMS) – SK 552",
       "coords": [
         4.7639,
         52.3086
       ],
       "day": 6,
-      "start": "08:00",
+      "start": "08:30",
       "end": "10:30",
       "category": "transit",
-      "description": "Check in for the ten-thirty departure to Copenhagen and on to Dulles. Leave the draft stay in time for security on a weekday morning.",
+      "description": "Check in for the ten-thirty SK 552 departure to Copenhagen and on to Dulles. Leave the Badhoevedorp studio after checkout in time for security.",
       "photos": [
         "/photos/schiphol-departures.jpg"
       ],
       "tips": [
         "SAS Light means paid bags and seats if you want them.",
-        "The train from Centraal takes about fifteen minutes when it is running clean."
+        "From Badhoevedorp, the airport is minutes away by bus or train."
       ]
     }
   ],
@@ -1158,27 +1158,49 @@
     },
     {
       "from": "in-de-waag",
-      "to": "amsterdam-tuesday-draft",
-      "mode": "walk",
+      "to": "badhoevedorp-studio",
+      "mode": "bus",
       "depart": "22:05",
-      "arrive": "22:15",
-      "notes": "Walk toward wherever Tuesday night lands."
-    },
-    {
-      "from": "amsterdam-tuesday-draft",
-      "to": "schiphol-departure",
-      "mode": "train",
-      "depart": "07:45",
-      "arrive": "08:05",
-      "notes": "Early train to the airport for the ten-thirty flight.",
+      "arrive": "22:50",
+      "notes": "Taxi or Schiphol train plus local bus, to be decided. Drawn as a bus leg toward Badhoevedorp.",
       "via": [
         [
-          4.885,
-          52.36
+          4.900385,
+          52.372693
         ],
         [
-          4.83,
+          4.9003,
+          52.378
+        ],
+        [
+          4.85,
+          52.35
+        ],
+        [
+          4.8,
           52.34
+        ],
+        [
+          4.777,
+          52.333
+        ]
+      ]
+    },
+    {
+      "from": "badhoevedorp-studio",
+      "to": "schiphol-departure",
+      "mode": "train",
+      "depart": "08:15",
+      "arrive": "08:35",
+      "notes": "Short ride from Badhoevedorp toward Schiphol for the ten-thirty flight.",
+      "via": [
+        [
+          4.777,
+          52.333
+        ],
+        [
+          4.77,
+          52.318
         ],
         [
           4.7639,
