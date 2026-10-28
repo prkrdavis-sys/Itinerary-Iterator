@@ -663,29 +663,8 @@
         "/photos/blankenberge-lighthouse.jpg"
       ],
       "tips": [
-        "Timing here feeds the three-fifty-hour run to Amsterdam.",
-        "Leaving around four-thirty targets a seven-ish arrival at drop-off."
-      ]
-    },
-    {
-      "id": "sixt-drop-amsterdam",
-      "city": "Amsterdam",
-      "name": "Sixt drop-off (Oosterdok Parking)",
-      "coords": [
-        4.9081,
-        52.3762
-      ],
-      "day": 5,
-      "start": "19:00",
-      "end": "20:15",
-      "category": "transit",
-      "description": "Return the rental at the Sixt desk in Oosterdok Parking, level minus two, by the Centraal and Oosterdokskade garages. Due back before eleven pm; fill the tank and keep the receipt, then walk to Nieuwmarkt for dinner.",
-      "photos": [
-        "/photos/amsterdam-centraal.jpg"
-      ],
-      "tips": [
-        "Allow time for traffic on the A10 ring.",
-        "Dinner is booked at eight-thirty at In de Waag."
+        "Timing here feeds the long drive north with the rental still.",
+        "Leaving around four-thirty targets dinner near Nieuwmarkt."
       ]
     },
     {
@@ -700,11 +679,11 @@
       "start": "20:30",
       "end": "22:00",
       "category": "food",
-      "description": "Booked dinner at eight-thirty in the old weigh house on Nieuwmarkt. Candlelit rooms after the car is back.",
+      "description": "Booked dinner at eight-thirty in the old weigh house on Nieuwmarkt. Drive in from the coast, park nearby, and keep the rental for the night.",
       "note": "Booked.",
       "tips": [
-        "Walk from Oosterdok through the old center to Nieuwmarkt.",
-        "Keep an eye on the time; you still need a bed afterward."
+        "Allow a few minutes to find parking near the square.",
+        "After dinner you drive west to Badhoevedorp with the same car."
       ]
     },
     {
@@ -719,14 +698,36 @@
       "start": "22:15",
       "end": "23:30",
       "category": "stay",
-      "description": "Confirmed studio in Badhoevedorp, the village west of Schiphol. Check-in Tuesday after one pm; you arrive after dinner. Checkout Wednesday by ten am before the flight.",
+      "description": "Confirmed studio in Badhoevedorp, the village west of Schiphol. Check-in Tuesday after one pm; you arrive around ten-fifteen by car after dinner. Checkout Wednesday by ten am, then return the car at the airport.",
       "note": "Stay confirmed.",
       "photos": [
         "/photos/schiphol-terminal.jpg"
       ],
       "tips": [
         "Pin is the approximate village area, not the exact door.",
-        "A short hop to the airport Wednesday morning."
+        "The rental stays with you overnight in Badhoevedorp."
+      ]
+    },
+    {
+      "id": "schiphol-sixt-return",
+      "city": "Amsterdam",
+      "name": "Sixt return (Schiphol Plaza)",
+      "coords": [
+        4.7655,
+        52.3088
+      ],
+      "day": 6,
+      "start": "08:00",
+      "end": "08:30",
+      "category": "transit",
+      "description": "Return the rental at the Sixt desk at Schiphol Plaza by the arrivals hall. Fill the tank, keep the receipt, then head into the terminal for the ten-thirty flight.",
+      "photos": [
+        "/photos/schiphol-terminal.jpg"
+      ],
+      "note": "Car return at Schiphol Sixt (24h return available). The current rental booking still lists an Amsterdam-Centrum 11:00 drop-off, which does not work with the 10:30 flight. Rebook to Schiphol before Fri 10/30.",
+      "tips": [
+        "Leave Badhoevedorp around seven-forty-five.",
+        "Allow time to walk from the desk to check-in."
       ]
     },
     {
@@ -738,16 +739,16 @@
         52.3086
       ],
       "day": 6,
-      "start": "08:30",
+      "start": "09:00",
       "end": "10:30",
       "category": "transit",
-      "description": "Check in for the ten-thirty SK 552 departure to Copenhagen and on to Dulles. Leave the Badhoevedorp studio after checkout in time for security.",
+      "description": "Check in for the ten-thirty SK 552 departure to Copenhagen and on to Dulles after the car is back at Schiphol.",
       "photos": [
         "/photos/schiphol-departures.jpg"
       ],
       "tips": [
         "SAS Light means paid bags and seats if you want them.",
-        "From Badhoevedorp, the airport is minutes away by bus or train."
+        "Walk from the plaza return desk into departures."
       ]
     }
   ],
@@ -1142,71 +1143,35 @@
     },
     {
       "from": "blankenberge-lighthouse",
-      "to": "sixt-drop-amsterdam",
+      "to": "in-de-waag",
       "mode": "car",
       "depart": "15:40",
-      "arrive": "19:05",
-      "notes": "Long haul to Amsterdam, about three hours twenty with traffic."
-    },
-    {
-      "from": "sixt-drop-amsterdam",
-      "to": "in-de-waag",
-      "mode": "walk",
-      "depart": "20:18",
-      "arrive": "20:28",
-      "notes": "Car returned first, then dinner at Nieuwmarkt."
+      "arrive": "20:20",
+      "notes": "Drive north with the rental; prefer scenic lanes where the detour is small, then park near Nieuwmarkt for dinner."
     },
     {
       "from": "in-de-waag",
       "to": "badhoevedorp-studio",
-      "mode": "bus",
+      "mode": "car",
       "depart": "22:05",
-      "arrive": "22:50",
-      "notes": "Taxi or Schiphol train plus local bus, to be decided. Drawn as a bus leg toward Badhoevedorp.",
-      "via": [
-        [
-          4.900385,
-          52.372693
-        ],
-        [
-          4.9003,
-          52.378
-        ],
-        [
-          4.85,
-          52.35
-        ],
-        [
-          4.8,
-          52.34
-        ],
-        [
-          4.777,
-          52.333
-        ]
-      ]
+      "arrive": "22:15",
+      "notes": "Same car west to the Badhoevedorp studio after dinner."
     },
     {
       "from": "badhoevedorp-studio",
+      "to": "schiphol-sixt-return",
+      "mode": "car",
+      "depart": "07:45",
+      "arrive": "08:00",
+      "notes": "Short morning drive from Badhoevedorp to Schiphol Plaza for the Sixt return."
+    },
+    {
+      "from": "schiphol-sixt-return",
       "to": "schiphol-departure",
-      "mode": "train",
-      "depart": "08:15",
-      "arrive": "08:35",
-      "notes": "Short ride from Badhoevedorp toward Schiphol for the ten-thirty flight.",
-      "via": [
-        [
-          4.777,
-          52.333
-        ],
-        [
-          4.77,
-          52.318
-        ],
-        [
-          4.7639,
-          52.3086
-        ]
-      ]
+      "mode": "walk",
+      "depart": "08:35",
+      "arrive": "08:50",
+      "notes": "Walk from the plaza desk into the departures hall for check-in."
     }
   ]
 }
