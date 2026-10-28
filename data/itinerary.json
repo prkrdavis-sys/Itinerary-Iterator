@@ -236,7 +236,7 @@
       "start": "17:40",
       "end": "18:00",
       "category": "transit",
-      "description": "Step out under the angular roof into Rotterdam. Drop bags at the Airbnb before dinner at Loos.",
+      "description": "Step out under the angular roof into Rotterdam. Head to the studio to check in before dinner at Loos.",
       "photos": [
         "/photos/rotterdam-centraal.jpg"
       ],
@@ -247,20 +247,22 @@
     {
       "id": "rotterdam-airbnb",
       "city": "Rotterdam",
-      "name": "Rotterdam Airbnb",
+      "name": "Rotterdam studio stay",
       "coords": [
-        4.4772,
-        51.9225
+        4.4637,
+        51.9158
       ],
       "day": 2,
-      "start": "18:10",
+      "start": "18:05",
       "end": "19:30",
       "category": "stay",
-      "description": "Home base for two nights. Unpack, change for dinner, and save the costume for the rave.",
+      "description": "Confirmed private ground-floor studio for two nights. Check-in Saturday after three pm once you arrive on the train; unpack before Loos at eight.",
+      "note": "Stay confirmed.",
       "photos": [
         "/photos/hofplein.jpg"
       ],
       "tips": [
+        "Pin is the approximate center-Rotterdam area, not the exact door.",
         "How you get home after the rave is still an open question."
       ]
     },
@@ -410,20 +412,22 @@
     {
       "id": "rotterdam-airbnb-sunday",
       "city": "Rotterdam",
-      "name": "Rotterdam Airbnb",
+      "name": "Rotterdam studio stay",
       "coords": [
-        4.4772,
-        51.9225
+        4.4637,
+        51.9158
       ],
       "day": 3,
       "start": "22:15",
       "end": "23:30",
       "category": "stay",
-      "description": "Second night in the same flat. Pack a day bag for Monday; the big luggage rides in the car to Bruges.",
+      "description": "Second night in the same confirmed studio. Checkout Monday by eleven am before the airport car pickup.",
+      "note": "Stay confirmed.",
       "photos": [
         "/photos/hofplein.jpg"
       ],
       "tips": [
+        "Pin is the approximate center-Rotterdam area, not the exact door.",
         "Set an alarm for the airport pickup.",
         "Charge everything for the driving day."
       ]
@@ -666,22 +670,22 @@
     {
       "id": "sixt-drop-amsterdam",
       "city": "Amsterdam",
-      "name": "Sixt drop-off (De Ruijterkade)",
+      "name": "Sixt drop-off (Oosterdok Parking)",
       "coords": [
-        4.8948,
-        52.3772
+        4.9081,
+        52.3762
       ],
       "day": 5,
       "start": "19:00",
       "end": "20:15",
       "category": "transit",
-      "description": "Return the rental at the Sixt desk on De Ruijterkade before eleven pm, then walk to Nieuwmarkt for dinner. Fill the tank and keep the receipt.",
+      "description": "Return the rental at the Sixt desk in Oosterdok Parking, level minus two, by the Centraal and Oosterdokskade garages. Due back before eleven pm; fill the tank and keep the receipt, then walk to Nieuwmarkt for dinner.",
       "photos": [
-        "/photos/de-ruijterkade.jpg"
+        "/photos/amsterdam-centraal.jpg"
       ],
       "tips": [
         "Allow time for traffic on the A10 ring.",
-        "Dinner is booked at eight-thirty nearby."
+        "Dinner is booked at eight-thirty at In de Waag."
       ]
     },
     {
@@ -699,7 +703,7 @@
       "description": "Booked dinner at eight-thirty in the old weigh house on Nieuwmarkt. Candlelit rooms after the car is back.",
       "note": "Booked.",
       "tips": [
-        "Walk from the drop-off along the canals.",
+        "Walk from Oosterdok through the old center to Nieuwmarkt.",
         "Keep an eye on the time; you still need a bed afterward."
       ]
     },
@@ -922,7 +926,8 @@
       "to": "rotterdam-airbnb",
       "mode": "walk",
       "depart": "18:02",
-      "arrive": "18:10"
+      "arrive": "18:05",
+      "notes": "Short ride or walk to the studio for check-in."
     },
     {
       "from": "rotterdam-airbnb",
