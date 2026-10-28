@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Outfit } from "next/font/google";
+import { RegisterServiceWorker } from "@/components/RegisterServiceWorker";
 import { getItinerary } from "@/lib/itinerary";
 import "./globals.css";
 
@@ -25,9 +26,16 @@ export const metadata: Metadata = {
     title: trip.title,
     statusBarStyle: "black-translucent",
   },
-  icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml" }],
-    apple: [{ url: "/icon.svg", type: "image/svg+xml" }],
+  openGraph: {
+    title: trip.title,
+    description: trip.subtitle,
+    siteName: trip.title,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: trip.title,
+    description: trip.subtitle,
   },
 };
 
@@ -42,7 +50,10 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${fraunces.variable} ${outfit.variable} h-full antialiased`}>
-      <body className="min-h-dvh bg-ink font-sans text-cream">{children}</body>
+      <body className="min-h-dvh bg-ink font-sans text-cream">
+        <RegisterServiceWorker />
+        {children}
+      </body>
     </html>
   );
 }

@@ -167,6 +167,11 @@ export function sketchArc(a: LngLat, b: LngLat): LngLat[] {
   return smoothThrough([a, mid, b], 14);
 }
 
+export function appleMapsUrl(name: string, coords: LngLat): string {
+  const [lng, lat] = coords;
+  return `https://maps.apple.com/?ll=${lat},${lng}&q=${encodeURIComponent(name)}`;
+}
+
 export function boundsOf(
   coords: LngLat[],
 ): [[number, number], [number, number]] {

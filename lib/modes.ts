@@ -76,25 +76,6 @@ export function legDuration(mode: Mode, meters: number): number {
   return Math.round(Math.max(1500, Math.min(4600, base * scale)));
 }
 
-export function arrivalPhrase(mode: Mode): string {
-  switch (mode) {
-    case "car":
-      return "Arrived by car";
-    case "train":
-      return "Arrived by train";
-    case "bike":
-      return "Arrived by bike";
-    case "bus":
-      return "Arrived by bus";
-    case "walk":
-      return "Arrived on foot";
-    default: {
-      const neverMode: never = mode;
-      return neverMode;
-    }
-  }
-}
-
 export function iconRotation(mode: Mode, bearingDeg: number): number {
   switch (mode) {
     case "car":

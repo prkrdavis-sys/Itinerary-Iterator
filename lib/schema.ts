@@ -43,7 +43,9 @@ export const stopSchema = z.object({
   end: clock,
   category: z.enum(categories),
   description: z.string().min(1),
+  url: z.url().optional(),
   photo: z.url().optional(),
+  photos: z.array(z.url()).max(4).default([]),
   tips: z.array(z.string().min(1)).default([]),
   emoji: z.string().min(1).optional(),
 });

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { spotEmoji } from "@/lib/categories";
 import { boundsOf, pointAlong, sliceLine, type LngLat } from "@/lib/geo";
 import { findStop, legKey } from "@/lib/itinerary";
 import {
@@ -11,9 +12,16 @@ import {
   modeStyle,
   playbackProgress,
 } from "@/lib/modes";
+import { ensureMapArchive } from "@/lib/offline-archive";
 import type { Itinerary } from "@/lib/schema";
 import type { RouteSet } from "@/lib/routes";
-import { createMap, lineFeature, type MapEngine, type MarkerHandle } from "./map-engine";
+import {
+  createMap,
+  lineFeature,
+  type Basemap,
+  type MapEngine,
+  type MarkerHandle,
+} from "./map-engine";
 
 export type TripMapHandle = {
   showOverview: () => Promise<void>;
@@ -29,11 +37,82 @@ type TripMapProps = {
   selectedId: string | null;
   playing: boolean;
   reducedMotion: boolean;
+  routesRevealed: boolean;
+  mapboxToken: string | null;
   onSelect: (id: string) => void;
+  onMapClick: () => void;
   onReady: (handle: TripMapHandle | null) => void;
 };
 
-const PADDING = { top: 132, bottom: 210, left: 28, right: 28 };
+const PADDING = { top: 188, bottom: 168, left: 28, right: 28 };
+
+type SaveStatus = "saving" | "saved" | "error";
+
+function saveMessage(status: SaveStatus): string {
+  switch (status) {
+    case "saving":
+      return "Saving the map on this phone";
+    case "saved":
+      return "Saved on this phone";
+    case "error":
+      return "This phone could not store the map";
+    default: {
+      const neverStatus: never = status;
+      return neverStatus;
+    }
+  }
+}
+
+function legIsVisible(
+  day: number | null,
+  playing: boolean,
+  fromDay: number | undefined,
+  toDay: number | undefined,
+): boolean {
+  if (playing || day === null) return true;
+  return fromDay === day || toDay === day;
+}
+
+function visibleCoordinates(
+  itinerary: Itinerary,
+  routes: RouteSet,
+  day: number | null,
+): LngLat[] {
+  const coords: LngLat[] = [];
+  for (const stop of itinerary.stops) {
+    if (day === null || stop.day === day) coords.push(stop.coords);
+  }
+  for (const leg of itinerary.legs) {
+    const from = findStop(itinerary, leg.from);
+    const to = findStop(itinerary, leg.to);
+    if (day !== null && from?.day !== day && to?.day !== day) continue;
+    const line = routes[legKey(leg.from, leg.to)]?.coordinates;
+    if (line) coords.push(...line);
+  }
+  return coords;
+}
+
+function frameCoords(coords: LngLat[]): [LngLat, LngLat] {
+  const bounds = boundsOf(coords);
+  const [[minLng, minLat], [maxLng, maxLat]] = bounds;
+  if (maxLng - minLng < 0.012 && maxLat - minLat < 0.012) {
+    return [
+      [minLng - 0.02, minLat - 0.015],
+      [maxLng + 0.02, maxLat + 0.015],
+    ];
+  }
+  return bounds;
+}
+
+function setLayerVisibility(engine: MapEngine, id: string, visible: boolean) {
+  const opacity = visible ? (id.endsWith("-casing") ? 0.55 : 0.95) : 0;
+  try {
+    engine.map.setLayoutProperty(id, "visibility", visible ? "visible" : "none");
+    engine.map.setPaintProperty(id, "line-opacity", opacity);
+  } catch {
+    // Layers are added once the style has loaded.
+  }
+}
 
 function wait(ms: number): Promise<void> {
   return new Promise((resolve) => {
@@ -73,7 +152,10 @@ export function TripMap({
   selectedId,
   playing,
   reducedMotion,
+  routesRevealed,
+  mapboxToken,
   onSelect,
+  onMapClick,
   onReady,
 }: TripMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -84,7 +166,13 @@ export function TripMap({
   const runRef = useRef(0);
   const shownRef = useRef(false);
   const onSelectRef = useRef(onSelect);
+  const onMapClickRef = useRef(onMapClick);
   const reducedRef = useRef(reducedMotion);
+  const selectedIdRef = useRef(selectedId);
+  const playingRef = useRef(playing);
+  const dayRef = useRef(day);
+  const revealedRef = useRef(routesRevealed);
+  const daySeen = useRef<number | null | undefined>(undefined);
   const overviewRef = useRef<() => Promise<void>>(async () => {});
   const playRef = useRef<(index: number) => Promise<void>>(async () => {});
   const focusRef = useRef<(id: string) => void>(() => {});
@@ -92,11 +180,44 @@ export function TripMap({
     runRef.current += 1;
   });
   const [booted, setBooted] = useState(false);
+  const [online, setOnline] = useState<boolean | null>(null);
+  const [archive, setArchive] = useState<Blob | null>(null);
+  const [saveStatus, setSaveStatus] = useState<SaveStatus>("saving");
+
+  onSelectRef.current = onSelect;
+  onMapClickRef.current = onMapClick;
+  reducedRef.current = reducedMotion;
+  selectedIdRef.current = selectedId;
+  playingRef.current = playing;
+  dayRef.current = day;
+  revealedRef.current = routesRevealed;
 
   useEffect(() => {
-    onSelectRef.current = onSelect;
-    reducedRef.current = reducedMotion;
-  }, [onSelect, reducedMotion]);
+    const sync = () => setOnline(navigator.onLine);
+    sync();
+    window.addEventListener("online", sync);
+    window.addEventListener("offline", sync);
+    return () => {
+      window.removeEventListener("online", sync);
+      window.removeEventListener("offline", sync);
+    };
+  }, []);
+
+  useEffect(() => {
+    let dead = false;
+    void ensureMapArchive()
+      .then((blob) => {
+        if (dead) return;
+        setArchive(blob);
+        setSaveStatus("saved");
+      })
+      .catch(() => {
+        if (!dead) setSaveStatus("error");
+      });
+    return () => {
+      dead = true;
+    };
+  }, []);
 
   useEffect(() => {
     onReady({
@@ -110,8 +231,15 @@ export function TripMap({
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
-    const engine = createMap(container);
+    if (!container || online === null) return;
+    const basemap: Basemap | null =
+      online && mapboxToken
+        ? { kind: "mapbox", token: mapboxToken }
+        : archive
+          ? { kind: "maplibre", archive }
+          : null;
+    if (!basemap) return;
+    const engine = createMap(container, basemap);
     engineRef.current = engine;
     let dead = false;
     const markers: MarkerHandle[] = [];
@@ -185,8 +313,16 @@ export function TripMap({
         button.className = "stop-marker";
         button.style.setProperty("--city", cityColor(stop.city));
         button.setAttribute("aria-label", `${stop.name}, ${stop.city}`);
-        button.innerHTML = '<span class="pulse"></span><span class="core"></span>';
-        button.addEventListener("click", () => onSelectRef.current(stop.id));
+        const pulse = document.createElement("span");
+        pulse.className = "pulse";
+        const core = document.createElement("span");
+        core.className = "core";
+        core.textContent = spotEmoji(stop);
+        button.append(pulse, core);
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+          onSelectRef.current(stop.id);
+        });
         const marker = engine.addMarker(button);
         marker.setLngLat(stop.coords);
         marker.addTo();
@@ -204,8 +340,54 @@ export function TripMap({
       vehicleEl.current = vehicle;
       vehicleMarker.current = handle;
       engine.map.resize();
+      if (revealedRef.current) {
+        for (const leg of itinerary.legs) {
+          const key = legKey(leg.from, leg.to);
+          const coords = routes[key]?.coordinates;
+          if (coords) setLine(key, coords);
+        }
+        shownRef.current = true;
+        const filterDay = playingRef.current ? null : dayRef.current;
+        const framed = visibleCoordinates(itinerary, routes, filterDay);
+        if (framed.length > 0) {
+          try {
+            engine.map.fitBounds(frameCoords(framed), {
+              padding: PADDING,
+              absolutePadding: true,
+              pitch: reducedRef.current ? 0 : 34,
+              duration: 0,
+              maxZoom: filterDay === null ? 12.5 : 14,
+            });
+          } catch {
+            engine.map.resize();
+          }
+        }
+      }
       setBooted(true);
     };
+
+    let pointerStart: { x: number; y: number; at: number } | null = null;
+    const onPointerDown = (event: PointerEvent) => {
+      if (event.button !== 0) return;
+      pointerStart = { x: event.clientX, y: event.clientY, at: performance.now() };
+    };
+    const onClick = (event: MouseEvent) => {
+      const target = event.target;
+      const start = pointerStart;
+      pointerStart = null;
+      if (!(target instanceof Element)) return;
+      if (target.closest(".stop-marker, .maplibregl-ctrl, .mapboxgl-ctrl")) return;
+      if (
+        start &&
+        performance.now() - start.at < 500 &&
+        Math.hypot(event.clientX - start.x, event.clientY - start.y) > 8
+      ) {
+        return;
+      }
+      onMapClickRef.current();
+    };
+    container.addEventListener("pointerdown", onPointerDown, true);
+    container.addEventListener("click", onClick, true);
 
     if (engine.map.loaded()) boot();
     else engine.map.on("load", boot);
@@ -230,6 +412,7 @@ export function TripMap({
         try {
           engine.map.fitBounds(boundsOf(all), {
             padding: PADDING,
+            absolutePadding: true,
             pitch: reduced ? 0 : 32,
             duration: reduced ? 0 : 2600,
             maxZoom: 12.5,
@@ -320,7 +503,7 @@ export function TripMap({
         pitch: reducedRef.current ? 0 : 48,
         duration: reducedRef.current ? 0 : 1400,
         essential: true,
-        padding: { top: 120, bottom: 260, left: 24, right: 24 },
+        padding: { top: 170, bottom: 300, left: 24, right: 24 },
       });
     };
 
@@ -328,6 +511,8 @@ export function TripMap({
       dead = true;
       runRef.current += 1;
       observer.disconnect();
+      container.removeEventListener("pointerdown", onPointerDown, true);
+      container.removeEventListener("click", onClick, true);
       for (const marker of markers) marker.remove();
       markerButtons.clear();
       vehicleEl.current = null;
@@ -336,51 +521,75 @@ export function TripMap({
       engineRef.current = null;
       setBooted(false);
     };
-  }, [itinerary, routes]);
+  }, [itinerary, routes, mapboxToken, online, archive]);
 
   useEffect(() => {
     const engine = engineRef.current;
     if (!engine || !booted) return;
+
     for (const stop of itinerary.stops) {
       const element = markerEls.current.get(stop.id);
       if (!element) continue;
-      element.classList.toggle("is-dim", day !== null && stop.day !== day);
+      const hidden = !playing && day !== null && stop.day !== day;
+      element.classList.toggle("is-hidden", hidden);
       element.classList.toggle("is-active", stop.id === selectedId);
+      element.tabIndex = hidden ? -1 : 0;
+      if (hidden) element.setAttribute("aria-hidden", "true");
+      else element.removeAttribute("aria-hidden");
     }
+
     for (const leg of itinerary.legs) {
       const from = findStop(itinerary, leg.from);
       const to = findStop(itinerary, leg.to);
-      const visible = day === null || from?.day === day || to?.day === day;
+      const visible = legIsVisible(day, playing, from?.day, to?.day);
       const key = legKey(leg.from, leg.to);
-      engine.map.setPaintProperty(`leg-${key}`, "line-opacity", visible ? 0.95 : 0.14);
-      engine.map.setPaintProperty(
-        `leg-${key}-casing`,
-        "line-opacity",
-        visible ? 0.5 : 0.05,
-      );
+      setLayerVisibility(engine, `leg-${key}`, visible);
+      setLayerVisibility(engine, `leg-${key}-casing`, visible);
     }
-  }, [booted, day, selectedId, itinerary]);
 
-  useEffect(() => {
-    const engine = engineRef.current;
-    if (!engine || !booted || !shownRef.current || playing || day === null) return;
-    const coords = itinerary.stops
-      .filter((stop) => stop.day === day)
-      .map((stop) => stop.coords);
+    if (daySeen.current === day) return;
+    const previous = daySeen.current;
+    daySeen.current = day;
+    if (previous === undefined && day === null) return;
+    if (playingRef.current) return;
+
+    runRef.current += 1;
+    if (vehicleEl.current) vehicleEl.current.hidden = true;
+    shownRef.current = true;
+    for (const leg of itinerary.legs) {
+      const from = findStop(itinerary, leg.from);
+      const to = findStop(itinerary, leg.to);
+      const visible = legIsVisible(day, false, from?.day, to?.day);
+      const route = routes[legKey(leg.from, leg.to)];
+      if (!visible || !route) continue;
+      engine.map.getSource(`leg-${legKey(leg.from, leg.to)}`)?.setData(lineFeature(route.coordinates));
+    }
+    if (selectedIdRef.current) return;
+    const coords = visibleCoordinates(itinerary, routes, day);
     if (coords.length === 0) return;
-    engine.map.fitBounds(boundsOf(coords), {
-      padding: PADDING,
-      pitch: reducedMotion ? 0 : 36,
-      duration: reducedMotion ? 0 : 900,
-      maxZoom: 14,
-    });
-  }, [booted, day, itinerary, playing, reducedMotion]);
+    try {
+      engine.map.fitBounds(frameCoords(coords), {
+        padding: PADDING,
+        absolutePadding: true,
+        pitch: reducedMotion ? 0 : 36,
+        duration: reducedMotion ? 0 : 900,
+        maxZoom: day === null ? 12.5 : 14,
+      });
+    } catch {
+      engine.map.resize();
+    }
+  }, [booted, day, selectedId, playing, itinerary, routes, reducedMotion]);
 
   return (
-    <div
-      ref={containerRef}
-      className="map-canvas absolute inset-0"
-      style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0 }}
-    />
+    <>
+      <div
+        ref={containerRef}
+        className="map-canvas absolute inset-0"
+        style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, zIndex: 0 }}
+      />
+      <p className={`map-save-status glass${saveStatus === "error" ? " is-error" : ""}`} role="status">
+        {saveMessage(saveStatus)}
+      </p>
+    </>
   );
 }

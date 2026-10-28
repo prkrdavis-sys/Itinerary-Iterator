@@ -40,3 +40,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# offline map extract and generated worker
+/scripts/.cache/
+/public/maps/*.pmtiles
+/public/sw.js
+/public/sw.js.map

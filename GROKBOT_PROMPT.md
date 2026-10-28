@@ -31,9 +31,11 @@ You are editing a trip file for an animated map. Return only valid JSON, no mark
       "start": "10:00",
       "end": "12:30",
       "category": "museum",
-      "description": "string",
-      "photo": "https://example.com/optional.jpg",
-      "tips": ["string"]
+      "emoji": "🖼️",
+      "description": "one short factual line",
+      "url": "https://example.com/official-page",
+      "photos": ["https://example.com/one.jpg", "https://example.com/two.jpg"],
+      "tips": []
     }
   ],
   "legs": [
@@ -56,7 +58,8 @@ Rules:
 - `category` is one of: museum, food, sight, stay, transit, neighborhood, activity.
 - `mode` is one of: car, train, bike, bus, walk.
 - There is exactly one leg between each consecutive pair of stops, in the same order as `stops`. The first stop has no incoming leg.
-- `depart`, `arrive`, `notes`, `via`, and `photo` may be omitted. `tips` may be an empty array.
+- `depart`, `arrive`, `notes`, `via`, `url`, `emoji`, and `photos` may be omitted. `tips` may be an empty array. `photos` is up to four image URLs. When a stop already has `emoji` or `photos`, keep them.
+- `url` is the place's own webpage, only when one exists. The card shows the name, the time window, the category, how you arrived, an Apple Maps icon, and that link as an icon. Keep `description` to one short fact and leave `tips` empty.
 - Times are 24-hour `HH:MM`. A stop's `end` is the same as or after `start`. If a leg has both `depart` and `arrive`, arrive is the same as or after depart.
 - For a train or bus that should follow a real corridor instead of roads, add `via` waypoints. The Schiphol–Centraal train and the IJ ferry are drawn by smoothing through those points. Car, bike, and walk legs are routed on roads and do not need `via`.
 - Keep ids stable when you are only editing copy, so existing route geometry can be reused.

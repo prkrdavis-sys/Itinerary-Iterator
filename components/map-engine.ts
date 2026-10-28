@@ -1,7 +1,9 @@
 import mapboxgl from "mapbox-gl";
-import { Map as MapLibreMap, Marker as MapLibreMarker, setWorkerUrl } from "maplibre-gl";
+import { addProtocol, Map as MapLibreMap, Marker as MapLibreMarker, setWorkerUrl } from "maplibre-gl";
+import { PMTiles, Protocol, type RangeResponse, type Source } from "pmtiles";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "maplibre-gl/dist/maplibre-gl.css";
+import { ARCHIVE_KEY, localBasemapStyle } from "@/lib/basemap-style";
 import type { LngLat } from "@/lib/geo";
 
 setWorkerUrl("/maplibre-gl-worker.js");
@@ -17,7 +19,7 @@ export type LineFeature = {
 };
 
 type MapLike = {
-  on: (event: string, listener: () => void) => void;
+  on: (event: string, listener: (event?: { originalEvent?: Event }) => void) => void;
   loaded: () => boolean;
   addSource: (id: string, source: { type: "geojson"; data: LineFeature }) => void;
   addLayer: (layer: {
@@ -31,6 +33,7 @@ type MapLike = {
   setPaintProperty: (layer: string, name: string, value: unknown) => void;
   resize: () => void;
   remove: () => void;
+  setLayoutProperty: (layer: string, name: string, value: unknown) => void;
   fitBounds: (
     bounds: [LngLat, LngLat],
     options: {
@@ -38,6 +41,7 @@ type MapLike = {
       pitch?: number;
       duration?: number;
       maxZoom?: number;
+      absolutePadding?: boolean;
     },
   ) => void;
   easeTo: (options: {
@@ -69,52 +73,90 @@ export type MapEngine = {
   addMarker: (element: HTMLElement) => MarkerHandle;
 };
 
-const EUROPE: LngLat = [4.6, 51.45];
+export type Basemap =
+  | { kind: "maplibre"; archive: Blob }
+  | { kind: "mapbox"; token: string };
 
-export function createMap(container: HTMLElement): MapEngine {
-  const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-  if (token) {
-    mapboxgl.accessToken = token;
-    const map = new mapboxgl.Map({
-      container,
-      style: "mapbox://styles/mapbox/standard",
-      center: EUROPE,
-      zoom: 5.15,
-      pitch: 0,
-      projection: "mercator",
-      attributionControl: true,
-      fadeDuration: 0,
-    });
-    map.on("style.load", () => {
-      try {
-        map.setConfigProperty("basemap", "lightPreset", "dusk");
-      } catch {
-        // The standard style is the only one with a dusk preset.
-      }
-    });
-    return {
-      kind: "mapbox",
-      map: map as unknown as MapLike,
-      addMarker: (element) => {
-        const marker = new mapboxgl.Marker({ element, anchor: "center" });
-        return {
-          setLngLat: (lngLat) => {
-            marker.setLngLat(lngLat);
-          },
-          addTo: () => {
-            marker.addTo(map);
-          },
-          remove: () => {
-            marker.remove();
-          },
-        };
-      },
-    };
+class BlobSource implements Source {
+  private readonly blob: Blob;
+  private readonly key: string;
+
+  constructor(blob: Blob, key: string) {
+    this.blob = blob;
+    this.key = key;
   }
 
+  getKey(): string {
+    return this.key;
+  }
+
+  async getBytes(offset: number, length: number): Promise<RangeResponse> {
+    const data = await this.blob.slice(offset, offset + length).arrayBuffer();
+    return { data };
+  }
+}
+
+let protocol: Protocol | null = null;
+
+function attachArchive(blob: Blob): void {
+  if (!protocol) {
+    protocol = new Protocol();
+    addProtocol("pmtiles", protocol.tile);
+  }
+  protocol.add(new PMTiles(new BlobSource(blob, ARCHIVE_KEY)));
+}
+
+const EUROPE: LngLat = [4.6, 51.45];
+
+function createMapbox(container: HTMLElement, token: string): MapEngine {
+  mapboxgl.accessToken = token;
+  const map = new mapboxgl.Map({
+    container,
+    style: "mapbox://styles/mapbox/standard",
+    config: {
+      basemap: {
+        lightPreset: "dusk",
+      },
+    },
+    center: EUROPE,
+    zoom: 5.15,
+    pitch: 0,
+    projection: "mercator",
+    attributionControl: true,
+    fadeDuration: 0,
+  });
+  map.on("style.load", () => {
+    try {
+      map.setConfigProperty("basemap", "lightPreset", "dusk");
+    } catch {
+      // The standard style is the only one with a dusk preset.
+    }
+  });
+  return {
+    kind: "mapbox",
+    map: map as unknown as MapLike,
+    addMarker: (element) => {
+      const marker = new mapboxgl.Marker({ element, anchor: "center" });
+      return {
+        setLngLat: (lngLat) => {
+          marker.setLngLat(lngLat);
+        },
+        addTo: () => {
+          marker.addTo(map);
+        },
+        remove: () => {
+          marker.remove();
+        },
+      };
+    },
+  };
+}
+
+function createMapLibre(container: HTMLElement, archive: Blob): MapEngine {
+  attachArchive(archive);
   const map = new MapLibreMap({
     container,
-    style: "https://tiles.openfreemap.org/styles/dark",
+    style: localBasemapStyle(),
     center: EUROPE,
     zoom: 5.15,
     pitch: 0,
@@ -138,6 +180,19 @@ export function createMap(container: HTMLElement): MapEngine {
       };
     },
   };
+}
+
+export function createMap(container: HTMLElement, basemap: Basemap): MapEngine {
+  switch (basemap.kind) {
+    case "mapbox":
+      return createMapbox(container, basemap.token);
+    case "maplibre":
+      return createMapLibre(container, basemap.archive);
+    default: {
+      const neverBasemap: never = basemap;
+      return neverBasemap;
+    }
+  }
 }
 
 export function lineFeature(coordinates: LngLat[]): LineFeature {

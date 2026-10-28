@@ -73,6 +73,7 @@ body {
 }
 
 .chip {
+  cursor: pointer;
   flex: 0 0 auto;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -105,8 +106,8 @@ body {
 
 .stop-marker {
   position: relative;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: 0;
   background: transparent;
@@ -117,32 +118,42 @@ body {
 .stop-marker .core {
   position: absolute;
   border-radius: 999px;
+  pointer-events: none;
 }
 
 .stop-marker .core {
-  inset: 10px;
+  inset: 7px;
+  display: grid;
+  place-items: center;
   background: var(--city);
+  font-size: 16px;
+  line-height: 1;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
   box-shadow:
     0 0 0 2px rgba(12, 10, 8, 0.85),
     0 0 12px var(--city);
 }
 
 .stop-marker .pulse {
-  inset: 8px;
+  inset: 6px;
   background: var(--city);
   opacity: 0.45;
   animation: marker-pulse 2.4s ease-out infinite;
 }
 
 .stop-marker.is-active .core {
-  inset: 7px;
+  inset: 4px;
+  font-size: 18px;
   box-shadow:
     0 0 0 3px #f0b429,
     0 0 16px var(--city);
 }
 
-.stop-marker.is-dim {
-  opacity: 0.28;
+.stop-marker.is-dim,
+.stop-marker.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .vehicle {
@@ -184,6 +195,27 @@ body {
   display: none !important;
 }
 
+.map-save-status {
+  position: absolute;
+  z-index: 31;
+  left: 50%;
+  bottom: calc(max(0.75rem, env(safe-area-inset-bottom)) + 7.35rem);
+  transform: translateX(-50%);
+  max-width: calc(100% - 1.5rem);
+  margin: 0;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #f4efe6;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.map-save-status.is-error {
+  color: #f0b429;
+}
+
 .phone .map-canvas.maplibregl-map,
 .phone .map-canvas.mapboxgl-map {
   position: absolute !important;
@@ -191,6 +223,97 @@ body {
   z-index: 0 !important;
   width: 100% !important;
   height: 100% !important;
+}
+
+.chrome {
+  z-index: 40;
+  pointer-events: none;
+}
+
+.chrome .glass,
+.chrome button {
+  pointer-events: auto;
+}
+
+.under-chrome {
+  position: absolute;
+  z-index: 33;
+  left: 0.5rem;
+  right: 0.5rem;
+  top: max(
+    calc(max(0.75rem, env(safe-area-inset-top)) + 8.75rem),
+    calc(var(--chrome-bottom, 0px) + 0.4rem)
+  );
+  bottom: max(0.5rem, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.stop-sheet {
+  bottom: calc(max(0.75rem, env(safe-area-inset-bottom)) + 4.15rem);
+  max-height: calc(
+    100% - var(--chrome-bottom, 9rem) - max(0.75rem, env(safe-area-inset-bottom)) - 4.5rem
+  );
+}
+
+.settings-sheet {
+  position: absolute;
+  z-index: 36;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: max(0.55rem, env(safe-area-inset-bottom));
+  max-height: calc(
+    100% - max(0.75rem, env(safe-area-inset-top)) - var(--chrome-bottom, 8.75rem) - 0.75rem
+  );
+  overflow: auto;
+  border-radius: 28px;
+  padding: 1rem 1.1rem 1.1rem;
+}
+
+.settings-launch,
+.back-button,
+.icon-button {
+  min-height: 2.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(240, 180, 41, 0.45);
+  background: rgba(240, 180, 41, 0.14);
+  color: #f4efe6;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.settings-launch,
+.icon-button {
+  width: 2.75rem;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.icon-button {
+  height: 2.75rem;
+  color: #f0b429;
+  text-decoration: none;
+}
+
+.back-button {
+  padding: 0 0.95rem;
+}
+
+.settings-input {
+  width: 100%;
+  height: 2.75rem;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.28);
+  color: #f4efe6;
+  padding: 0 0.8rem;
+  font-size: 16px;
+}
+
+.dock-button:disabled {
+  opacity: 0.38;
 }
 
 @keyframes marker-pulse {

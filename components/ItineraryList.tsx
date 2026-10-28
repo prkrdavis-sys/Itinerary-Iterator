@@ -21,20 +21,16 @@ export function ItineraryList({ itinerary, day, onClose, onPick }: ItineraryList
       layoutId="directory"
       role="dialog"
       aria-label="Itinerary"
-      className="glass absolute inset-2 z-40 flex flex-col overflow-hidden rounded-[28px]"
+      className="glass under-chrome rounded-[28px]"
       transition={{ type: "spring", stiffness: 320, damping: 32 }}
     >
-      <header className="flex items-center justify-between px-5 pt-5 pb-3">
-        <div>
+      <header className="flex items-center justify-between gap-3 px-4 pt-4 pb-3">
+        <div className="min-w-0">
           <p className="text-[11px] tracking-[0.22em] text-gold uppercase">The days</p>
           <h2 className="font-display text-3xl text-cream">List</h2>
         </div>
-        <button
-          type="button"
-          onClick={onClose}
-          className="rounded-full border border-white/15 px-3 py-1.5 text-sm text-cream"
-        >
-          Close
+        <button type="button" onClick={onClose} className="back-button shrink-0">
+          Back
         </button>
       </header>
       <div className="min-h-0 flex-1 overflow-y-auto px-3 pb-4">

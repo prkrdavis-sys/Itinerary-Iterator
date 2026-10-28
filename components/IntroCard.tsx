@@ -29,6 +29,13 @@ export function IntroCard({ itinerary, onOpen }: IntroCardProps) {
         exit={{ y: 48, opacity: 0 }}
         transition={{ type: "spring", stiffness: 280, damping: 30 }}
       >
+        <img
+          src="/logo.png"
+          alt=""
+          width={88}
+          height={88}
+          className="mb-5 h-[4.5rem] w-[4.5rem] rounded-[22px]"
+        />
         <p className="text-[11px] tracking-[0.28em] text-gold uppercase">
           {formatRange(trip.start, trip.end)}
         </p>
