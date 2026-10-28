@@ -241,7 +241,7 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
             ) : null}
           </AnimatePresence>
 
-          {phase === "ready" ? (
+          {phase === "ready" && (!selected || playing) ? (
             <div className="absolute inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-20 flex items-center gap-2">
               {playing ? (
                 <button type="button" onClick={stopPlayback} className="dock-button bg-cream text-ink">

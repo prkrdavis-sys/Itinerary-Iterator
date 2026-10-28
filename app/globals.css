@@ -188,6 +188,7 @@ body {
 .phone .map-canvas.mapboxgl-map {
   position: absolute !important;
   inset: 0 !important;
+  z-index: 0 !important;
   width: 100% !important;
   height: 100% !important;
 }
