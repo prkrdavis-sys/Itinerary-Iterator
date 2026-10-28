@@ -5,7 +5,7 @@
     "start": "2026-10-30",
     "end": "2026-11-04",
     "travelers": "Two travelers",
-    "note": "Partner joins in Amsterdam on Friday 10/30. Tuesday night in Amsterdam is still being chosen."
+    "note": "Partner joins in Amsterdam on Friday 10/30. Tuesday sleep in Amsterdam is still being chosen after dinner."
   },
   "stops": [
     {
@@ -60,36 +60,147 @@
       ],
       "day": 1,
       "start": "17:30",
-      "end": "22:00",
+      "end": "18:15",
       "category": "neighborhood",
-      "description": "Coffee shops, thrift stops, and canals without a fixed list. Let the neighborhoods choose the route and end when the bars feel right.",
+      "description": "A short wander through canals and side streets before dinner. Coffee shops and thrift stops if you still have energy.",
       "photos": [
         "/photos/herengracht-evening.jpg"
       ],
+      "note": "Optional pre-dinner wander.",
       "tips": [
-        "Trams and trains run late back to Sloterdijk.",
-        "Keep dinner loose; nothing is booked for this night."
+        "Trams and trains run late back toward Sloterdijk."
       ]
     },
     {
-      "id": "amsterdam-saturday",
+      "id": "de-reiger",
       "city": "Amsterdam",
-      "name": "Amsterdam by bike",
+      "name": "Eetcafé De Reiger",
       "coords": [
-        4.8867,
-        52.3794
+        4.882673,
+        52.375749
       ],
-      "day": 2,
-      "start": "09:30",
-      "end": "16:00",
-      "category": "activity",
-      "description": "A full day on rental bikes through the Jordaan, thrift shops, and whatever side street catches your eye. Leave time to pack before the train south.",
+      "day": 1,
+      "start": "18:30",
+      "end": "20:30",
+      "category": "food",
+      "description": "Classic Jordaan eetcafé on Nieuwe Leliestraat. You asked for a table around half six; treat it as requested until the restaurant confirms.",
+      "note": "Requested, not confirmed.",
+      "tips": [
+        "Kitchen service typically starts a bit after opening.",
+        "Walk-ins sometimes find bar seats later in the evening."
+      ]
+    },
+    {
+      "id": "holiday-inn-friday-night",
+      "city": "Amsterdam",
+      "name": "Holiday Inn Sloterdijk Station",
+      "coords": [
+        4.8384,
+        52.3892
+      ],
+      "day": 1,
+      "start": "21:00",
+      "end": "23:30",
+      "category": "stay",
+      "description": "First night at Sloterdijk after dinner in the Jordaan. Sleep before the Saturday market run.",
       "photos": [
-        "/photos/amsterdam-bike.jpg"
+        "/photos/sloterdijk.jpg"
       ],
       "tips": [
-        "Lock bikes properly; the city is full of polite thieves.",
-        "A late lunch in town beats rushing to the station hungry."
+        "Set out anything you need for the Waterlooplein morning."
+      ]
+    },
+    {
+      "id": "waterlooplein",
+      "city": "Amsterdam",
+      "name": "Waterlooplein flea market",
+      "coords": [
+        4.901761,
+        52.368421
+      ],
+      "day": 2,
+      "start": "10:00",
+      "end": "11:15",
+      "category": "activity",
+      "description": "Outdoor flea market stalls around the square, good for leather jackets and odd finds. Open Monday through Saturday until six.",
+      "note": "Planned stop.",
+      "tips": [
+        "Bring cash; not every stall takes cards.",
+        "Saturday crowds pick up late morning."
+      ]
+    },
+    {
+      "id": "episode-waterlooplein",
+      "city": "Amsterdam",
+      "name": "Episode",
+      "coords": [
+        4.900853,
+        52.369102
+      ],
+      "day": 2,
+      "start": "11:30",
+      "end": "12:15",
+      "category": "activity",
+      "description": "Thrift floor at the Waterlooplein Episode, a few steps from the market. Dig for jackets and denim before lunch.",
+      "note": "Planned stop.",
+      "tips": [
+        "Try things on; the good racks turn over fast."
+      ]
+    },
+    {
+      "id": "sluyswacht",
+      "city": "Amsterdam",
+      "name": "Café de Sluyswacht",
+      "coords": [
+        4.901685,
+        52.369856
+      ],
+      "day": 2,
+      "start": "12:30",
+      "end": "13:45",
+      "category": "food",
+      "description": "Crooked canal-house café by the Waterlooplein end of town. Lunch at the leaning terrace before you drift south toward the coffeeshops.",
+      "note": "Planned stop.",
+      "tips": [
+        "The terrace fills on sunny Saturdays.",
+        "Book if you want a guaranteed table."
+      ]
+    },
+    {
+      "id": "bluebird",
+      "city": "Amsterdam",
+      "name": "Coffeeshop Bluebird",
+      "coords": [
+        4.900897,
+        52.369998
+      ],
+      "day": 2,
+      "start": "14:00",
+      "end": "14:45",
+      "category": "food",
+      "description": "Bluebird on Sint Antoniesbreestraat, a few minutes from the Sluyswacht. Slow down before the optional second shop.",
+      "note": "Planned stop.",
+      "tips": [
+        "ID required; read the menu board before ordering."
+      ]
+    },
+    {
+      "id": "dampkring",
+      "city": "Amsterdam",
+      "name": "Original Dampkring",
+      "coords": [
+        4.890465,
+        52.367697
+      ],
+      "day": 2,
+      "start": "15:00",
+      "end": "15:45",
+      "category": "food",
+      "description": "Optional detour to the Original Dampkring on Handboogstraat if you still want a second room. Skip it if the clock is tight for the train.",
+      "note": "Optional.",
+      "tips": [
+        "Ten-minute walk west from Bluebird.",
+        "Leave time to reach Centraal by four-thirty."
       ]
     },
     {
@@ -101,10 +212,10 @@
         52.378
       ],
       "day": 2,
-      "start": "16:45",
-      "end": "17:10",
+      "start": "16:20",
+      "end": "16:50",
       "category": "transit",
-      "description": "The hall under the old roof, with the IJ out back. Find the Rotterdam-bound Intercity on the departure boards.",
+      "description": "Platforms under the old roof for the Intercity south toward Rotterdam. Aim to tap in before the half-six departure.",
       "photos": [
         "/photos/amsterdam-centraal.jpg"
       ],
@@ -122,16 +233,15 @@
         51.9244
       ],
       "day": 2,
-      "start": "18:15",
-      "end": "18:35",
+      "start": "17:40",
+      "end": "18:00",
       "category": "transit",
-      "description": "Step out under the angular roof into a city that looks nothing like Amsterdam. The Airbnb is a short ride or walk from here.",
+      "description": "Step out under the angular roof into Rotterdam. Drop bags at the Airbnb before dinner at Loos.",
       "photos": [
         "/photos/rotterdam-centraal.jpg"
       ],
       "tips": [
-        "Metro and tram stops are on the station square.",
-        "Drop bags at the Airbnb before you think about the rave."
+        "Metro and tram stops are on the station square."
       ]
     },
     {
@@ -143,16 +253,34 @@
         51.9225
       ],
       "day": 2,
-      "start": "18:45",
-      "end": "22:00",
+      "start": "18:10",
+      "end": "19:30",
       "category": "stay",
-      "description": "Home base for two nights in Rotterdam. Unpack the Halloween costume, eat something sensible, and leave for the party around ten-fifteen.",
+      "description": "Home base for two nights. Unpack, change for dinner, and save the costume for the rave.",
       "photos": [
         "/photos/hofplein.jpg"
       ],
       "tips": [
-        "How you get home after the rave is still an open question.",
-        "Sunday and Monday mornings both start from here."
+        "How you get home after the rave is still an open question."
+      ]
+    },
+    {
+      "id": "grand-cafe-loos",
+      "city": "Rotterdam",
+      "name": "Grand Café Loos",
+      "coords": [
+        4.479117,
+        51.908949
+      ],
+      "day": 2,
+      "start": "20:00",
+      "end": "21:30",
+      "category": "food",
+      "description": "Booked table at eight at Loos on Westplein, the grand café above the historic Veerhaven. French brasserie energy before Halloween.",
+      "note": "Booked.",
+      "tips": [
+        "Walk or tram from the flat toward the Scheepvaartkwartier.",
+        "Leave time to get back and out to the rave."
       ]
     },
     {
@@ -171,9 +299,29 @@
       "photos": [
         "/photos/erasmusbrug-night.jpg"
       ],
+      "note": "Booked event.",
       "tips": [
         "Earplugs and water are not optional.",
         "Save an offline map for the return trip."
+      ]
+    },
+    {
+      "id": "pannenkoekenhuys-delfshaven",
+      "city": "Rotterdam",
+      "name": "Oud-Rotterdamsch Pannenkoekenhuys",
+      "coords": [
+        4.44806,
+        51.90826
+      ],
+      "day": 3,
+      "start": "11:00",
+      "end": "12:00",
+      "category": "food",
+      "description": "Optional pancake brunch in Delfshaven if you are awake and the room is serving. Skip straight to Kinderdijk if you sleep in.",
+      "note": "Optional; opening hours unconfirmed.",
+      "tips": [
+        "Check same-day hours before you cross town.",
+        "Delfshaven is a tram ride from the flat."
       ]
     },
     {
@@ -185,15 +333,15 @@
         51.8838
       ],
       "day": 3,
-      "start": "10:00",
-      "end": "12:15",
+      "start": "12:30",
+      "end": "14:30",
       "category": "activity",
-      "description": "Windmills along the polder canals, a slow walk on a sleep-in Sunday. Go before the coach groups if you can.",
+      "description": "Windmills along the polder canals after a slow morning. Go before the coach groups if you can.",
       "photos": [
         "/photos/kinderdijk.jpg"
       ],
       "tips": [
-        "Reach it by bus and ferry from Rotterdam, or drive if you prefer.",
+        "Reach it by bus and ferry from Rotterdam.",
         "The path is flat and exposed; bring a layer."
       ]
     },
@@ -206,38 +354,57 @@
         51.92
       ],
       "day": 3,
-      "start": "13:30",
-      "end": "18:00",
+      "start": "15:00",
+      "end": "17:30",
       "category": "neighborhood",
-      "description": "Afternoon back in the city after the mills: Markthal, the cube houses, or the waterfront without a fixed checklist.",
+      "description": "Afternoon back in the city after the mills: Markthal, cube houses, or the waterfront without a fixed checklist.",
       "photos": [
         "/photos/markthal.jpg",
         "/photos/cube-houses.jpg"
       ],
       "tips": [
-        "The Markthal stalls close earlier than the restaurants upstairs.",
         "Save energy; the car pickup is tomorrow morning."
       ]
     },
     {
-      "id": "heroine",
+      "id": "hotel-new-york",
       "city": "Rotterdam",
-      "name": "Heroine",
+      "name": "Hotel New York Café-Restaurant",
       "coords": [
-        4.4508,
-        51.9189
+        4.484338,
+        51.904018
       ],
       "day": 3,
-      "start": "19:00",
-      "end": "21:00",
+      "start": "18:00",
+      "end": "20:00",
       "category": "food",
-      "description": "A proper Sunday dinner at Heroine before another quiet night at the Airbnb. Book if they still take reservations.",
+      "description": "Booked dinner at six on Kop van Zuid in the old Holland America Line building. Proper Sunday meal before an optional nightcap.",
       "photos": [
-        "/photos/heroine.jpg"
+        "/photos/erasmusbrug-night.jpg"
       ],
+      "note": "Booked.",
       "tips": [
-        "Dress a notch above casual.",
-        "Walk or tram back toward your stay afterward."
+        "Walk the Wilhelminakade at blue hour if you arrive early.",
+        "Tram back toward Delfshaven afterward."
+      ]
+    },
+    {
+      "id": "de-pelgrim",
+      "city": "Rotterdam",
+      "name": "Stadsbrouwerij De Pelgrim",
+      "coords": [
+        4.448879,
+        51.908763
+      ],
+      "day": 3,
+      "start": "20:15",
+      "end": "22:00",
+      "category": "food",
+      "description": "Optional walk-in pint at De Pelgrim in Delfshaven if dinner did not run long. Brewery taproom under the church tower.",
+      "note": "Optional; walk-in.",
+      "tips": [
+        "Last tram times matter if you are staying across the river.",
+        "Skip if you need an early Monday."
       ]
     },
     {
@@ -249,7 +416,7 @@
         51.9225
       ],
       "day": 3,
-      "start": "21:30",
+      "start": "22:15",
       "end": "23:30",
       "category": "stay",
       "description": "Second night in the same flat. Pack a day bag for Monday; the big luggage rides in the car to Bruges.",
@@ -336,7 +503,7 @@
       ],
       "day": 4,
       "start": "17:15",
-      "end": "18:30",
+      "end": "18:15",
       "category": "sight",
       "description": "Park near the ring and walk into the Markt and Burg as the lights come on. Rozenhoedkaai is the postcard angle if you still have daylight.",
       "photos": [
@@ -344,50 +511,70 @@
         "/photos/bruges-burg.jpg"
       ],
       "tips": [
-        "Guesthouse check-in time is still pending.",
-        "Leave the car where the host said parking is free."
-      ]
-    },
-    {
-      "id": "bruges-dinner",
-      "city": "Bruges",
-      "name": "Dinner in Bruges",
-      "coords": [
-        3.2261,
-        51.2092
-      ],
-      "day": 4,
-      "start": "19:00",
-      "end": "20:30",
-      "category": "food",
-      "description": "A sit-down dinner in the old center. Bruut is the leading idea at seven, but the Grok plan still marks the restaurant as to be decided.",
-      "photos": [
-        "/photos/rozenhoedkaai.jpg"
-      ],
-      "tips": [
-        "Reserve if you settle on Bruut or anywhere near the Markt.",
-        "Monday nights can fill up fast."
+        "Leave the car where parking is included with the studio."
       ]
     },
     {
       "id": "bruges-guesthouse",
       "city": "Bruges",
-      "name": "Bruges guesthouse (requested)",
+      "name": "Bruges studio stay",
       "coords": [
         3.2272,
         51.2076
       ],
       "day": 4,
-      "start": "21:00",
-      "end": "23:30",
+      "start": "18:20",
+      "end": "18:25",
       "category": "stay",
-      "description": "Private studio guesthouse with bikes and parking for the rental, still awaiting host confirmation. Address and exact check-in time are not locked yet.",
+      "description": "Confirmed private studio with bikes and parking for the rental. Check in, drop bags, and walk back out for dinner.",
       "photos": [
         "/photos/bruges-canal.jpg"
       ],
+      "note": "Confirmed stay.",
       "tips": [
-        "Free parking matters with the car outside.",
-        "Host bikes beat haggling with taxis in the morning."
+        "Host bikes beat haggling with taxis in the morning.",
+        "Free parking matters with the car outside."
+      ]
+    },
+    {
+      "id": "cambrinus",
+      "city": "Bruges",
+      "name": "Bierbrasserie Cambrinus",
+      "coords": [
+        3.226143,
+        51.209632
+      ],
+      "day": 4,
+      "start": "18:30",
+      "end": "20:00",
+      "category": "food",
+      "description": "Booked table at half six on Philipstockstraat for beer brasserie classics after you are settled in the studio.",
+      "photos": [
+        "/photos/rozenhoedkaai.jpg"
+      ],
+      "note": "Booked.",
+      "tips": [
+        "Walk from the studio; the center is compact.",
+        "Monday nights can fill up fast."
+      ]
+    },
+    {
+      "id": "boho-brunch",
+      "city": "Bruges",
+      "name": "Boho Brunch",
+      "coords": [
+        3.220496,
+        51.207013
+      ],
+      "day": 5,
+      "start": "08:30",
+      "end": "09:45",
+      "category": "food",
+      "description": "Optional early brunch on Giststraat if you want eggs before the Belfry queue. Skip if you prefer a lighter start.",
+      "note": "Optional.",
+      "tips": [
+        "Kitchen closes mid-afternoon on most days.",
+        "Short walk from the studio."
       ]
     },
     {
@@ -399,10 +586,10 @@
         51.208
       ],
       "day": 5,
-      "start": "08:30",
+      "start": "10:00",
       "end": "12:00",
       "category": "sight",
-      "description": "The Belfry opens at ten on winter hours, so canals and Boniface Bridge first, then the climb if tickets allow. Rozenhoedkaai again in softer morning light.",
+      "description": "The Belfry opens at ten on winter hours. Canals and Boniface Bridge first if you skipped brunch, then the climb if tickets allow.",
       "photos": [
         "/photos/bruges-belfry.jpg",
         "/photos/bruges-morning.jpg"
@@ -473,7 +660,7 @@
       ],
       "tips": [
         "Timing here feeds the three-fifty-hour run to Amsterdam.",
-        "Leaving around five from the coast targets a nine-ish arrival at drop-off."
+        "Leaving around four-thirty targets a seven-ish arrival at drop-off."
       ]
     },
     {
@@ -485,16 +672,35 @@
         52.3772
       ],
       "day": 5,
-      "start": "20:30",
-      "end": "21:30",
+      "start": "19:00",
+      "end": "20:15",
       "category": "transit",
-      "description": "Return the car at the Sixt desk on De Ruijterkade before eleven pm. Fill the tank per the contract and keep the receipt.",
+      "description": "Return the rental at the Sixt desk on De Ruijterkade before eleven pm, then walk to Nieuwmarkt for dinner. Fill the tank and keep the receipt.",
       "photos": [
         "/photos/de-ruijterkade.jpg"
       ],
       "tips": [
         "Allow time for traffic on the A10 ring.",
-        "Tuesday dinner is still open: on the road or back in town afterward."
+        "Dinner is booked at eight-thirty nearby."
+      ]
+    },
+    {
+      "id": "in-de-waag",
+      "city": "Amsterdam",
+      "name": "In de Waag",
+      "coords": [
+        4.900385,
+        52.372693
+      ],
+      "day": 5,
+      "start": "20:30",
+      "end": "22:00",
+      "category": "food",
+      "description": "Booked dinner at eight-thirty in the old weigh house on Nieuwmarkt. Candlelit rooms after the car is back.",
+      "note": "Booked.",
+      "tips": [
+        "Walk from the drop-off along the canals.",
+        "Keep an eye on the time; you still need a bed afterward."
       ]
     },
     {
@@ -506,13 +712,14 @@
         52.36
       ],
       "day": 5,
-      "start": "22:00",
+      "start": "22:15",
       "end": "23:30",
       "category": "stay",
-      "description": "Draft: where to sleep in Amsterdam after the car is back is not chosen yet. Treat this pin as a placeholder until a hotel or flat is booked.",
+      "description": "Draft: where to sleep after dinner is not booked yet. Treat this pin as a placeholder near the canal belt until you pick a hotel or flat.",
       "photos": [
         "/photos/rijksmuseum.jpg"
       ],
+      "note": "Draft stay.",
       "tips": [
         "Early night before the ten-thirty flight.",
         "Schiphol is reachable by train from most central stays."
@@ -569,7 +776,7 @@
       "mode": "train",
       "depart": "17:05",
       "arrive": "17:25",
-      "notes": "Back toward Centraal, then walk into the canal belt.",
+      "notes": "Toward Centraal, then walk into the canal belt.",
       "via": [
         [
           4.838,
@@ -587,15 +794,23 @@
     },
     {
       "from": "amsterdam-first-evening",
-      "to": "amsterdam-saturday",
+      "to": "de-reiger",
+      "mode": "walk",
+      "depart": "18:15",
+      "arrive": "18:28",
+      "notes": "North into the Jordaan for dinner."
+    },
+    {
+      "from": "de-reiger",
+      "to": "holiday-inn-friday-night",
       "mode": "train",
-      "depart": "09:00",
-      "arrive": "09:25",
-      "notes": "Morning train from Sloterdijk to Centraal to pick up bikes.",
+      "depart": "20:40",
+      "arrive": "21:00",
+      "notes": "Train back to Sloterdijk for the night.",
       "via": [
         [
-          4.9003,
-          52.378
+          4.882673,
+          52.375749
         ],
         [
           4.868,
@@ -604,27 +819,76 @@
         [
           4.838,
           52.389
-        ],
-        [
-          4.8867,
-          52.3794
         ]
       ]
     },
     {
-      "from": "amsterdam-saturday",
+      "from": "holiday-inn-friday-night",
+      "to": "waterlooplein",
+      "mode": "train",
+      "depart": "09:35",
+      "arrive": "09:55",
+      "notes": "Morning train toward Centraal and the market.",
+      "via": [
+        [
+          4.838,
+          52.389
+        ],
+        [
+          4.868,
+          52.388
+        ],
+        [
+          4.9003,
+          52.378
+        ],
+        [
+          4.901761,
+          52.368421
+        ]
+      ]
+    },
+    {
+      "from": "waterlooplein",
+      "to": "episode-waterlooplein",
+      "mode": "walk",
+      "depart": "11:18",
+      "arrive": "11:28"
+    },
+    {
+      "from": "episode-waterlooplein",
+      "to": "sluyswacht",
+      "mode": "walk",
+      "depart": "12:18",
+      "arrive": "12:28"
+    },
+    {
+      "from": "sluyswacht",
+      "to": "bluebird",
+      "mode": "walk",
+      "depart": "13:48",
+      "arrive": "13:58"
+    },
+    {
+      "from": "bluebird",
+      "to": "dampkring",
+      "mode": "walk",
+      "depart": "14:48",
+      "arrive": "15:05"
+    },
+    {
+      "from": "dampkring",
       "to": "amsterdam-centraal",
-      "mode": "bike",
-      "depart": "16:05",
-      "arrive": "16:40",
-      "notes": "Return rental bikes near the station before the Intercity south."
+      "mode": "walk",
+      "depart": "15:50",
+      "arrive": "16:18"
     },
     {
       "from": "amsterdam-centraal",
       "to": "rotterdam-centraal",
       "mode": "train",
-      "depart": "17:15",
-      "arrive": "18:15",
+      "depart": "16:30",
+      "arrive": "17:40",
       "notes": "NS Intercity toward Rotterdam, about one hour ten.",
       "via": [
         [
@@ -657,33 +921,60 @@
       "from": "rotterdam-centraal",
       "to": "rotterdam-airbnb",
       "mode": "walk",
-      "depart": "18:40",
-      "arrive": "18:45",
-      "notes": "Short walk or tram to the flat."
+      "depart": "18:02",
+      "arrive": "18:10"
     },
     {
       "from": "rotterdam-airbnb",
+      "to": "grand-cafe-loos",
+      "mode": "walk",
+      "depart": "19:35",
+      "arrive": "19:55"
+    },
+    {
+      "from": "grand-cafe-loos",
       "to": "rotterdam-halloween-rave",
       "mode": "walk",
-      "depart": "22:15",
-      "arrive": "22:55",
-      "notes": "Leave around ten-fifteen for the eleven o'clock start; exact route still TBD."
+      "depart": "21:40",
+      "arrive": "22:50"
     },
     {
       "from": "rotterdam-halloween-rave",
-      "to": "kinderdijk",
+      "to": "pannenkoekenhuys-delfshaven",
       "mode": "bus",
-      "depart": "10:00",
-      "arrive": "10:45",
-      "notes": "Sunday morning: metro and bus toward the Kinderdijk ferry.",
+      "depart": "10:30",
+      "arrive": "10:55",
+      "notes": "Sunday late morning toward Delfshaven if brunch is on.",
       "via": [
         [
-          4.488,
-          51.901
+          4.4886,
+          51.9012
         ],
         [
           4.477,
           51.922
+        ],
+        [
+          4.46,
+          51.915
+        ],
+        [
+          4.44806,
+          51.90826
+        ]
+      ]
+    },
+    {
+      "from": "pannenkoekenhuys-delfshaven",
+      "to": "kinderdijk",
+      "mode": "bus",
+      "depart": "12:05",
+      "arrive": "12:35",
+      "notes": "Skip the brunch leg timing by jumping straight to Kinderdijk if you sleep in.",
+      "via": [
+        [
+          4.44806,
+          51.90826
         ],
         [
           4.52,
@@ -703,9 +994,9 @@
       "from": "kinderdijk",
       "to": "rotterdam-sunday",
       "mode": "bus",
-      "depart": "12:25",
-      "arrive": "13:25",
-      "notes": "Same corridor back toward the city.",
+      "depart": "14:35",
+      "arrive": "15:00",
+      "notes": "Back toward the city core.",
       "via": [
         [
           4.6336,
@@ -727,19 +1018,24 @@
     },
     {
       "from": "rotterdam-sunday",
-      "to": "heroine",
+      "to": "hotel-new-york",
       "mode": "walk",
-      "depart": "18:35",
-      "arrive": "19:00",
-      "notes": "Cross toward the west side for dinner."
+      "depart": "17:35",
+      "arrive": "17:55"
     },
     {
-      "from": "heroine",
+      "from": "hotel-new-york",
+      "to": "de-pelgrim",
+      "mode": "walk",
+      "depart": "20:05",
+      "arrive": "20:12"
+    },
+    {
+      "from": "de-pelgrim",
       "to": "rotterdam-airbnb-sunday",
       "mode": "walk",
-      "depart": "21:05",
-      "arrive": "21:30",
-      "notes": "Walk or tram back to the flat."
+      "depart": "21:50",
+      "arrive": "22:15"
     },
     {
       "from": "rotterdam-airbnb-sunday",
@@ -789,27 +1085,31 @@
     },
     {
       "from": "bruges-markt",
-      "to": "bruges-dinner",
-      "mode": "walk",
-      "depart": "18:35",
-      "arrive": "18:55",
-      "notes": "A few minutes through the lit streets."
-    },
-    {
-      "from": "bruges-dinner",
       "to": "bruges-guesthouse",
       "mode": "walk",
-      "depart": "20:35",
-      "arrive": "21:00",
-      "notes": "Walk or drive the last block to the studio."
+      "depart": "18:16",
+      "arrive": "18:20"
     },
     {
       "from": "bruges-guesthouse",
+      "to": "cambrinus",
+      "mode": "walk",
+      "depart": "18:25",
+      "arrive": "18:28"
+    },
+    {
+      "from": "cambrinus",
+      "to": "boho-brunch",
+      "mode": "walk",
+      "depart": "08:10",
+      "arrive": "08:28"
+    },
+    {
+      "from": "boho-brunch",
       "to": "bruges-tuesday-morning",
       "mode": "walk",
-      "depart": "08:15",
-      "arrive": "08:30",
-      "notes": "Host bikes or a short walk back to the center."
+      "depart": "09:48",
+      "arrive": "10:00"
     },
     {
       "from": "bruges-tuesday-morning",
@@ -839,17 +1139,25 @@
       "from": "blankenberge-lighthouse",
       "to": "sixt-drop-amsterdam",
       "mode": "car",
-      "depart": "16:45",
-      "arrive": "20:25",
-      "notes": "Long haul to Amsterdam, about three hours fifty with traffic."
+      "depart": "15:40",
+      "arrive": "19:05",
+      "notes": "Long haul to Amsterdam, about three hours twenty with traffic."
     },
     {
       "from": "sixt-drop-amsterdam",
+      "to": "in-de-waag",
+      "mode": "walk",
+      "depart": "20:18",
+      "arrive": "20:28",
+      "notes": "Car returned first, then dinner at Nieuwmarkt."
+    },
+    {
+      "from": "in-de-waag",
       "to": "amsterdam-tuesday-draft",
       "mode": "walk",
-      "depart": "21:35",
-      "arrive": "22:00",
-      "notes": "Draft: walk or tram to wherever Tuesday night lands."
+      "depart": "22:05",
+      "arrive": "22:15",
+      "notes": "Walk toward wherever Tuesday night lands."
     },
     {
       "from": "amsterdam-tuesday-draft",
