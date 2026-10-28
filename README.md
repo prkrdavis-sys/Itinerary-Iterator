@@ -1,6 +1,6 @@
 # Canals to Canals
 
-An iPhone-first trip map for a long weekend from Amsterdam to Rotterdam to Bruges. The route draws itself, then a car, train, bike, bus, or walk moves along each leg.
+An iPhone-first trip map for a late-October run from Amsterdam through a Rotterdam Halloween night, Kinderdijk, Ghent, Damme, and Bruges, with a rental car on the Flemish days. The route draws itself, then a car, train, bike, bus, or walk moves along each leg.
 
 The live site uses a dark OpenFreeMap style when no Mapbox token is set, so it works as soon as it is deployed.
 
