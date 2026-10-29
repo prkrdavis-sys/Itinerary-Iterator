@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import {
   anchorLine,
   haversine,
@@ -159,6 +159,12 @@ const OVERPASS_URLS = [
   "https://overpass.kumi.systems/api/interpreter",
 ];
 
+const onVercel = process.env.VERCEL === "1";
+const OVERPASS_TIMEOUT_MS = onVercel ? 25_000 : 150_000;
+const OVERPASS_ATTEMPTS = onVercel ? 1 : OVERPASS_URLS.length * 2;
+
+let tripRailNetwork: OverpassElement[] | null = null;
+
 type OverpassElement =
   | { type: "way"; nodes: number[]; geometry: { lat: number; lon: number }[] }
   | { type: "node"; lat: number; lon: number };
@@ -172,7 +178,7 @@ async function queryOverpass(url: string, query: string): Promise<OverpassElemen
         "User-Agent": "itinerary-iterator",
       },
       body: `data=${encodeURIComponent(query)}`,
-      signal: AbortSignal.timeout(150_000),
+      signal: AbortSignal.timeout(OVERPASS_TIMEOUT_MS),
     });
     if (!response.ok) {
       console.warn(`overpass responded ${response.status}`);
@@ -192,6 +198,9 @@ async function queryOverpass(url: string, query: string): Promise<OverpassElemen
 }
 
 async function fetchRailNetwork(points: LngLat[]): Promise<OverpassElement[]> {
+  if (onVercel) return [];
+  if (tripRailNetwork) return tripRailNetwork;
+
   const lngs = points.map((point) => point[0]);
   const lats = points.map((point) => point[1]);
   const bbox = [
@@ -205,11 +214,17 @@ async function fetchRailNetwork(points: LngLat[]): Promise<OverpassElement[]> {
     `way["railway"~"^(rail|subway|light_rail)$"]["service"!~"^(yard|siding|spur)$"](${bbox});` +
     `node["railway"~"^(station|halt)$"](${bbox});` +
     `);out geom;`;
-  for (let attempt = 0; attempt < OVERPASS_URLS.length * 2; attempt += 1) {
+  for (let attempt = 0; attempt < OVERPASS_ATTEMPTS; attempt += 1) {
     const elements = await queryOverpass(OVERPASS_URLS[attempt % OVERPASS_URLS.length], query);
-    if (elements) return elements;
-    await new Promise((resolve) => setTimeout(resolve, 5_000 * (attempt + 1)));
+    if (elements) {
+      tripRailNetwork = elements;
+      return elements;
+    }
+    if (attempt + 1 < OVERPASS_ATTEMPTS) {
+      await new Promise((resolve) => setTimeout(resolve, 5_000 * (attempt + 1)));
+    }
   }
+  tripRailNetwork = [];
   return [];
 }
 
@@ -564,6 +579,7 @@ async function buildLeg(
   const saved = keepExisting(existing, key);
   if (leg.mode === "train") {
     if (saved?.source === "rail") return finish(saved, from, to);
+    if (onVercel && saved) return finish(saved, from, to);
     const rail =
       (await fetchRailRoute(from, to)) ??
       (await fetchOsrmRoutes("driving", [from, to]))[0] ??
@@ -595,11 +611,20 @@ async function buildLeg(
 }
 
 async function main(): Promise<void> {
+  if (onVercel && existsSync(routesPath())) {
+    console.log("Skipping route regeneration on Vercel (using committed routes.generated.json)");
+    return;
+  }
+
   const itinerary = getItinerary();
   const existing = readExisting();
   const token = process.env.MAPBOX_TOKEN || process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
   const routes: RouteSet = {};
   const stops = new Map(itinerary.stops.map((stop) => [stop.id, stop]));
+
+  if (!onVercel) {
+    await fetchRailNetwork(itinerary.stops.map((stop) => stop.coords));
+  }
 
   for (const leg of itinerary.legs) {
     const from = stops.get(leg.from);
