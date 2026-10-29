@@ -1,5 +1,6 @@
 "use client";
 
+import { useLayoutEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 type IntroCardProps = {
@@ -7,11 +8,65 @@ type IntroCardProps = {
 };
 
 const photos = [
-  { src: "/photos/us/dinner.jpg", position: "center 64%" },
-  { src: "/photos/us/wine.jpg", position: "center 46%" },
-  { src: "/photos/us/evening.jpg", position: "center top" },
-  { src: "/photos/us/falls.jpg", position: "center 24%" },
+  { src: "/photos/us/dinner.jpg", focusX: 0.5, focusY: 0.46 },
+  { src: "/photos/us/wine.jpg", focusX: 0.5, focusY: 0.36 },
+  { src: "/photos/us/evening.jpg", focusX: 0.48, focusY: 0.26 },
+  { src: "/photos/us/falls.jpg", focusX: 0.45, focusY: 0.48 },
 ];
+
+function framePhoto(frame: HTMLElement, img: HTMLImageElement, focusX: number, focusY: number) {
+  const tileW = frame.clientWidth;
+  const tileH = frame.clientHeight;
+  const imgW = img.naturalWidth;
+  const imgH = img.naturalHeight;
+  if (!tileW || !tileH || !imgW || !imgH) return;
+
+  const scale = Math.max(tileW / imgW, tileH / imgH);
+  const dispW = imgW * scale;
+  const dispH = imgH * scale;
+  const x = Math.min(0, Math.max(tileW - dispW, tileW / 2 - focusX * dispW));
+  // Sit the couple just below center so the tops of their heads stay inside the frame.
+  const y = Math.min(0, Math.max(tileH - dispH, tileH * 0.58 - focusY * dispH));
+
+  img.style.width = `${dispW}px`;
+  img.style.height = `${dispH}px`;
+  img.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function FramedPhoto({
+  src,
+  focusX,
+  focusY,
+}: {
+  src: string;
+  focusX: number;
+  focusY: number;
+}) {
+  const frameRef = useRef<HTMLDivElement>(null);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useLayoutEffect(() => {
+    const frame = frameRef.current;
+    const img = imgRef.current;
+    if (!frame || !img) return;
+
+    const layout = () => framePhoto(frame, img, focusX, focusY);
+    layout();
+    img.addEventListener("load", layout);
+    const observer = new ResizeObserver(layout);
+    observer.observe(frame);
+    return () => {
+      img.removeEventListener("load", layout);
+      observer.disconnect();
+    };
+  }, [focusX, focusY]);
+
+  return (
+    <div ref={frameRef} className="hero-frame">
+      <img ref={imgRef} src={src} alt="" />
+    </div>
+  );
+}
 
 export function IntroCard({ onOpen }: IntroCardProps) {
   return (
@@ -24,12 +79,7 @@ export function IntroCard({ onOpen }: IntroCardProps) {
     >
       <div className="hero-collage" aria-hidden="true">
         {photos.map((photo) => (
-          <img
-            key={photo.src}
-            src={photo.src}
-            alt=""
-            style={{ objectPosition: photo.position }}
-          />
+          <FramedPhoto key={photo.src} {...photo} />
         ))}
       </div>
       <div className="hero-veil" aria-hidden="true" />
