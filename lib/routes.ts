@@ -53,7 +53,10 @@ export function getRoutes(): RouteSet {
     const from = findStop(itinerary, leg.from);
     const to = findStop(itinerary, leg.to);
     if (!route || !from || !to) continue;
-    const coordinates = anchorLine(route.coordinates, from.coords, to.coords);
+    let coordinates = anchorLine(route.coordinates, from.coords, to.coords);
+    if (coordinates.length < 2) {
+      coordinates = [from.coords, to.coords];
+    }
     anchored[key] = {
       coordinates,
       distanceMeters: Math.round(lineLength(coordinates)),

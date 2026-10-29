@@ -79,6 +79,59 @@ const IDS: Record<string, string> = {
   "2026-11-04|3": "iad-arrival",
 };
 
+const EMOJIS: Record<string, string> = {
+  "iad-departure": "✈️",
+  "cph-layover": "🛂",
+  "ams-arrival": "🛬",
+  "holiday-inn-checkin-fri": "🛏️",
+  "winkel-43": "🥧",
+  zipper: "👕",
+  dampkring: "☕",
+  "reguliersgracht-bridges": "🌉",
+  katsu: "🌿",
+  "heemelrijck-de-pijp": "🥘",
+  "holiday-inn-sleep-fri": "🛏️",
+  "holiday-inn-morning-sat": "🛏️",
+  "waterlooplein-episode": "🧺",
+  "bluebird-lunch": "🐦",
+  "oude-kerk": "⛪",
+  "amsterdam-centraal-sat": "🚆",
+  "rotterdam-centraal-sat": "🚄",
+  "rotterdam-airbnb-checkin": "🏡",
+  "grand-cafe-loos": "🍷",
+  "now-wow-rave": "🎃",
+  "rotterdam-airbnb-sunday-morning": "🏡",
+  "cube-houses": "🧊",
+  "waterbus-erasmus": "⛴️",
+  kinderdijk: "🌾",
+  "waterbus-erasmus-return": "⛴️",
+  euromast: "🗼",
+  "erasmus-bridge-blue-hour": "🌃",
+  "hotel-new-york": "🥂",
+  "rotterdam-airbnb-sunday-night": "🏡",
+  "rotterdam-airbnb-monday-morning": "🏡",
+  "rtm-avis-pickup": "🚗",
+  gravensteen: "🏰",
+  "graslei-lunch": "🚣",
+  damme: "🚴",
+  "bruges-studio-checkin": "🏠",
+  "bruges-markt-burg": "🐴",
+  cambrinus: "🍺",
+  "bruges-studio-sleep-mon": "🏠",
+  "bruges-studio-checkout": "🏠",
+  rozenhoedkaai: "📸",
+  "boniface-bridge": "🪨",
+  "belfry-bruges": "🔔",
+  ezelpoort: "🚪",
+  "minnewater-lunch": "🦢",
+  "haamstede-westerlicht": "🔦",
+  "in-de-waag": "🧇",
+  "badhoevedorp-studio": "🌙",
+  "badhoevedorp-morning": "🌙",
+  "schiphol-avis-return": "🔑",
+  "iad-arrival": "🧳",
+};
+
 const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string }> = {
   "iad-departure": {
     photo: "/photos/us-evening.jpg",
@@ -101,33 +154,33 @@ const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string
   },
   "winkel-43": {
     photo: "/photos/winkel-43.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Winkel_43,_Amsterdam.jpg",
+    credit: "© Google Street View",
+    creditUrl: "https://www.google.com/maps/search/?api=1&query=52.379084,4.886234",
   },
   "zipper": {
-    photo: "/photos/amsterdam-nine-streets.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons (Nine Streets area)",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Negen_Straatjes_Amsterdam.jpg",
+    photo: "/photos/zipper.jpg",
+    credit: "© Google Street View",
+    creditUrl: "https://www.google.com/maps/search/?api=1&query=52.368757,4.885990",
   },
   "dampkring": {
     photo: "/photos/dampkring.jpg",
-    credit: "CC BY-SA 3.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Amsterdam_-_Oudezijds_Voorburgwal_-_Bulldog_The_Energy_Palace.jpg",
+    credit: "© Google Street View",
+    creditUrl: "https://www.google.com/maps/search/?api=1&query=52.367732,4.890481",
   },
   "reguliersgracht-bridges": {
     photo: "/photos/reguliersgracht.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons",
+    credit: "CC BY-SA 4.0, Marco Ober, Wikimedia Commons",
     creditUrl: "https://commons.wikimedia.org/wiki/File:Reguliersgracht,_Amsterdam.jpg",
   },
   "katsu": {
-    photo: "/photos/de-pijp-street.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons (De Pijp)",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Albert_Cuyp_Market,_Amsterdam.jpg",
+    photo: "/photos/katsu.jpg",
+    credit: "© Google Street View",
+    creditUrl: "https://www.google.com/maps/search/?api=1&query=52.354831,4.893289",
   },
   "heemelrijck-de-pijp": {
-    photo: "/photos/de-pijp-street.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons (De Pijp area substitute)",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Albert_Cuyp_Market,_Amsterdam.jpg",
+    photo: "/photos/heemelrijck.jpg",
+    credit: "© Google Street View",
+    creditUrl: "https://www.google.com/maps/search/?api=1&query=52.356815,4.899901",
   },
   "holiday-inn-sleep-fri": {
     photo: "/photos/sloterdijk.jpg",
@@ -140,19 +193,19 @@ const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string
     creditUrl: "https://commons.wikimedia.org/wiki/File:Amsterdam_Sloterdijk_station_2016.jpg",
   },
   "waterlooplein-episode": {
-    photo: "/photos/waterlooplein.jpg",
-    credit: "CC BY-SA 3.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Waterlooplein,_Amsterdam.jpg",
+    photo: "/photos/episode.jpg",
+    credit: "© Google Street View",
+    creditUrl: "https://www.google.com/maps/search/?api=1&query=52.369102,4.900853",
   },
   "bluebird-lunch": {
-    photo: "/photos/bluebird-area.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons (Nieuwmarkt area substitute)",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Nieuwmarkt,_Amsterdam.jpg",
+    photo: "/photos/bluebird.jpg",
+    credit: "© Google Street View",
+    creditUrl: "https://www.google.com/maps/search/?api=1&query=52.369998,4.900897",
   },
   "oude-kerk": {
     photo: "/photos/oude-kerk.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Oude_Kerk,_Amsterdam.jpg",
+    credit: "CC BY-SA 4.0, Yair Haklai, Wikimedia Commons",
+    creditUrl: "https://commons.wikimedia.org/wiki/File:Exterior_view_of_the_Oude_Kerk_(Amsterdam).jpg",
   },
   "amsterdam-centraal-sat": {
     photo: "/photos/amsterdam-centraal.jpg",
@@ -171,13 +224,13 @@ const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string
   },
   "grand-cafe-loos": {
     photo: "/photos/loos-rotterdam.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons (Veerhaven area)",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Veerhaven,_Rotterdam.jpg",
+    credit: "© Google Street View",
+    creditUrl: "https://www.google.com/maps/search/?api=1&query=51.909000,4.479300",
   },
   "now-wow-rave": {
     photo: "/photos/maassilo.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Maassilo,_Rotterdam.jpg",
+    credit: "© Google Street View",
+    creditUrl: "https://www.google.com/maps/search/?api=1&query=51.897699,4.494644",
   },
   "rotterdam-airbnb-sunday-morning": {
     photo: "/photos/rotterdam-city.jpg",
@@ -206,8 +259,8 @@ const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string
   },
   "euromast": {
     photo: "/photos/euromast.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Euromast_Rotterdam.jpg",
+    credit: "CC BY-SA 4.0, W. Bulach, Wikimedia Commons",
+    creditUrl: "https://commons.wikimedia.org/wiki/File:.00_2435_Euromast_-_Rotterdam.jpg",
   },
   "erasmus-bridge-blue-hour": {
     photo: "/photos/erasmusbrug-night.jpg",
@@ -216,8 +269,8 @@ const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string
   },
   "hotel-new-york": {
     photo: "/photos/hotel-new-york.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Hotel_New_York_(Rotterdam).jpg",
+    credit: "CC BY-SA 4.0, W. Bulach, Wikimedia Commons",
+    creditUrl: "https://commons.wikimedia.org/wiki/File:02_Hotel_New_York_-_Rotterdam.jpg",
   },
   "rotterdam-airbnb-sunday-night": {
     photo: "/photos/rotterdam-city.jpg",
@@ -241,8 +294,8 @@ const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string
   },
   "graslei-lunch": {
     photo: "/photos/graslei.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Graslei,_Gent.jpg",
+    credit: "CC BY-SA 4.0, Michielverbeek, Wikimedia Commons",
+    creditUrl: "https://commons.wikimedia.org/wiki/File:Gent,_de_Graslei_vanaf_de_Korenlei_met_oeg24758tm61%2B25159_IMG_0447_2021-08-13_18.37.jpg",
   },
   "damme": {
     photo: "/photos/damme-windmill.jpg",
@@ -260,9 +313,9 @@ const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string
     creditUrl: "https://commons.wikimedia.org/wiki/File:Brugge_Markt.jpg",
   },
   "cambrinus": {
-    photo: "/photos/rozenhoedkaai.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons (Bruges centre substitute)",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Brugge_-_Rozenhoedkaai.jpg",
+    photo: "/photos/cambrinus.jpg",
+    credit: "© Google Street View",
+    creditUrl: "https://www.google.com/maps/search/?api=1&query=51.209632,3.226143",
   },
   "bruges-studio-sleep-mon": {
     photo: "/photos/bruges-canal.jpg",
@@ -271,13 +324,13 @@ const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string
   },
   "rozenhoedkaai": {
     photo: "/photos/rozenhoedkaai.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Brugge_-_Rozenhoedkaai.jpg",
+    credit: "CC BY-SA 4.0, Ank Kumar, Wikimedia Commons",
+    creditUrl: "https://commons.wikimedia.org/wiki/File:Rozenhoedkaai_(canal)_and_Belfry_of_Bruges,_Bruges,_Belgium_(Ank_Kumar,_Infosys_Limited)_01.jpg",
   },
   "boniface-bridge": {
     photo: "/photos/boniface-bridge.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Bonifaciusbrug,_Brugge.jpg",
+    credit: "CC BY-SA 4.0, Dietmar Rabich, Wikimedia Commons",
+    creditUrl: "https://commons.wikimedia.org/wiki/File:Br%C3%BCgge_(B),_Bonifatius-Br%C3%BCcke_--_2018_--_8605.jpg",
   },
   "belfry-bruges": {
     photo: "/photos/bruges-belfry.jpg",
@@ -291,23 +344,23 @@ const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string
   },
   "ezelpoort": {
     photo: "/photos/ezelpoort.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Ezelpoort_Brugge.jpg",
+    credit: "CC BY-SA 3.0, VWAmFot, Wikimedia Commons",
+    creditUrl: "https://commons.wikimedia.org/wiki/File:%22Ezelpoort%22,_middeleeuwse_stadspoort,_Ezelstraat,_Brugge.JPG",
   },
   "minnewater-lunch": {
     photo: "/photos/minnewater.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Minnewaterpark_Brugge.jpg",
+    credit: "CC BY 3.0, Marc Ryckaert, Wikimedia Commons",
+    creditUrl: "https://commons.wikimedia.org/wiki/File:Brugge_Minnewater_R01.jpg",
   },
   "haamstede-westerlicht": {
     photo: "/photos/westerlicht.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Vuurtoren_Westerlicht.jpg",
+    credit: "CC BY-SA 2.0, Jeroen Looyé, Wikimedia Commons",
+    creditUrl: "https://commons.wikimedia.org/wiki/File:Nieuw_Haamstede_-_Vuurtoren_(33997226663).jpg",
   },
   "in-de-waag": {
     photo: "/photos/de-waag-amsterdam.jpg",
-    credit: "CC BY-SA 4.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:De_Waag,_Amsterdam.jpg",
+    credit: "CC BY-SA 4.0, Txllxt TxllxT, Wikimedia Commons",
+    creditUrl: "https://commons.wikimedia.org/wiki/File:Amsterdam_-_Nieuwmarkt_-_15th_Century_City_gate_that_was_transformed_into_De_Waag.jpg",
   },
   "badhoevedorp-studio": {
     photo: "/photos/badhoevedorp-area.jpg",
@@ -476,6 +529,7 @@ function main() {
       photos: [photoMeta.photo],
       photoCredit: photoMeta.credit,
       tips,
+      emoji: EMOJIS[id] ?? "📍",
     };
     if (photoMeta.creditUrl) stop.photoCreditUrl = photoMeta.creditUrl;
     if (row.url?.trim()) stop.url = row.url.trim();

@@ -483,7 +483,10 @@ function keepExisting(existing: RouteSet, key: string): RouteGeometry | null {
 }
 
 function finish(route: RouteGeometry, from: LngLat, to: LngLat): RouteGeometry {
-  const coordinates = anchorLine(route.coordinates, from, to);
+  let coordinates = anchorLine(route.coordinates, from, to);
+  if (coordinates.length < 2) {
+    coordinates = [from, to];
+  }
   return {
     coordinates,
     distanceMeters: Math.round(lineLength(coordinates)),
@@ -580,6 +583,9 @@ async function buildLeg(
   if (leg.mode === "train") {
     if (saved?.source === "rail") return finish(saved, from, to);
     if (onVercel && saved) return finish(saved, from, to);
+    if (haversine(from, to) > 400_000) {
+      return finish(saved ?? geometry(curved(from, leg.via, to), "sketch"), from, to);
+    }
     const rail =
       (await fetchRailRoute(from, to)) ??
       (await fetchOsrmRoutes("driving", [from, to]))[0] ??
