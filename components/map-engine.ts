@@ -117,7 +117,7 @@ function attachArchive(blob: Blob): void {
 
 const EUROPE: LngLat = [4.6, 51.45];
 
-function createMapbox(container: HTMLElement, token: string): MapEngine {
+function createMapbox(container: HTMLElement, token: string, onStyleError: () => void): MapEngine {
   mapboxgl.accessToken = token;
   const map = new mapboxgl.Map({
     container,
@@ -134,12 +134,22 @@ function createMapbox(container: HTMLElement, token: string): MapEngine {
     attributionControl: true,
     fadeDuration: 0,
   });
+  let styleReady = false;
   map.on("style.load", () => {
+    styleReady = true;
     try {
       map.setConfigProperty("basemap", "lightPreset", "dusk");
     } catch {
       // The standard style is the only one with a dusk preset.
     }
+  });
+  map.on("error", (event) => {
+    if (styleReady) return;
+    const error = event.error as { status?: number; message?: string } | undefined;
+    const failed =
+      typeof error?.status === "number" ||
+      /fetch|network|style|ajax|failed/i.test(error?.message ?? "");
+    if (failed) onStyleError();
   });
   return {
     kind: "mapbox",
@@ -165,7 +175,7 @@ function createMapLibre(container: HTMLElement, archive: Blob): MapEngine {
   attachArchive(archive);
   const map = new MapLibreMap({
     container,
-    style: localBasemapStyle(),
+    style: localBasemapStyle(window.location.origin),
     center: EUROPE,
     zoom: 5.15,
     pitch: 0,
@@ -191,10 +201,19 @@ function createMapLibre(container: HTMLElement, archive: Blob): MapEngine {
   };
 }
 
-export function createMap(container: HTMLElement, basemap: Basemap): MapEngine {
+export function mapboxStyleReachable(token: string, signal: AbortSignal): Promise<boolean> {
+  const url = `https://api.mapbox.com/styles/v1/mapbox/standard?access_token=${encodeURIComponent(token)}`;
+  return fetch(url, { signal }).then((response) => response.ok);
+}
+
+export function createMap(
+  container: HTMLElement,
+  basemap: Basemap,
+  onStyleError: () => void = () => {},
+): MapEngine {
   switch (basemap.kind) {
     case "mapbox":
-      return createMapbox(container, basemap.token);
+      return createMapbox(container, basemap.token, onStyleError);
     case "maplibre":
       return createMapLibre(container, basemap.archive);
     default: {

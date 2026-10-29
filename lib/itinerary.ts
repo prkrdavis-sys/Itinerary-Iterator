@@ -42,6 +42,28 @@ export function legOutOf(itinerary: Itinerary, stopId: string): Leg | undefined 
   return itinerary.legs.find((leg) => leg.from === stopId);
 }
 
+export function legIndexesOnDay(itinerary: Itinerary, day: number): number[] {
+  const indexes: number[] = [];
+  itinerary.legs.forEach((leg, index) => {
+    const destination = findStop(itinerary, leg.to);
+    if (destination?.day === day) indexes.push(index);
+  });
+  return indexes;
+}
+
+export function stopShownOnDay(
+  itinerary: Itinerary,
+  stopId: string,
+  day: number,
+): boolean {
+  const stop = findStop(itinerary, stopId);
+  if (stop?.day === day) return true;
+  return itinerary.legs.some((leg) => {
+    if (leg.from !== stopId) return false;
+    return findStop(itinerary, leg.to)?.day === day;
+  });
+}
+
 export function dayCities(itinerary: Itinerary, day: number): string {
   const cities: string[] = [];
   for (const stop of stopsOnDay(itinerary, day)) {

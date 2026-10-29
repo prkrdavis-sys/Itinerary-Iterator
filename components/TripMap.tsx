@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { spotEmoji } from "@/lib/categories";
 import { boundsOf, pointAlong, sliceLine, type LngLat } from "@/lib/geo";
-import { findStop, legKey } from "@/lib/itinerary";
+import { findStop, legKey, stopShownOnDay } from "@/lib/itinerary";
 import {
   cityColor,
   followZoom,
@@ -13,12 +13,13 @@ import {
   modeStyle,
   playbackProgress,
 } from "@/lib/modes";
-import { ensureMapArchive } from "@/lib/offline-archive";
+import { ensureMapArchive, mapSaveMessage, type MapSaveStatus } from "@/lib/offline-archive";
 import type { Itinerary } from "@/lib/schema";
 import type { RouteSet } from "@/lib/routes";
 import {
   createMap,
   lineFeature,
+  mapboxStyleReachable,
   readCamera,
   type Basemap,
   type MapEngine,
@@ -44,34 +45,15 @@ type TripMapProps = {
   onSelect: (id: string) => void;
   onMapClick: () => void;
   onReady: (handle: TripMapHandle | null) => void;
+  onSaveStatus: (status: MapSaveStatus) => void;
 };
 
 const PADDING = { top: 156, bottom: 148, left: 28, right: 28 };
+const SAVED_NOTICE_MS = 4000;
 
-type SaveStatus = "saving" | "saved" | "error";
-
-function saveMessage(status: SaveStatus): string {
-  switch (status) {
-    case "saving":
-      return "Saving the map on this phone";
-    case "saved":
-      return "Saved on this phone";
-    case "error":
-      return "This phone could not store the map";
-    default: {
-      const neverStatus: never = status;
-      return neverStatus;
-    }
-  }
-}
-
-function legIsVisible(
-  day: number | null,
-  fromDay: number | undefined,
-  toDay: number | undefined,
-): boolean {
+function legIsVisible(day: number | null, toDay: number | undefined): boolean {
   if (day === null) return true;
-  return fromDay === day || toDay === day;
+  return toDay === day;
 }
 
 function visibleCoordinates(
@@ -81,12 +63,11 @@ function visibleCoordinates(
 ): LngLat[] {
   const coords: LngLat[] = [];
   for (const stop of itinerary.stops) {
-    if (day === null || stop.day === day) coords.push(stop.coords);
+    if (day === null || stopShownOnDay(itinerary, stop.id, day)) coords.push(stop.coords);
   }
   for (const leg of itinerary.legs) {
-    const from = findStop(itinerary, leg.from);
     const to = findStop(itinerary, leg.to);
-    if (day !== null && from?.day !== day && to?.day !== day) continue;
+    if (day !== null && to?.day !== day) continue;
     const line = routes[legKey(leg.from, leg.to)]?.coordinates;
     if (line) coords.push(...line);
   }
@@ -163,6 +144,7 @@ export function TripMap({
   onSelect,
   onMapClick,
   onReady,
+  onSaveStatus,
 }: TripMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const engineRef = useRef<MapEngine | null>(null);
@@ -187,9 +169,13 @@ export function TripMap({
   });
   const [booted, setBooted] = useState(false);
   const [online, setOnline] = useState<boolean | null>(null);
+  const [duskReady, setDuskReady] = useState(false);
   const [archive, setArchive] = useState<Blob | null>(null);
-  const [saveStatus, setSaveStatus] = useState<SaveStatus>("saving");
+  const [saveStatus, setSaveStatus] = useState<MapSaveStatus>("saving");
+  const [showSaveNotice, setShowSaveNotice] = useState(true);
+  const onSaveStatusRef = useRef(onSaveStatus);
 
+  onSaveStatusRef.current = onSaveStatus;
   onSelectRef.current = onSelect;
   onMapClickRef.current = onMapClick;
   reducedRef.current = reducedMotion;
@@ -216,14 +202,44 @@ export function TripMap({
         if (dead) return;
         setArchive(blob);
         setSaveStatus("saved");
+        onSaveStatusRef.current("saved");
       })
       .catch(() => {
-        if (!dead) setSaveStatus("error");
+        if (dead) return;
+        setSaveStatus("error");
+        onSaveStatusRef.current("error");
       });
     return () => {
       dead = true;
     };
   }, []);
+
+  useEffect(() => {
+    if (!routesRevealed || saveStatus !== "saved") return;
+    setShowSaveNotice(true);
+    const timer = window.setTimeout(() => setShowSaveNotice(false), SAVED_NOTICE_MS);
+    return () => window.clearTimeout(timer);
+  }, [routesRevealed, saveStatus]);
+
+  useEffect(() => {
+    setDuskReady(false);
+    if (online !== true || !mapboxToken) return;
+    const controller = new AbortController();
+    let dead = false;
+    void mapboxStyleReachable(mapboxToken, controller.signal)
+      .then((reachable) => {
+        if (!dead) setDuskReady(reachable);
+      })
+      .catch((error: unknown) => {
+        if (dead) return;
+        if (error instanceof DOMException && error.name === "AbortError") return;
+        setDuskReady(false);
+      });
+    return () => {
+      dead = true;
+      controller.abort();
+    };
+  }, [online, mapboxToken]);
 
   useEffect(() => {
     onReady({
@@ -237,17 +253,19 @@ export function TripMap({
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container || online === null) return;
+    if (!container) return;
     const basemap: Basemap | null =
-      online && mapboxToken
+      duskReady && mapboxToken
         ? { kind: "mapbox", token: mapboxToken }
         : archive
           ? { kind: "maplibre", archive }
           : null;
     if (!basemap) return;
-    const engine = createMap(container, basemap);
-    engineRef.current = engine;
     let dead = false;
+    const engine = createMap(container, basemap, () => {
+      if (!dead) setDuskReady(false);
+    });
+    engineRef.current = engine;
     const markers: MarkerHandle[] = [];
     const markerButtons = markerEls.current;
     const observer = new ResizeObserver(() => engine.map.resize());
@@ -353,7 +371,7 @@ export function TripMap({
           if (coords) setLine(key, coords);
         }
         shownRef.current = true;
-        const filterDay = playingRef.current ? null : dayRef.current;
+        const filterDay = dayRef.current;
         const framed = visibleCoordinates(itinerary, routes, filterDay);
         if (framed.length > 0) {
           try {
@@ -542,7 +560,7 @@ export function TripMap({
       engineRef.current = null;
       setBooted(false);
     };
-  }, [itinerary, routes, mapboxToken, online, archive]);
+  }, [itinerary, routes, mapboxToken, duskReady, archive]);
 
   useEffect(() => {
     const engine = engineRef.current;
@@ -551,7 +569,7 @@ export function TripMap({
     for (const stop of itinerary.stops) {
       const element = markerEls.current.get(stop.id);
       if (!element) continue;
-      const hidden = !playing && day !== null && stop.day !== day;
+      const hidden = day !== null && !stopShownOnDay(itinerary, stop.id, day);
       element.classList.toggle("is-hidden", hidden);
       element.classList.toggle("is-active", stop.id === selectedId);
       element.tabIndex = hidden ? -1 : 0;
@@ -560,9 +578,8 @@ export function TripMap({
     }
 
     for (const leg of itinerary.legs) {
-      const from = findStop(itinerary, leg.from);
       const to = findStop(itinerary, leg.to);
-      const visible = legIsVisible(day, from?.day, to?.day);
+      const visible = legIsVisible(day, to?.day);
       const key = legKey(leg.from, leg.to);
       setLayerVisibility(engine, `leg-${key}`, visible);
       setLayerVisibility(engine, `leg-${key}-casing`, visible);
@@ -578,9 +595,8 @@ export function TripMap({
     if (vehicleEl.current) vehicleEl.current.hidden = true;
     shownRef.current = true;
     for (const leg of itinerary.legs) {
-      const from = findStop(itinerary, leg.from);
       const to = findStop(itinerary, leg.to);
-      const visible = legIsVisible(day, from?.day, to?.day);
+      const visible = legIsVisible(day, to?.day);
       const route = routes[legKey(leg.from, leg.to)];
       if (!visible || !route) continue;
       engine.map.getSource(`leg-${legKey(leg.from, leg.to)}`)?.setData(lineFeature(route.coordinates));
@@ -608,9 +624,11 @@ export function TripMap({
         className="map-canvas absolute inset-0"
         style={{ position: "absolute", top: 0, right: 0, bottom: 0, left: 0, zIndex: 0 }}
       />
-      <p className={`map-save-status glass${saveStatus === "error" ? " is-error" : ""}`} role="status">
-        {saveMessage(saveStatus)}
-      </p>
+      {routesRevealed && showSaveNotice ? (
+        <p className={`map-save-status glass${saveStatus === "error" ? " is-error" : ""}`} role="status">
+          {mapSaveMessage(saveStatus)}
+        </p>
+      ) : null}
     </>
   );
 }

@@ -1,8 +1,8 @@
 import path from "node:path";
 import { z } from "zod";
 import generated from "../data/routes.generated.json";
-import type { LngLat } from "./geo";
-import { getItinerary, legKey } from "./itinerary";
+import { anchorLine, lineLength, type LngLat } from "./geo";
+import { findStop, getItinerary, legKey } from "./itinerary";
 import { coordSchema } from "./schema";
 
 export type RouteSource = "mapbox" | "osrm" | "sketch";
@@ -46,5 +46,19 @@ export function getRoutes(): RouteSet {
     throw new Error(`Route geometry is missing for: ${ids}`);
   }
 
-  return parsed.data;
+  const anchored: RouteSet = { ...parsed.data };
+  for (const leg of itinerary.legs) {
+    const key = legKey(leg.from, leg.to);
+    const route = parsed.data[key];
+    const from = findStop(itinerary, leg.from);
+    const to = findStop(itinerary, leg.to);
+    if (!route || !from || !to) continue;
+    const coordinates = anchorLine(route.coordinates, from.coords, to.coords);
+    anchored[key] = {
+      coordinates,
+      distanceMeters: Math.round(lineLength(coordinates)),
+      source: route.source,
+    };
+  }
+  return anchored;
 }

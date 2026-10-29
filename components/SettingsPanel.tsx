@@ -1,24 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import type { MapSettings } from "@/lib/map-settings";
+import { publicMapboxToken, type MapSettings } from "@/lib/map-settings";
+import { mapSaveMessage, type MapSaveStatus } from "@/lib/offline-archive";
 
 type SettingsPanelProps = {
   token: string;
   dusk: boolean;
+  mapSaveStatus: MapSaveStatus;
   onBack: () => void;
   onSave: (draft: MapSettings) => string | null;
   onClear: () => void;
 };
 
-export function SettingsPanel({ token, dusk, onBack, onSave, onClear }: SettingsPanelProps) {
+export function SettingsPanel({
+  token,
+  dusk,
+  mapSaveStatus,
+  onBack,
+  onSave,
+  onClear,
+}: SettingsPanelProps) {
   const [draftToken, setDraftToken] = useState(token);
-  const [draftDusk, setDraftDusk] = useState(dusk);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
 
   function save() {
-    const message = onSave({ token: draftToken, dusk: draftDusk });
+    const message = onSave({ token: draftToken, dusk });
     if (message) {
       setError(message);
       setNotice(null);
@@ -26,12 +34,27 @@ export function SettingsPanel({ token, dusk, onBack, onSave, onClear }: Settings
     }
     setError(null);
     setNotice("Saved on this device.");
-    if (!draftToken.trim()) setDraftDusk(false);
+  }
+
+  function toggleDusk() {
+    const next = !dusk;
+    if (next && !publicMapboxToken(token)) {
+      setError("Save a public token that starts with pk. before turning dusk on.");
+      setNotice(null);
+      return;
+    }
+    const message = onSave({ token, dusk: next });
+    if (message) {
+      setError(message);
+      setNotice(null);
+      return;
+    }
+    setError(null);
+    setNotice(null);
   }
 
   function clear() {
     setDraftToken("");
-    setDraftDusk(false);
     setError(null);
     setNotice("Token cleared.");
     onClear();
@@ -45,9 +68,12 @@ export function SettingsPanel({ token, dusk, onBack, onSave, onClear }: Settings
           Back
         </button>
       </div>
-      <p className="mt-3 text-sm leading-6 text-mist">
-        This is a public browser token from mapbox.com, and route geometry is already built in.
-        Dusk is used while this phone is online. Offline, the map is the copy saved on the phone.
+      <p
+        className={`settings-save-marker${
+          mapSaveStatus === "error" ? " is-error" : mapSaveStatus === "saving" ? " is-saving" : ""
+        }`}
+      >
+        {mapSaveMessage(mapSaveStatus)}
       </p>
       <form
         className="mt-4 space-y-3"
@@ -58,14 +84,11 @@ export function SettingsPanel({ token, dusk, onBack, onSave, onClear }: Settings
       >
         <button
           type="button"
-          aria-pressed={draftDusk}
-          onClick={() => {
-            setDraftDusk((current) => !current);
-            setNotice(null);
-          }}
-          className={draftDusk ? "chip chip-on" : "chip"}
+          aria-pressed={dusk}
+          onClick={toggleDusk}
+          className={dusk ? "chip chip-on" : "chip"}
         >
-          {draftDusk ? "Dusk style on" : "Dusk style off"}
+          {dusk ? "Dusk style on" : "Dusk style off"}
         </button>
         <label className="block text-sm text-cream">
           Mapbox public token

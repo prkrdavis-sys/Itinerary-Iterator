@@ -15,6 +15,7 @@ import {
   findStop,
   formatRange,
   legIndexFrom,
+  legIndexesOnDay,
   legInto,
 } from "@/lib/itinerary";
 import {
@@ -24,6 +25,7 @@ import {
   type MapSettings,
 } from "@/lib/map-settings";
 import { cityEmoji, modeStyle } from "@/lib/modes";
+import { type MapSaveStatus } from "@/lib/offline-archive";
 import type { Itinerary } from "@/lib/schema";
 import type { RouteSet } from "@/lib/routes";
 
@@ -62,13 +64,15 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [settings, setSettings] = useState<MapSettings>({ token: "", dusk: false });
   const [mapReady, setMapReady] = useState(false);
+  const [mapSaveStatus, setMapSaveStatus] = useState<MapSaveStatus>("saving");
+  const reportSaveStatus = useCallback((status: MapSaveStatus) => {
+    setMapSaveStatus(status);
+  }, []);
   const chromeRef = useRef<HTMLElement>(null);
 
   const selected = selectedId ? findStop(itinerary, selectedId) : undefined;
   const incoming = selected ? (legInto(itinerary, selected.id) ?? null) : null;
   const outgoingIndex = selected ? legIndexFrom(itinerary, selected.id) : -1;
-  const outgoing = outgoingIndex >= 0 ? itinerary.legs[outgoingIndex] : null;
-  const nextStop = outgoing ? findStop(itinerary, outgoing.to) : undefined;
   const days = daysOf(itinerary);
   const stopIndex = selectedId
     ? itinerary.stops.findIndex((stop) => stop.id === selectedId)
@@ -229,14 +233,15 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
     await mapRef.current?.playLeg(index);
   }
 
-  async function playTrip(fromIndex = 0) {
+  async function playLegs(indexes: number[], scope: number | null) {
+    if (indexes.length === 0) return;
     const token = ++playToken.current;
     setPlaying(true);
-    setDay(null);
+    if (scope === null) setDay(null);
     setListOpen(false);
     setSettingsOpen(false);
     setCelebrate(false);
-    for (let index = fromIndex; index < itinerary.legs.length; index += 1) {
+    for (const index of indexes) {
       if (playToken.current !== token) return;
       const leg = itinerary.legs[index];
       if (!leg) return;
@@ -248,14 +253,18 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
     }
     if (playToken.current !== token) return;
     setPlaying(false);
-    const last = itinerary.stops[itinerary.stops.length - 1];
-    if (last?.city === "Bruges") {
-      setCelebrate(true);
-      setStatus("Bruges");
-      window.setTimeout(() => setCelebrate(false), 4200);
-    } else {
-      setStatus(formatRange(itinerary.trip.start, itinerary.trip.end));
+    if (scope === null) {
+      const last = itinerary.stops[itinerary.stops.length - 1];
+      if (last?.city === "Bruges") {
+        setCelebrate(true);
+        setStatus("Bruges");
+        window.setTimeout(() => setCelebrate(false), 4200);
+      } else {
+        setStatus(formatRange(itinerary.trip.start, itinerary.trip.end));
+      }
+      return;
     }
+    setStatus(tripStatus(scope));
   }
 
   async function playNext() {
@@ -278,16 +287,26 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
       stopPlayback();
       return;
     }
+    if (day !== null) {
+      void playLegs(legIndexesOnDay(itinerary, day), day);
+      return;
+    }
     if (selectedId) {
       void playNext();
       return;
     }
-    void playTrip(0);
+    void playLegs(
+      itinerary.legs.map((_, index) => index),
+      null,
+    );
   }
 
   return (
     <MotionConfig reducedMotion="user">
       <LayoutGroup>
+        <AnimatePresence>
+          {phase === "intro" ? <IntroCard onOpen={() => void openMap()} /> : null}
+        </AnimatePresence>
         <div className="phone">
           {mapReady ? (
             <TripMap
@@ -302,14 +321,12 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
               onSelect={chooseStop}
               onMapClick={dismissDetails}
               onReady={registerMap}
+              onSaveStatus={reportSaveStatus}
             />
           ) : (
             <div className="map-canvas absolute inset-0" style={{ zIndex: 0 }} />
           )}
 
-          <AnimatePresence>
-            {phase === "intro" ? <IntroCard itinerary={itinerary} onOpen={() => void openMap()} /> : null}
-          </AnimatePresence>
 
           {phase === "ready" ? (
             <header
@@ -412,12 +429,7 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
                 key={selected.id}
                 stop={selected}
                 incoming={incoming}
-                outgoing={outgoing ?? null}
-                nextStop={nextStop ?? null}
-                playing={playing}
                 onClose={() => setSelectedId(null)}
-                onPrevious={previousStop ? () => showStop(previousStop.id) : null}
-                onNext={() => void playNext()}
               />
             ) : null}
           </AnimatePresence>
@@ -436,11 +448,12 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
               <button
                 type="button"
                 onClick={togglePlay}
-                disabled={!playing && selectedId !== null && outgoingIndex < 0}
+                disabled={!playing && day === null && selectedId !== null && outgoingIndex < 0}
                 aria-pressed={playing}
+                aria-label={day !== null && !playing ? `Play day ${day}` : undefined}
                 className={playing ? "dock-button is-play is-pause" : "dock-button is-play"}
               >
-                {playing ? "Pause" : "Play"}
+                {playing ? "Pause" : day !== null ? "Play day" : "Play"}
               </button>
               <button
                 type="button"
@@ -470,6 +483,7 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
             <SettingsPanel
               token={settings.token}
               dusk={settings.dusk}
+              mapSaveStatus={mapSaveStatus}
               onBack={() => setSettingsOpen(false)}
               onSave={saveSettings}
               onClear={clearSettings}

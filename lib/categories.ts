@@ -31,7 +31,7 @@ export function spotEmoji(stop: Pick<Stop, "emoji" | "category">): string {
     case "food":
       return "🍽️";
     case "sight":
-      return "📍";
+      return "🏛️";
     case "stay":
       return "🏨";
     case "transit":

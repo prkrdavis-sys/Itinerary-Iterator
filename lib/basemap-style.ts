@@ -3,11 +3,12 @@ import type { StyleSpecification } from "maplibre-gl";
 
 export const ARCHIVE_KEY = "trip.pmtiles";
 
-export function localBasemapStyle(): StyleSpecification {
+export function localBasemapStyle(origin: string): StyleSpecification {
+  const root = origin.replace(/\/$/, "");
   return {
     version: 8,
-    glyphs: "/map-assets/fonts/{fontstack}/{range}.pbf",
-    sprite: "/map-assets/sprites/dark",
+    glyphs: `${root}/map-assets/fonts/{fontstack}/{range}.pbf`,
+    sprite: `${root}/map-assets/sprites/dark`,
     sources: {
       protomaps: {
         type: "vector",

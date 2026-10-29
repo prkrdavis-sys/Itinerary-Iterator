@@ -155,6 +155,19 @@ export function smoothThrough(points: LngLat[], samples = 8): LngLat[] {
   return line;
 }
 
+const PIN_SNAP_METERS = 25;
+
+export function anchorLine(coords: LngLat[], from: LngLat, to: LngLat): LngLat[] {
+  if (coords.length === 0) return [from, to];
+  const line = coords.map((point) => [point[0], point[1]] as LngLat);
+  if (haversine(line[0], from) > PIN_SNAP_METERS) line.unshift(from);
+  else line[0] = from;
+  const end = line.length - 1;
+  if (haversine(line[end], to) > PIN_SNAP_METERS) line.push(to);
+  else line[end] = to;
+  return line;
+}
+
 export function sketchArc(a: LngLat, b: LngLat): LngLat[] {
   const dx = b[0] - a[0];
   const dy = b[1] - a[1];

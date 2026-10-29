@@ -15,6 +15,23 @@ type StoredArchive = {
   blob: Blob;
 };
 
+export type MapSaveStatus = "saving" | "saved" | "error";
+
+export function mapSaveMessage(status: MapSaveStatus): string {
+  switch (status) {
+    case "saving":
+      return "Saving the map on this phone";
+    case "saved":
+      return "Saved on this phone";
+    case "error":
+      return "This phone could not store the map";
+    default: {
+      const neverStatus: never = status;
+      return neverStatus;
+    }
+  }
+}
+
 function openDb(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DB_NAME, 1);
@@ -82,27 +99,47 @@ async function persistStorage(): Promise<void> {
   }
 }
 
+const PMTILES_MAGIC = 0x4d50;
+
+async function readableArchive(blob: Blob, bytes: number): Promise<boolean> {
+  if (blob.size !== bytes || blob.size < 127) return false;
+  try {
+    const header = new DataView(await blob.slice(0, 8).arrayBuffer());
+    if (header.getUint16(0, true) !== PMTILES_MAGIC) return false;
+    const tail = await blob.slice(blob.size - 1, blob.size).arrayBuffer();
+    return tail.byteLength === 1;
+  } catch {
+    return false;
+  }
+}
+
 export async function ensureMapArchive(): Promise<Blob> {
   const stored = await readStored().catch(() => null);
   let manifest: z.infer<typeof archiveSchema> | null = null;
   try {
     manifest = await loadManifest();
   } catch (error) {
-    if (stored) return stored.blob;
+    if (stored && (await readableArchive(stored.blob, stored.blob.size))) return stored.blob;
     throw error;
   }
-  if (stored?.revision === manifest.revision) return stored.blob;
+  const storedMatches =
+    stored?.revision === manifest.revision &&
+    (await readableArchive(stored.blob, manifest.bytes).catch(() => false));
+  if (storedMatches && stored) return stored.blob;
   if (!navigator.onLine) {
-    if (stored) return stored.blob;
+    if (stored && (await readableArchive(stored.blob, stored.blob.size))) return stored.blob;
     throw new Error("This phone is offline and has no saved map");
   }
   try {
     const blob = await downloadArchive(manifest.file);
+    if (!(await readableArchive(blob, manifest.bytes))) {
+      throw new Error("Map download was unreadable");
+    }
     await writeStored({ revision: manifest.revision, blob });
     await persistStorage();
     return blob;
   } catch (error) {
-    if (stored) return stored.blob;
+    if (stored && (await readableArchive(stored.blob, stored.blob.size))) return stored.blob;
     throw error;
   }
 }

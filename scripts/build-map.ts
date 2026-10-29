@@ -10,14 +10,15 @@ import {
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
+import { PMTiles, type RangeResponse, type Source } from "pmtiles";
 import { haversine, type LngLat } from "../lib/geo";
 import { getItinerary } from "../lib/itinerary";
 import { getRoutes } from "../lib/routes";
 
 const PMTILES_VERSION = "1.31.2";
 const MAX_BYTES = 50 * 1024 * 1024;
-const ZOOM_CHOICES = [15, 14, 13, 12] as const;
-const SOURCE_VERSION = "2";
+const ZOOM_CHOICES = [15, 14, 13, 12, 11, 10] as const;
+const SOURCE_VERSION = "3";
 const BUFFER_METERS = 4_000;
 const SAMPLE_METERS = 2_000;
 const FONT_STACKS = ["Noto Sans Regular", "Noto Sans Italic", "Noto Sans Medium"] as const;
@@ -57,12 +58,66 @@ function sampleLine(coords: LngLat[]): LngLat[] {
   const kept: LngLat[] = [];
   for (const point of coords) {
     const last = kept[kept.length - 1];
-    if (!last || haversine(last, point) >= SAMPLE_METERS) kept.push(point);
+    if (!last) {
+      kept.push(point);
+      continue;
+    }
+    const distance = haversine(last, point);
+    if (distance === 0) continue;
+    const steps = Math.max(1, Math.ceil(distance / SAMPLE_METERS));
+    for (let step = 1; step <= steps; step += 1) {
+      const t = step / steps;
+      kept.push([
+        last[0] + (point[0] - last[0]) * t,
+        last[1] + (point[1] - last[1]) * t,
+      ]);
+    }
   }
-  const end = coords[coords.length - 1];
-  const last = kept[kept.length - 1];
-  if (end && (!last || haversine(last, end) >= 500)) kept.push(end);
   return kept;
+}
+
+function tileKey(lng: number, lat: number, zoom: number): string {
+  const n = 2 ** zoom;
+  const x = Math.floor(((lng + 180) / 360) * n);
+  const latRad = (lat * Math.PI) / 180;
+  const y = Math.floor(
+    ((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2) * n,
+  );
+  return `${zoom}/${x}/${y}`;
+}
+
+async function assertRouteCovered(zoom: number): Promise<void> {
+  const bytes = readFileSync(archivePath);
+  const source: Source = {
+    getKey: () => "trip.pmtiles",
+    async getBytes(offset: number, length: number): Promise<RangeResponse> {
+      const slice = bytes.subarray(offset, Math.min(bytes.length, offset + length));
+      const copy = new Uint8Array(slice.byteLength);
+      copy.set(slice);
+      return { data: copy.buffer };
+    },
+  };
+  const archive = new PMTiles(source);
+  const itinerary = getItinerary();
+  const routes = getRoutes();
+  const coords: LngLat[] = itinerary.stops.map((stop) => stop.coords);
+  for (const route of Object.values(routes)) coords.push(...route.coordinates);
+  const missing = new Set<string>();
+  const seen = new Set<string>();
+  for (const [lng, lat] of coords) {
+    const key = tileKey(lng, lat, zoom);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const [z, x, y] = key.split("/").map(Number);
+    const tile = await archive.getZxy(z, x, y);
+    if (!tile) missing.add(key);
+  }
+  if (missing.size > 0) {
+    throw new Error(
+      `Map extract is missing ${missing.size} tiles under the route at zoom ${zoom}`,
+    );
+  }
+  console.log(`route coverage ${seen.size} tiles at zoom ${zoom}`);
 }
 
 function regionJson(): string {
@@ -305,7 +360,9 @@ async function main(): Promise<void> {
     }
   }
   if (zoom === null) {
-    throw new Error("The trip corridor does not fit in 50 MB even at zoom 12");
+    throw new Error(
+      `The trip corridor does not fit in 50 MB even at zoom ${ZOOM_CHOICES[ZOOM_CHOICES.length - 1]}`,
+    );
   }
 
   console.log(`extracting zoom 0–${zoom} from ${planet}`);
@@ -324,6 +381,7 @@ async function main(): Promise<void> {
   if (extracted.status !== 0) {
     throw new Error("pmtiles extract failed");
   }
+  await assertRouteCovered(zoom);
   writeArchiveMeta(source);
 }
 

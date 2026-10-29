@@ -7,33 +7,17 @@ import { categoryLabel, stopPhotos } from "@/lib/categories";
 import { appleMapsUrl } from "@/lib/geo";
 import { formatClockRange } from "@/lib/itinerary";
 import { modeStyle } from "@/lib/modes";
-import { photoCredit } from "@/lib/photo-credits";
 import type { Leg, Stop } from "@/lib/schema";
 
 type StopSheetProps = {
   stop: Stop;
   incoming: Leg | null;
-  nextStop: Stop | null;
-  outgoing: Leg | null;
-  playing: boolean;
   onClose: () => void;
-  onPrevious: (() => void) | null;
-  onNext: () => void;
 };
 
-export function StopSheet({
-  stop,
-  incoming,
-  nextStop,
-  outgoing,
-  playing,
-  onClose,
-  onPrevious,
-  onNext,
-}: StopSheetProps) {
+export function StopSheet({ stop, incoming, onClose }: StopSheetProps) {
   const dragControls = useDragControls();
   const [photosOpen, setPhotosOpen] = useState(false);
-  const outgoingStyle = outgoing ? modeStyle(outgoing.mode) : null;
   const incomingStyle = incoming ? modeStyle(incoming.mode) : null;
   const arrived =
     incoming && incomingStyle
@@ -43,7 +27,6 @@ export function StopSheet({
       : null;
   const photos = stopPhotos(stop);
   const cover = photos[0];
-  const coverCredit = cover ? photoCredit(cover) : null;
 
   return (
     <motion.section
@@ -175,7 +158,7 @@ export function StopSheet({
             ) : null}
           </div>
       </div>
-      <div className="relative z-[1] min-h-0 overflow-y-auto px-5 pt-1 pb-3">
+      <div className="relative z-[1] min-h-0 overflow-y-auto px-5 pt-1 pb-5">
         <h2 id="stop-title" className="font-display text-[2rem] leading-none text-cream">
           {stop.name}
         </h2>
@@ -199,32 +182,6 @@ export function StopSheet({
             </ul>
           </div>
         ) : null}
-        {coverCredit ? (
-          <a className="photo-credit" href={coverCredit.source} target="_blank" rel="noreferrer">
-            Photo: {coverCredit.author}, {coverCredit.license}
-          </a>
-        ) : null}
-      </div>
-      <div className="relative z-[1] flex gap-2 px-4 pt-2 pb-4">
-        {onPrevious ? (
-          <button type="button" onClick={onPrevious} className="dock-button glass text-cream">
-            Previous
-          </button>
-        ) : null}
-        {outgoing && nextStop && outgoingStyle ? (
-          <button
-            type="button"
-            onClick={onNext}
-            disabled={playing}
-            className="dock-button bg-gold text-ink disabled:opacity-60"
-          >
-            {outgoingStyle.emoji} Next · {nextStop.name}
-          </button>
-        ) : (
-          <p className="flex h-12 flex-1 items-center justify-center font-display text-xl text-gold">
-            Last stop
-          </p>
-        )}
       </div>
       {photosOpen && photos.length > 0 ? (
         <PhotoViewer name={stop.name} photos={photos} onClose={() => setPhotosOpen(false)} />

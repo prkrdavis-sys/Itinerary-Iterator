@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Outfit } from "next/font/google";
+import { Fraunces, Great_Vibes, Outfit } from "next/font/google";
 import { RegisterServiceWorker } from "@/components/RegisterServiceWorker";
 import { getItinerary } from "@/lib/itinerary";
 import "./globals.css";
@@ -13,6 +13,13 @@ const fraunces = Fraunces({
 const outfit = Outfit({
   subsets: ["latin"],
   variable: "--font-outfit",
+  display: "swap",
+});
+
+const script = Great_Vibes({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-great-vibes",
   display: "swap",
 });
 
@@ -49,7 +56,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${outfit.variable} h-full antialiased`}>
+    <html lang="en" className={`${fraunces.variable} ${outfit.variable} ${script.variable} h-full antialiased`}>
       <body className="min-h-dvh bg-ink font-sans text-cream">
         <RegisterServiceWorker />
         {children}

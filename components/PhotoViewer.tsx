@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { photoCredit } from "@/lib/photo-credits";
 
 type PhotoViewerProps = {
   name: string;
@@ -20,7 +19,6 @@ export function PhotoViewer({ name, photos, onClose }: PhotoViewerProps) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const dragStart = useRef<number | null>(null);
   const src = photos[index] ?? photos[0];
-  const credit = src ? photoCredit(src) : null;
   const many = photos.length > 1;
 
   useEffect(() => {
@@ -129,16 +127,6 @@ export function PhotoViewer({ name, photos, onClose }: PhotoViewerProps) {
             ))}
           </div>
         </>
-      ) : null}
-      {credit ? (
-        <a
-          className="photo-viewer-credit"
-          href={credit.source}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {credit.author} · {credit.license}
-        </a>
       ) : null}
     </div>,
     host,
