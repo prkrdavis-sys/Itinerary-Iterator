@@ -563,40 +563,43 @@
       ]
     },
     {
-      "id": "boho-brunch",
+      "id": "bruges-rozenhoedkaai",
       "city": "Bruges",
-      "name": "Boho Brunch",
+      "name": "Rozenhoedkaai and Boniface Bridge",
       "coords": [
-        3.220496,
-        51.207013
+        3.2255,
+        51.2055
       ],
       "day": 5,
-      "start": "08:30",
+      "start": "09:00",
       "end": "09:45",
-      "category": "food",
-      "description": "Optional early brunch on Giststraat if you want eggs before the Belfry queue. Skip if you prefer a lighter start.",
-      "note": "Optional.",
+      "category": "sight",
+      "description": "Start Tuesday on the Rosary Quay and St Boniface Bridge as the canals wake up. Aim to be on the quay around nine-fifteen for photos before the Belfry queue.",
+      "photos": [
+        "/photos/rozenhoedkaai.jpg",
+        "/photos/bruges-morning.jpg"
+      ],
       "tips": [
-        "Kitchen closes mid-afternoon on most days.",
-        "Short walk from the studio."
+        "Walk from the studio; the center is compact.",
+        "Morning light on the quay beats the midday crowds."
       ]
     },
     {
-      "id": "bruges-tuesday-morning",
+      "id": "bruges-belfry-burg",
       "city": "Bruges",
-      "name": "Belfry and canals",
+      "name": "Belfry and De Burg",
       "coords": [
-        3.2249,
-        51.208
+        3.2243,
+        51.2084
       ],
       "day": 5,
       "start": "10:00",
-      "end": "12:00",
+      "end": "10:45",
       "category": "sight",
-      "description": "The Belfry opens at ten on winter hours. Canals and Boniface Bridge first if you skipped brunch, then the climb if tickets allow.",
+      "description": "Climb the Belfry when it opens at ten, then cross to De Burg and the Basilica of the Holy Blood before you need the car again.",
       "photos": [
         "/photos/bruges-belfry.jpg",
-        "/photos/bruges-morning.jpg"
+        "/photos/bruges-burg.jpg"
       ],
       "tips": [
         "Belfry tickets are still on the to-do list.",
@@ -604,67 +607,138 @@
       ]
     },
     {
-      "id": "lissewege",
-      "city": "Lissewege",
-      "name": "Lissewege",
+      "id": "bruges-checkout",
+      "city": "Bruges",
+      "name": "Studio checkout and load car",
       "coords": [
-        3.1958,
-        51.2949
+        3.2272,
+        51.2076
       ],
       "day": 5,
-      "start": "12:25",
-      "end": "13:05",
-      "category": "neighborhood",
-      "description": "Whitewashed Flemish houses and a village church, twenty minutes from Bruges. A short photo stop before the coast.",
+      "start": "10:50",
+      "end": "11:10",
+      "category": "transit",
+      "description": "Checkout of the Bruges studio around ten-fifty, load luggage into the rental, and point the car toward the southern gates.",
       "photos": [
-        "/photos/lissewege.jpg",
-        "/photos/lissewege-tower.jpg"
+        "/photos/bruges-canal.jpg"
       ],
       "tips": [
-        "Street parking is usually enough.",
-        "Respect driveways; people live here."
+        "Host bikes stay behind; you are driving from here.",
+        "Double-check nothing is left in the studio."
       ]
     },
     {
-      "id": "de-fonteintjes",
-      "city": "Zuienkerke",
-      "name": "De Fonteintjes",
+      "id": "bruges-minnewater",
+      "city": "Bruges",
+      "name": "Ezelpoort and Minnewater",
       "coords": [
-        3.1428,
-        51.3215
+        3.206,
+        51.1995
       ],
       "day": 5,
-      "start": "13:20",
-      "end": "14:45",
-      "category": "activity",
-      "description": "Coastal nature walk through dunes, ponds, and reeds toward the North Sea beach. Blocked out from about one-twenty to two-forty-five.",
-      "photos": [
-        "/photos/fonteintjes.jpg"
-      ],
-      "tips": [
-        "Trails can be sandy; wear shoes you do not mind.",
-        "Wind off the sea is colder than Bruges."
-      ]
-    },
-    {
-      "id": "blankenberge-lighthouse",
-      "city": "Blankenberge",
-      "name": "Blankenberge lighthouse",
-      "coords": [
-        3.1542,
-        51.3134
-      ],
-      "day": 5,
-      "start": "15:00",
-      "end": "15:35",
+      "start": "11:15",
+      "end": "12:10",
       "category": "sight",
-      "description": "The lighthouse from the outside only; the tower is not open to visitors. Photos and a breath of sea air before the long drive north.",
+      "description": "Short drive to the Lake of Love and Minnewater Park, with a look at the Ezelpoort gate on the way out of town.",
       "photos": [
-        "/photos/blankenberge-lighthouse.jpg"
+        "/photos/bruges-canal.jpg"
       ],
       "tips": [
-        "Timing here feeds the long drive north with the rental still.",
-        "Leaving around four-thirty targets dinner near Nieuwmarkt."
+        "Park near the lake; the walk is flat and quick.",
+        "Swans on Minnewater are a classic Bruges goodbye."
+      ]
+    },
+    {
+      "id": "bruges-waffles",
+      "city": "Bruges",
+      "name": "Waffles",
+      "coords": [
+        3.2248,
+        51.2078
+      ],
+      "day": 5,
+      "start": "12:15",
+      "end": "12:40",
+      "category": "food",
+      "description": "Sit-down Belgian waffles around twelve-fifteen before a proper lunch nearby.",
+      "tips": [
+        "Share a plate if you are saving room for lunch.",
+        "Walk back toward the center from Minnewater or park once more nearby."
+      ]
+    },
+    {
+      "id": "bruges-lunch",
+      "city": "Bruges",
+      "name": "Lunch in Bruges",
+      "coords": [
+        3.226,
+        51.2082
+      ],
+      "day": 5,
+      "start": "12:45",
+      "end": "13:25",
+      "category": "food",
+      "description": "Unhurried lunch in the old center starting around twelve-forty-five. Pick any brasserie that looks good; nothing is booked.",
+      "tips": [
+        "Aim to be back in the car by one-thirty.",
+        "Keep receipts if you want a paper trail for expenses."
+      ]
+    },
+    {
+      "id": "bruges-departure",
+      "city": "Bruges",
+      "name": "Leave Bruges",
+      "coords": [
+        3.21,
+        51.192
+      ],
+      "day": 5,
+      "start": "13:30",
+      "end": "13:35",
+      "category": "transit",
+      "description": "Pull onto the ring and head west toward Zeeland. Budget about two hours via the Westerschelde Tunnel and the N57.",
+      "tips": [
+        "Fill the tank if the gauge is low before the long drives.",
+        "Have navigation ready for the tunnel toll lane."
+      ]
+    },
+    {
+      "id": "haamstede-westerlicht",
+      "city": "Haamstede",
+      "name": "Westerlicht lighthouse",
+      "coords": [
+        3.7233,
+        51.7156
+      ],
+      "day": 5,
+      "start": "16:00",
+      "end": "16:30",
+      "category": "sight",
+      "description": "Photo stop at the Westerlicht lighthouse on Schouwen-Duiveland. Sunset is around seventeen-thirteen; stay for the light if traffic allows.",
+      "tips": [
+        "Wind off the North Sea is colder than Bruges.",
+        "Outside photos only; the tower is not a climb stop."
+      ]
+    },
+    {
+      "id": "amsterdam-nieuwmarkt-arrival",
+      "city": "Amsterdam",
+      "name": "Nieuwmarkt parking",
+      "coords": [
+        4.8995,
+        52.372
+      ],
+      "day": 5,
+      "start": "19:45",
+      "end": "20:25",
+      "category": "transit",
+      "description": "Arrive in Amsterdam after about two hours and five minutes over the Brouwersdam. Park near Nieuwmarkt and walk to dinner.",
+      "photos": [
+        "/photos/rijksmuseum.jpg"
+      ],
+      "tips": [
+        "Allow a few minutes to find parking near the square.",
+        "Dinner at In de Waag is at eight-thirty."
       ]
     },
     {
@@ -679,7 +753,7 @@
       "start": "20:30",
       "end": "22:00",
       "category": "food",
-      "description": "Booked dinner at eight-thirty in the old weigh house on Nieuwmarkt. Drive in from the coast, park nearby, and keep the rental for the night.",
+      "description": "Booked dinner at eight-thirty in the old weigh house on Nieuwmarkt. Walk over from parking and keep the rental for the night.",
       "note": "Booked.",
       "tips": [
         "Allow a few minutes to find parking near the square.",
@@ -1105,49 +1179,83 @@
     },
     {
       "from": "cambrinus",
-      "to": "boho-brunch",
+      "to": "bruges-rozenhoedkaai",
       "mode": "walk",
-      "depart": "08:10",
-      "arrive": "08:28"
+      "depart": "08:50",
+      "arrive": "09:10",
+      "notes": "Walk from the studio toward the quay for a nine-fifteen start."
     },
     {
-      "from": "boho-brunch",
-      "to": "bruges-tuesday-morning",
+      "from": "bruges-rozenhoedkaai",
+      "to": "bruges-belfry-burg",
       "mode": "walk",
       "depart": "09:48",
-      "arrive": "10:00"
+      "arrive": "10:00",
+      "notes": "Cut through the center to the Markt for the Belfry opening."
     },
     {
-      "from": "bruges-tuesday-morning",
-      "to": "lissewege",
+      "from": "bruges-belfry-burg",
+      "to": "bruges-checkout",
+      "mode": "walk",
+      "depart": "10:46",
+      "arrive": "10:50",
+      "notes": "Walk back to the studio to checkout and load the car."
+    },
+    {
+      "from": "bruges-checkout",
+      "to": "bruges-minnewater",
       "mode": "car",
-      "depart": "12:05",
-      "arrive": "12:20",
-      "notes": "Fifteen kilometers north to the village."
+      "depart": "11:12",
+      "arrive": "11:15",
+      "notes": "Short drive to Minnewater and the Ezelpoort area."
     },
     {
-      "from": "lissewege",
-      "to": "de-fonteintjes",
+      "from": "bruges-minnewater",
+      "to": "bruges-waffles",
+      "mode": "walk",
+      "depart": "12:12",
+      "arrive": "12:15",
+      "notes": "Walk or drive back toward the center for waffles."
+    },
+    {
+      "from": "bruges-waffles",
+      "to": "bruges-lunch",
+      "mode": "walk",
+      "depart": "12:42",
+      "arrive": "12:45",
+      "notes": "Stay on foot for lunch nearby."
+    },
+    {
+      "from": "bruges-lunch",
+      "to": "bruges-departure",
+      "mode": "walk",
+      "depart": "13:26",
+      "arrive": "13:30",
+      "notes": "Walk to the car and join the ring westbound."
+    },
+    {
+      "from": "bruges-departure",
+      "to": "haamstede-westerlicht",
       "mode": "car",
-      "depart": "13:05",
-      "arrive": "13:18",
-      "notes": "Ten minutes toward the nature reserve."
+      "depart": "13:35",
+      "arrive": "15:55",
+      "notes": "About two hours via the Westerschelde Tunnel and the N57 to Schouwen-Duiveland."
     },
     {
-      "from": "de-fonteintjes",
-      "to": "blankenberge-lighthouse",
+      "from": "haamstede-westerlicht",
+      "to": "amsterdam-nieuwmarkt-arrival",
       "mode": "car",
-      "depart": "14:50",
-      "arrive": "15:00",
-      "notes": "Ten minutes to the coast."
+      "depart": "17:15",
+      "arrive": "19:45",
+      "notes": "About two hours five over the Brouwersdam into Amsterdam; park near Nieuwmarkt."
     },
     {
-      "from": "blankenberge-lighthouse",
+      "from": "amsterdam-nieuwmarkt-arrival",
       "to": "in-de-waag",
-      "mode": "car",
-      "depart": "15:40",
-      "arrive": "20:20",
-      "notes": "Drive north with the rental; prefer scenic lanes where the detour is small, then park near Nieuwmarkt for dinner."
+      "mode": "walk",
+      "depart": "20:26",
+      "arrive": "20:30",
+      "notes": "Short walk to the weigh house for dinner."
     },
     {
       "from": "in-de-waag",
