@@ -23,21 +23,19 @@ const FALLBACK_SOURCE = path.join(
   "itinerary-stops_a19c.json",
 );
 
-const TRIP_START = "2026-10-29";
+const TRIP_START = "2026-10-30";
 const TRIP_END = "2026-11-04";
 
 const IDS: Record<string, string> = {
-  "2026-10-29|1": "iad-departure",
-  "2026-10-30|1": "cph-layover",
-  "2026-10-30|2": "ams-arrival",
-  "2026-10-30|3": "holiday-inn-checkin-fri",
-  "2026-10-30|4": "winkel-43",
-  "2026-10-30|5": "zipper",
-  "2026-10-30|6": "dampkring",
-  "2026-10-30|7": "reguliersgracht-bridges",
-  "2026-10-30|8": "katsu",
-  "2026-10-30|9": "heemelrijck-de-pijp",
-  "2026-10-30|10": "holiday-inn-sleep-fri",
+  "2026-10-30|1": "ams-arrival",
+  "2026-10-30|2": "holiday-inn-checkin-fri",
+  "2026-10-30|3": "winkel-43",
+  "2026-10-30|4": "zipper",
+  "2026-10-30|5": "dampkring",
+  "2026-10-30|6": "reguliersgracht-bridges",
+  "2026-10-30|7": "katsu",
+  "2026-10-30|8": "heemelrijck-de-pijp",
+  "2026-10-30|9": "holiday-inn-sleep-fri",
   "2026-10-31|1": "holiday-inn-morning-sat",
   "2026-10-31|2": "waterlooplein-episode",
   "2026-10-31|3": "bluebird-lunch",
@@ -76,19 +74,9 @@ const IDS: Record<string, string> = {
   "2026-11-03|9": "badhoevedorp-studio",
   "2026-11-04|1": "badhoevedorp-morning",
   "2026-11-04|2": "schiphol-avis-return",
-  "2026-11-04|3": "iad-arrival",
 };
 
 const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string }> = {
-  "iad-departure": {
-    photo: "/photos/us-evening.jpg",
-    credit: "Neutral travel photo (substitute for Dulles area)",
-  },
-  "cph-layover": {
-    photo: "/photos/cph-airport.jpg",
-    credit: "CC BY-SA 3.0, Wikimedia Commons",
-    creditUrl: "https://commons.wikimedia.org/wiki/File:Copenhagen_Airport_Terminal_3.jpg",
-  },
   "ams-arrival": {
     photo: "/photos/schiphol-terminal.jpg",
     credit: "CC BY-SA 4.0, Wikimedia Commons",
@@ -324,10 +312,6 @@ const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string
     credit: "CC BY-SA 4.0, Wikimedia Commons",
     creditUrl: "https://commons.wikimedia.org/wiki/File:Schiphol_Departures3.jpg",
   },
-  "iad-arrival": {
-    photo: "/photos/us-evening.jpg",
-    credit: "Neutral travel photo (substitute for Dulles arrival)",
-  },
 };
 
 function readSource(): SourceStop[] {
@@ -405,14 +389,12 @@ function resolveTimes(
   end: string,
 ): { start: string; end: string } {
   const overrides: Record<string, { start: string; end: string }> = {
-    "cph-layover": { start: "11:00", end: "13:10" },
     "holiday-inn-sleep-fri": { start: "22:45", end: "23:59" },
     "rotterdam-airbnb-sunday-morning": { start: "07:00", end: "10:30" },
     "rotterdam-airbnb-sunday-night": { start: "20:30", end: "23:59" },
     "bruges-studio-sleep-mon": { start: "20:45", end: "23:59" },
     "badhoevedorp-studio": { start: "22:15", end: "23:59" },
     "badhoevedorp-morning": { start: "07:00", end: "07:45" },
-    "iad-arrival": { start: "17:15", end: "17:15" },
     "now-wow-rave": { start: "23:00", end: "23:59" },
   };
   if (overrides[id]) return overrides[id];
@@ -542,7 +524,7 @@ function main() {
     trip: {
       title: "Rotterdam Halloween",
       subtitle:
-        "Late October from Dulles through Amsterdam, Rotterdam Halloween, Ghent, Damme, Bruges, Zeeland, and home.",
+        "Late October from Amsterdam through Rotterdam Halloween, Ghent, Damme, Bruges, Zeeland, and back to Schiphol.",
       start: TRIP_START,
       end: TRIP_END,
       travelers: "Two travelers",

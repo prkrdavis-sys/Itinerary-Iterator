@@ -4,8 +4,6 @@ import { Readable } from "node:stream";
 
 /** @type {Record<string, string>} */
 const FILES = {
-  "cph-airport.jpg":
-    "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Copenhagen_Airport_Terminal_3.jpg/1280px-Copenhagen_Airport_Terminal_3.jpg",
   "winkel-43.jpg":
     "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Winkel_43%2C_Amsterdam.jpg/1280px-Winkel_43%2C_Amsterdam.jpg",
   "amsterdam-nine-streets.jpg":

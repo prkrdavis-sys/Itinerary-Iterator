@@ -1,39 +1,7 @@
 [
  {
-  "day": "2026-10-29",
-  "order": 1,
-  "name": "Washington Dulles International Airport (IAD)",
-  "area": "Dulles, VA, USA",
-  "lonlat": [
-   -77.4535,
-   38.9523
-  ],
-  "start": "21:30",
-  "end": "21:30",
-  "category": "transport",
-  "mode_to_next": "train",
-  "note": "SAS SK 926 to Copenhagen, overnight flight (real mode: plane).",
-  "url": "https://www.flydulles.com"
- },
- {
   "day": "2026-10-30",
   "order": 1,
-  "name": "Copenhagen Airport (CPH)",
-  "area": "Copenhagen, Denmark",
-  "lonlat": [
-   12.6494,
-   55.6296
-  ],
-  "start": "",
-  "end": "",
-  "category": "transport",
-  "mode_to_next": "train",
-  "note": "2h 10m layover, then SK 547 to Amsterdam (real mode: plane); times not in the booking email.",
-  "url": "https://www.cph.dk/en"
- },
- {
-  "day": "2026-10-30",
-  "order": 2,
   "name": "Amsterdam Airport Schiphol (AMS)",
   "area": "Haarlemmermeer, Amsterdam",
   "lonlat": [
@@ -44,12 +12,12 @@
   "end": "14:40",
   "category": "transport",
   "mode_to_next": "train",
-  "note": "Land 14:15 on SK 547; NS train to Sloterdijk.",
+  "note": "Arrive about 14:15 local; NS train to Sloterdijk.",
   "url": "https://www.schiphol.nl/en/"
  },
  {
   "day": "2026-10-30",
-  "order": 3,
+  "order": 2,
   "name": "Holiday Inn Express Amsterdam Sloterdijk Station",
   "area": "Sloterdijk, Amsterdam",
   "lonlat": [
@@ -65,7 +33,7 @@
  },
  {
   "day": "2026-10-30",
-  "order": 4,
+  "order": 3,
   "name": "Winkel 43 (late lunch)",
   "area": "Jordaan, Amsterdam",
   "lonlat": [
@@ -82,7 +50,7 @@
  },
  {
   "day": "2026-10-30",
-  "order": 5,
+  "order": 4,
   "name": "Zipper (vintage)",
   "area": "9 Streets, Amsterdam",
   "lonlat": [
@@ -98,7 +66,7 @@
  },
  {
   "day": "2026-10-30",
-  "order": 6,
+  "order": 5,
   "name": "Original Dampkring Coffeeshop",
   "area": "Spui, Amsterdam",
   "lonlat": [
@@ -114,7 +82,7 @@
  },
  {
   "day": "2026-10-30",
-  "order": 7,
+  "order": 6,
   "name": "Reguliersgracht seven bridges (photo stop)",
   "area": "Canal Ring, Amsterdam",
   "lonlat": [
@@ -130,7 +98,7 @@
  },
  {
   "day": "2026-10-30",
-  "order": 8,
+  "order": 7,
   "name": "Katsu Coffeeshop",
   "area": "De Pijp, Amsterdam",
   "lonlat": [
@@ -146,7 +114,7 @@
  },
  {
   "day": "2026-10-30",
-  "order": 9,
+  "order": 8,
   "name": "Restaurant Heemelrijck De Pijp",
   "area": "De Pijp, Amsterdam",
   "lonlat": [
@@ -163,7 +131,7 @@
  },
  {
   "day": "2026-10-30",
-  "order": 10,
+  "order": 9,
   "name": "Holiday Inn Express Amsterdam Sloterdijk Station",
   "area": "Sloterdijk, Amsterdam",
   "lonlat": [
@@ -783,26 +751,10 @@
    52.327
   ],
   "start": "08:00",
-  "end": "10:30",
-  "category": "transport",
-  "mode_to_next": "train",
-  "note": "Return car ~08:00 (due 09:00); SK 552 to CPH 10:30, then SK 925 (real mode: plane).",
-  "url": "https://www.schiphol.nl/en/"
- },
- {
-  "day": "2026-11-04",
-  "order": 3,
-  "name": "Washington Dulles International Airport (IAD)",
-  "area": "Dulles, VA, USA",
-  "lonlat": [
-   -77.4535,
-   38.9523
-  ],
-  "start": "17:15",
-  "end": "",
+  "end": "08:30",
   "category": "transport",
   "mode_to_next": "",
-  "note": "Land 17:15 ET (local time).",
-  "url": "https://www.flydulles.com"
+  "note": "Return the Avis rental about 08:00 (due by 09:00). Use the key box if the desk is closed.",
+  "url": "https://www.schiphol.nl/en/"
  }
 ]
