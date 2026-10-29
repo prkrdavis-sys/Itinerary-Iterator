@@ -10,6 +10,8 @@ export const categories = [
   "transit",
   "neighborhood",
   "activity",
+  "shopping",
+  "nightlife",
 ] as const;
 
 const clock = z
@@ -58,6 +60,8 @@ export const stopSchema = z.object({
   url: z.url().optional(),
   photo: imageRef.optional(),
   photos: z.array(imageRef).max(4).default([]),
+  photoCredit: z.string().min(1).optional(),
+  photoCreditUrl: z.url().optional(),
   tips: z.array(z.string().min(1)).default([]),
   emoji: z.string().min(1).optional(),
 });

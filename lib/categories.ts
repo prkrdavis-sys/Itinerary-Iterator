@@ -16,6 +16,10 @@ export function categoryLabel(category: Category): string {
       return "Neighborhood";
     case "activity":
       return "Activity";
+    case "shopping":
+      return "Shopping";
+    case "nightlife":
+      return "Nightlife";
     default: {
       const neverCategory: never = category;
       return neverCategory;
@@ -40,6 +44,10 @@ export function spotEmoji(stop: Pick<Stop, "emoji" | "category">): string {
       return "🏘️";
     case "activity":
       return "🎡";
+    case "shopping":
+      return "🛍️";
+    case "nightlife":
+      return "🌙";
     default: {
       const neverCategory: never = stop.category;
       return neverCategory;
