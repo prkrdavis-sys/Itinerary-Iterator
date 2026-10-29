@@ -55,14 +55,14 @@
       "city": "Amsterdam",
       "name": "Amsterdam evening",
       "coords": [
-        4.8836,
-        52.3724
+        4.8925,
+        52.3575
       ],
       "day": 1,
       "start": "17:30",
-      "end": "18:15",
+      "end": "19:45",
       "category": "neighborhood",
-      "description": "A short wander through canals and side streets before dinner. Coffee shops and thrift stops if you still have energy.",
+      "description": "Train toward the city, then wander the De Pijp side streets and cafés before the restaurant table at eight-fifteen.",
       "photos": [
         "/photos/herengracht-evening.jpg"
       ],
@@ -72,22 +72,22 @@
       ]
     },
     {
-      "id": "de-reiger",
+      "id": "heemelrijck-de-pijp",
       "city": "Amsterdam",
-      "name": "Eetcafé De Reiger",
+      "name": "Restaurant Heemelrijck De Pijp",
       "coords": [
-        4.882673,
-        52.375749
+        4.8957,
+        52.3556
       ],
       "day": 1,
-      "start": "18:30",
-      "end": "20:30",
+      "start": "20:15",
+      "end": "22:15",
       "category": "food",
-      "description": "Classic Jordaan eetcafé on Nieuwe Leliestraat. You asked for a table around half six; treat it as requested until the restaurant confirms.",
-      "note": "Requested, not confirmed.",
+      "description": "Booked table at eight-fifteen in De Pijp for about two hours of dinner. Walk over from the neighborhood wander when it is time.",
+      "note": "Booked.",
       "tips": [
-        "Kitchen service typically starts a bit after opening.",
-        "Walk-ins sometimes find bar seats later in the evening."
+        "Arrive a few minutes early for a smooth seating.",
+        "The kitchen runs full service on a Friday night."
       ]
     },
     {
@@ -99,10 +99,10 @@
         52.3892
       ],
       "day": 1,
-      "start": "21:00",
+      "start": "22:45",
       "end": "23:30",
       "category": "stay",
-      "description": "First night at Sloterdijk after dinner in the Jordaan. Sleep before the Saturday market run.",
+      "description": "First night at Sloterdijk after dinner in De Pijp. Sleep before the Saturday market run.",
       "photos": [
         "/photos/sloterdijk.jpg"
       ],
@@ -855,7 +855,7 @@
       "mode": "train",
       "depart": "17:05",
       "arrive": "17:25",
-      "notes": "Toward Centraal, then walk into the canal belt.",
+      "notes": "Toward Centraal, then metro or tram south into De Pijp.",
       "via": [
         [
           4.838,
@@ -873,23 +873,23 @@
     },
     {
       "from": "amsterdam-first-evening",
-      "to": "de-reiger",
+      "to": "heemelrijck-de-pijp",
       "mode": "walk",
-      "depart": "18:15",
-      "arrive": "18:28",
-      "notes": "North into the Jordaan for dinner."
+      "depart": "19:45",
+      "arrive": "20:10",
+      "notes": "Short walk through De Pijp to the restaurant."
     },
     {
-      "from": "de-reiger",
+      "from": "heemelrijck-de-pijp",
       "to": "holiday-inn-friday-night",
       "mode": "train",
-      "depart": "20:40",
-      "arrive": "21:00",
-      "notes": "Train back to Sloterdijk for the night.",
+      "depart": "22:25",
+      "arrive": "22:45",
+      "notes": "Train north toward Sloterdijk for the night.",
       "via": [
         [
-          4.882673,
-          52.375749
+          4.8957,
+          52.3556
         ],
         [
           4.868,
