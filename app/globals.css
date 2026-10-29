@@ -262,6 +262,16 @@ body {
   color: #5c4310;
 }
 
+.cat-shopping {
+  background: #e8d4f5;
+  color: #4a245c;
+}
+
+.cat-nightlife {
+  background: #d4e0f5;
+  color: #243a5c;
+}
+
 .dock-button {
   height: 2.85rem;
   min-width: 0;

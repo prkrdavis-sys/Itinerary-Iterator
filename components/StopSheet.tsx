@@ -170,6 +170,26 @@ export function StopSheet({ stop, incoming, onClose }: StopSheetProps) {
           {arrived ? <span className="text-sm text-mist">{arrived}</span> : null}
         </div>
         <p className="stop-copy mt-4 text-sm leading-6 text-cream">{stop.description}</p>
+        {stop.note ? (
+          <p className="stop-copy mt-2 text-sm leading-6 text-gold">{stop.note}</p>
+        ) : null}
+        {stop.photoCredit ? (
+          <p className="mt-3 text-xs leading-5 text-mist">
+            Photo:{" "}
+            {stop.photoCreditUrl ? (
+              <a
+                href={stop.photoCreditUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="underline decoration-white/30 underline-offset-2"
+              >
+                {stop.photoCredit}
+              </a>
+            ) : (
+              stop.photoCredit
+            )}
+          </p>
+        ) : null}
         {stop.tips.length > 0 ? (
           <div className="mt-4">
             <h3 className="text-sm font-semibold text-cream">Notes</h3>

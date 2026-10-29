@@ -1,0 +1,808 @@
+[
+ {
+  "day": "2026-10-29",
+  "order": 1,
+  "name": "Washington Dulles International Airport (IAD)",
+  "area": "Dulles, VA, USA",
+  "lonlat": [
+   -77.4535,
+   38.9523
+  ],
+  "start": "21:30",
+  "end": "21:30",
+  "category": "transport",
+  "mode_to_next": "train",
+  "note": "SAS SK 926 to Copenhagen, overnight flight (real mode: plane).",
+  "url": "https://www.flydulles.com"
+ },
+ {
+  "day": "2026-10-30",
+  "order": 1,
+  "name": "Copenhagen Airport (CPH)",
+  "area": "Copenhagen, Denmark",
+  "lonlat": [
+   12.6494,
+   55.6296
+  ],
+  "start": "",
+  "end": "",
+  "category": "transport",
+  "mode_to_next": "train",
+  "note": "2h 10m layover, then SK 547 to Amsterdam (real mode: plane); times not in the booking email.",
+  "url": "https://www.cph.dk/en"
+ },
+ {
+  "day": "2026-10-30",
+  "order": 2,
+  "name": "Amsterdam Airport Schiphol (AMS)",
+  "area": "Haarlemmermeer, Amsterdam",
+  "lonlat": [
+   4.7415,
+   52.327
+  ],
+  "start": "14:15",
+  "end": "14:40",
+  "category": "transport",
+  "mode_to_next": "train",
+  "note": "Land 14:15 on SK 547; NS train to Sloterdijk.",
+  "url": "https://www.schiphol.nl/en/"
+ },
+ {
+  "day": "2026-10-30",
+  "order": 3,
+  "name": "Holiday Inn Express Amsterdam Sloterdijk Station",
+  "area": "Sloterdijk, Amsterdam",
+  "lonlat": [
+   4.8376,
+   52.3882
+  ],
+  "start": "15:00",
+  "end": "15:10",
+  "category": "lodging",
+  "mode_to_next": "train",
+  "note": "Check in 15:00; booked, breakfast included. NS train one stop to Centraal, then walk.",
+  "url": "https://www.ihg.com/holidayinnexpress/hotels/us/en/amsterdam/amsse/hoteldetail"
+ },
+ {
+  "day": "2026-10-30",
+  "order": 4,
+  "name": "Winkel 43 (late lunch)",
+  "area": "Jordaan, Amsterdam",
+  "lonlat": [
+   4.8862,
+   52.3791
+  ],
+  "start": "15:30",
+  "end": "16:30",
+  "category": "food",
+  "mode_to_next": "walk",
+  "note": "Planned late lunch: famous apple pie. Lunch options on the Food page.",
+  "url": "https://winkel43.nl",
+  "booking": "Walk-in only, no reservations."
+ },
+ {
+  "day": "2026-10-30",
+  "order": 5,
+  "name": "Zipper (vintage)",
+  "area": "9 Streets, Amsterdam",
+  "lonlat": [
+   4.886,
+   52.3688
+  ],
+  "start": "16:45",
+  "end": "17:30",
+  "category": "shopping",
+  "mode_to_next": "walk",
+  "note": "Thrift/vintage since 1984; Fri closing 18:30.",
+  "url": "https://www.zipperstore.nl"
+ },
+ {
+  "day": "2026-10-30",
+  "order": 6,
+  "name": "Original Dampkring Coffeeshop",
+  "area": "Spui, Amsterdam",
+  "lonlat": [
+   4.8905,
+   52.3678
+  ],
+  "start": "17:40",
+  "end": "18:45",
+  "category": "nightlife",
+  "mode_to_next": "walk",
+  "note": "Coffeeshop, 18+ with ID; daily 10:00-01:00.",
+  "url": "https://ogdampkring.com/"
+ },
+ {
+  "day": "2026-10-30",
+  "order": 7,
+  "name": "Reguliersgracht seven bridges (photo stop)",
+  "area": "Canal Ring, Amsterdam",
+  "lonlat": [
+   4.8962,
+   52.3598
+  ],
+  "start": "18:55",
+  "end": "19:05",
+  "category": "sight",
+  "mode_to_next": "walk",
+  "note": "Lit-up bridges en route to De Pijp; alternative tram 24 from Muntplein.",
+  "url": "https://en.wikipedia.org/wiki/Reguliersgracht"
+ },
+ {
+  "day": "2026-10-30",
+  "order": 8,
+  "name": "Katsu Coffeeshop",
+  "area": "De Pijp, Amsterdam",
+  "lonlat": [
+   4.8933,
+   52.3548
+  ],
+  "start": "19:20",
+  "end": "20:05",
+  "category": "nightlife",
+  "mode_to_next": "walk",
+  "note": "Coffeeshop near dinner, Fri 10:00-01:00; 8 min walk to dinner.",
+  "url": "https://www.katsu.nl"
+ },
+ {
+  "day": "2026-10-30",
+  "order": 9,
+  "name": "Restaurant Heemelrijck De Pijp",
+  "area": "De Pijp, Amsterdam",
+  "lonlat": [
+   4.8999,
+   52.3568
+  ],
+  "start": "20:15",
+  "end": "22:15",
+  "category": "food",
+  "mode_to_next": "train",
+  "note": "Dinner, booked. Then De Pijp bars optional; back via metro 52 + NS train (real mode: metro).",
+  "url": "https://www.heemelrijck.nl",
+  "booking": "Booked via OpenTable; manage in the OpenTable app."
+ },
+ {
+  "day": "2026-10-30",
+  "order": 10,
+  "name": "Holiday Inn Express Amsterdam Sloterdijk Station",
+  "area": "Sloterdijk, Amsterdam",
+  "lonlat": [
+   4.8376,
+   52.3882
+  ],
+  "start": "22:45",
+  "end": "",
+  "category": "lodging",
+  "mode_to_next": "",
+  "note": "Sleep.",
+  "url": "https://www.ihg.com/holidayinnexpress/hotels/us/en/amsterdam/amsse/hoteldetail"
+ },
+ {
+  "day": "2026-10-31",
+  "order": 1,
+  "name": "Holiday Inn Express Amsterdam Sloterdijk Station",
+  "area": "Sloterdijk, Amsterdam",
+  "lonlat": [
+   4.8376,
+   52.3882
+  ],
+  "start": "09:45",
+  "end": "10:00",
+  "category": "lodging",
+  "mode_to_next": "train",
+  "note": "Check out, leave bags at front desk; train to Centraal then 19 min walk.",
+  "url": "https://www.ihg.com/holidayinnexpress/hotels/us/en/amsterdam/amsse/hoteldetail"
+ },
+ {
+  "day": "2026-10-31",
+  "order": 2,
+  "name": "Waterlooplein flea market + Episode",
+  "area": "Waterlooplein, Amsterdam",
+  "lonlat": [
+   4.9018,
+   52.3684
+  ],
+  "start": "10:30",
+  "end": "12:30",
+  "category": "shopping",
+  "mode_to_next": "walk",
+  "note": "Outdoor market (Mon-Sat 9:30-18:00) and Episode thrift store; bring cash.",
+  "url": "https://en.wikipedia.org/wiki/Waterlooplein"
+ },
+ {
+  "day": "2026-10-31",
+  "order": 3,
+  "name": "Coffeeshop Bluebird + lunch",
+  "area": "Nieuwmarkt, Amsterdam",
+  "lonlat": [
+   4.9009,
+   52.37
+  ],
+  "start": "12:30",
+  "end": "13:55",
+  "category": "nightlife",
+  "mode_to_next": "walk",
+  "note": "Coffeeshop (daily 9:30-01:00); lunch nearby, options on the Food page. Old website is defunct, link is its Instagram.",
+  "url": "https://www.instagram.com/bluebirdcoffeeshopams/"
+ },
+ {
+  "day": "2026-10-31",
+  "order": 4,
+  "name": "Oude Kerk + tower tour",
+  "area": "De Wallen, Amsterdam",
+  "lonlat": [
+   4.8981,
+   52.3744
+  ],
+  "start": "14:00",
+  "end": "15:00",
+  "category": "sight",
+  "mode_to_next": "walk",
+  "note": "Amsterdam's oldest building (1306); 14:00 tower tour, last day of season; cashless, book slot.",
+  "url": "https://oudekerk.nl/en/"
+ },
+ {
+  "day": "2026-10-31",
+  "order": 5,
+  "name": "Amsterdam Centraal",
+  "area": "Centrum, Amsterdam",
+  "lonlat": [
+   4.9006,
+   52.3789
+  ],
+  "start": "15:10",
+  "end": "16:30",
+  "category": "transport",
+  "mode_to_next": "train",
+  "note": "Train to Sloterdijk for bags and back; NS Intercity to Rotterdam 16:30-17:00.",
+  "url": "https://en.wikipedia.org/wiki/Amsterdam_Centraal_station"
+ },
+ {
+  "day": "2026-10-31",
+  "order": 6,
+  "name": "Rotterdam Centraal",
+  "area": "Centrum, Rotterdam",
+  "lonlat": [
+   4.4689,
+   51.925
+  ],
+  "start": "17:40",
+  "end": "17:50",
+  "category": "transport",
+  "mode_to_next": "bus",
+  "note": "Arrive ~1h10 later; tram/metro to the studio (real mode: tram/metro, check RET app).",
+  "url": "https://en.wikipedia.org/wiki/Rotterdam_Centraal_station"
+ },
+ {
+  "day": "2026-10-31",
+  "order": 7,
+  "name": "Rotterdam studio (Airbnb)",
+  "area": "Rotterdam",
+  "lonlat": [
+   4.4778,
+   51.9244
+  ],
+  "start": "18:00",
+  "end": "19:30",
+  "category": "lodging",
+  "mode_to_next": "bus",
+  "note": "Check in after 15:00; booked. Location approximate (city centre); exact address in the Airbnb app.",
+  "url": ""
+ },
+ {
+  "day": "2026-10-31",
+  "order": 8,
+  "name": "Grand Café Loos",
+  "area": "Scheepvaartkwartier, Rotterdam",
+  "lonlat": [
+   4.4793,
+   51.909
+  ],
+  "start": "20:00",
+  "end": "22:30",
+  "category": "food",
+  "mode_to_next": "train",
+  "note": "Dinner, booked. Then walk to Leuvehaven, metro D/E 2 stops to Maashaven (real mode: metro).",
+  "url": "https://loos-rotterdam.nl/",
+  "booking": "Booked via SevenRooms; manage via the confirmation email."
+ },
+ {
+  "day": "2026-10-31",
+  "order": 9,
+  "name": "By Night Halloween at Now&Wow (Maassilo)",
+  "area": "Maashaven, Rotterdam",
+  "lonlat": [
+   4.4946,
+   51.8977
+  ],
+  "start": "23:00",
+  "end": "07:00",
+  "category": "nightlife",
+  "mode_to_next": "car",
+  "note": "Glow in the Dark Halloween Special rave, 18+ bring passport; tickets booked. Uber home.",
+  "url": "https://www.maassilo.com"
+ },
+ {
+  "day": "2026-11-01",
+  "order": 1,
+  "name": "Rotterdam studio (Airbnb)",
+  "area": "Rotterdam",
+  "lonlat": [
+   4.4778,
+   51.9244
+  ],
+  "start": "",
+  "end": "10:30",
+  "category": "lodging",
+  "mode_to_next": "bus",
+  "note": "Sleep after rave; brunch ~11:00 (options on Food page). Location approximate.",
+  "url": ""
+ },
+ {
+  "day": "2026-11-01",
+  "order": 2,
+  "name": "Cube Houses + Oude Haven",
+  "area": "Blaak, Rotterdam",
+  "lonlat": [
+   4.4901,
+   51.9204
+  ],
+  "start": "11:15",
+  "end": "12:00",
+  "category": "sight",
+  "mode_to_next": "walk",
+  "note": "Piet Blom's Cube Houses; optional Kijk-Kubus show cube; shoot from the Oude Haven quay.",
+  "url": "https://www.kubuswoning.nl"
+ },
+ {
+  "day": "2026-11-01",
+  "order": 3,
+  "name": "WaterShuttle stop by the Erasmus Bridge",
+  "area": "Willemskade, Rotterdam",
+  "lonlat": [
+   4.481,
+   51.9081
+  ],
+  "start": "12:15",
+  "end": "12:30",
+  "category": "transport",
+  "mode_to_next": "bus",
+  "note": "12:30 boat to Kinderdijk, ~30 min, €19.50 return (real mode: ferry/WaterShuttle). Buy tickets.",
+  "url": "https://www.waterbus.nl"
+ },
+ {
+  "day": "2026-11-01",
+  "order": 4,
+  "name": "Kinderdijk windmills",
+  "area": "Kinderdijk",
+  "lonlat": [
+   4.637,
+   51.8886
+  ],
+  "start": "13:00",
+  "end": "15:25",
+  "category": "sight",
+  "mode_to_next": "bus",
+  "note": "UNESCO windmills polder walk + lunch (Food page); 15:25 WaterShuttle back (real mode: ferry).",
+  "url": "https://www.kinderdijk.com"
+ },
+ {
+  "day": "2026-11-01",
+  "order": 5,
+  "name": "WaterShuttle stop by the Erasmus Bridge",
+  "area": "Willemskade, Rotterdam",
+  "lonlat": [
+   4.481,
+   51.9081
+  ],
+  "start": "15:55",
+  "end": "16:00",
+  "category": "transport",
+  "mode_to_next": "bus",
+  "note": "Tram to the Euromast (real mode: tram).",
+  "url": "https://www.waterbus.nl"
+ },
+ {
+  "day": "2026-11-01",
+  "order": 6,
+  "name": "Euromast",
+  "area": "Het Park, Rotterdam",
+  "lonlat": [
+   4.4666,
+   51.9054
+  ],
+  "start": "16:30",
+  "end": "17:30",
+  "category": "sight",
+  "mode_to_next": "walk",
+  "note": "Golden hour, sunset 17:13; timed slot to book, card only.",
+  "url": "https://euromast.nl/en/"
+ },
+ {
+  "day": "2026-11-01",
+  "order": 7,
+  "name": "Erasmus Bridge (blue hour)",
+  "area": "Kop van Zuid, Rotterdam",
+  "lonlat": [
+   4.4855,
+   51.9096
+  ],
+  "start": "17:30",
+  "end": "17:55",
+  "category": "sight",
+  "mode_to_next": "walk",
+  "note": "Walk across at blue hour to dinner.",
+  "url": "https://en.wikipedia.org/wiki/Erasmusbrug"
+ },
+ {
+  "day": "2026-11-01",
+  "order": 8,
+  "name": "Hotel New York Café-Restaurant",
+  "area": "Kop van Zuid, Rotterdam",
+  "lonlat": [
+   4.4845,
+   51.9041
+  ],
+  "start": "18:00",
+  "end": "20:00",
+  "category": "food",
+  "mode_to_next": "bus",
+  "note": "Dinner, booked, in the old Holland America Line HQ. Tram/metro back (real mode: tram/metro).",
+  "url": "https://hotelnewyork.com",
+  "booking": "Booked; manage via the confirmation email or the hotel's café-restaurant page."
+ },
+ {
+  "day": "2026-11-01",
+  "order": 9,
+  "name": "Rotterdam studio (Airbnb)",
+  "area": "Rotterdam",
+  "lonlat": [
+   4.4778,
+   51.9244
+  ],
+  "start": "20:30",
+  "end": "",
+  "category": "lodging",
+  "mode_to_next": "",
+  "note": "Sleep. Location approximate.",
+  "url": ""
+ },
+ {
+  "day": "2026-11-02",
+  "order": 1,
+  "name": "Rotterdam studio (Airbnb)",
+  "area": "Rotterdam",
+  "lonlat": [
+   4.4778,
+   51.9244
+  ],
+  "start": "07:45",
+  "end": "08:30",
+  "category": "lodging",
+  "mode_to_next": "car",
+  "note": "Breakfast first (Food page); checkout by 11:00, plan for bags vs car pick-up still open. Location approximate.",
+  "url": ""
+ },
+ {
+  "day": "2026-11-02",
+  "order": 2,
+  "name": "Avis pick-up, Rotterdam The Hague Airport (RTM)",
+  "area": "Overschie, Rotterdam",
+  "lonlat": [
+   4.4323,
+   51.9497
+  ],
+  "start": "09:00",
+  "end": "09:15",
+  "category": "transport",
+  "mode_to_next": "car",
+  "note": "Car rental booked; drive ~2h20 to Ghent.",
+  "url": "https://www.avis.nl"
+ },
+ {
+  "day": "2026-11-02",
+  "order": 3,
+  "name": "Gravensteen castle",
+  "area": "Patershol, Ghent",
+  "lonlat": [
+   3.7208,
+   51.0572
+  ],
+  "start": "11:30",
+  "end": "13:00",
+  "category": "sight",
+  "mode_to_next": "walk",
+  "note": "Medieval Castle of the Counts; buy castle tickets.",
+  "url": "https://historischehuizen.stad.gent"
+ },
+ {
+  "day": "2026-11-02",
+  "order": 4,
+  "name": "Graslei and Korenlei + lunch",
+  "area": "Centre, Ghent",
+  "lonlat": [
+   3.7208,
+   51.0548
+  ],
+  "start": "13:00",
+  "end": "15:00",
+  "category": "sight",
+  "mode_to_next": "car",
+  "note": "Canal-side guild houses; lunch options on the Food page. Scenic drive via Eeklo/Maldegem.",
+  "url": "https://visit.gent.be/en"
+ },
+ {
+  "day": "2026-11-02",
+  "order": 5,
+  "name": "Damme canal and Schellemolen windmill",
+  "area": "Damme, Belgium",
+  "lonlat": [
+   3.2775,
+   51.2505
+  ],
+  "start": "16:00",
+  "end": "16:45",
+  "category": "sight",
+  "mode_to_next": "car",
+  "note": "Tree-lined canal, windmill and old village; photos. ~15 min to Bruges.",
+  "url": "https://www.visitdamme.be"
+ },
+ {
+  "day": "2026-11-02",
+  "order": 6,
+  "name": "Bruges guesthouse (Airbnb)",
+  "area": "Assebroek, Bruges",
+  "lonlat": [
+   3.2557,
+   51.1914
+  ],
+  "start": "17:00",
+  "end": "17:30",
+  "category": "lodging",
+  "mode_to_next": "car",
+  "note": "Check in after 15:00; booked; free parking and bikes.",
+  "url": ""
+ },
+ {
+  "day": "2026-11-02",
+  "order": 7,
+  "name": "Markt + Burg (evening)",
+  "area": "Centre, Bruges",
+  "lonlat": [
+   3.2244,
+   51.2087
+  ],
+  "start": "17:45",
+  "end": "18:25",
+  "category": "sight",
+  "mode_to_next": "walk",
+  "note": "Illuminated medieval squares; Rozenhoedkaai photos.",
+  "url": "https://www.visitbruges.be/en"
+ },
+ {
+  "day": "2026-11-02",
+  "order": 8,
+  "name": "Bierbrasserie Cambrinus",
+  "area": "Centre, Bruges",
+  "lonlat": [
+   3.2261,
+   51.2097
+  ],
+  "start": "18:30",
+  "end": "20:30",
+  "category": "food",
+  "mode_to_next": "car",
+  "note": "Dinner, booked (Zenchef); Belgian beer brasserie.",
+  "url": "https://www.bierbrasseriecambrinus.eu",
+  "booking": "Booked on Zenchef; manage via the brasserie's contact page or phone."
+ },
+ {
+  "day": "2026-11-02",
+  "order": 9,
+  "name": "Bruges guesthouse (Airbnb)",
+  "area": "Assebroek, Bruges",
+  "lonlat": [
+   3.2557,
+   51.1914
+  ],
+  "start": "20:45",
+  "end": "",
+  "category": "lodging",
+  "mode_to_next": "",
+  "note": "Sleep.",
+  "url": ""
+ },
+ {
+  "day": "2026-11-03",
+  "order": 1,
+  "name": "Rozenhoedkaai",
+  "area": "Centre, Bruges",
+  "lonlat": [
+   3.2271,
+   51.207
+  ],
+  "start": "09:15",
+  "end": "09:35",
+  "category": "sight",
+  "mode_to_next": "walk",
+  "note": "Breakfast 8:30 first (Food page). Most photographed spot in Bruges.",
+  "url": "https://nl.wikipedia.org/wiki/Rozenhoedkaai"
+ },
+ {
+  "day": "2026-11-03",
+  "order": 2,
+  "name": "Boniface Bridge",
+  "area": "Centre, Bruges",
+  "lonlat": [
+   3.2253,
+   51.2049
+  ],
+  "start": "09:35",
+  "end": "09:50",
+  "category": "sight",
+  "mode_to_next": "walk",
+  "note": "Photo stop before the crowds; no reliable page found.",
+  "url": ""
+ },
+ {
+  "day": "2026-11-03",
+  "order": 3,
+  "name": "Belfry of Bruges",
+  "area": "Markt, Bruges",
+  "lonlat": [
+   3.2248,
+   51.2082
+  ],
+  "start": "10:00",
+  "end": "10:45",
+  "category": "sight",
+  "mode_to_next": "car",
+  "note": "Climb 366 steps (opens 10:00); then Burg square; buy tickets on the day.",
+  "url": "https://www.museabrugge.be"
+ },
+ {
+  "day": "2026-11-03",
+  "order": 4,
+  "name": "Bruges guesthouse (Airbnb)",
+  "area": "Assebroek, Bruges",
+  "lonlat": [
+   3.2557,
+   51.1914
+  ],
+  "start": "10:50",
+  "end": "11:00",
+  "category": "lodging",
+  "mode_to_next": "car",
+  "note": "Load the car and check out by 11:00.",
+  "url": ""
+ },
+ {
+  "day": "2026-11-03",
+  "order": 5,
+  "name": "Ezelpoort city gate",
+  "area": "Centre, Bruges",
+  "lonlat": [
+   3.2162,
+   51.216
+  ],
+  "start": "11:15",
+  "end": "11:45",
+  "category": "sight",
+  "mode_to_next": "car",
+  "note": "Old gate with moat; ~10 min drive to Minnewater.",
+  "url": "https://nl.wikipedia.org/wiki/Ezelpoort"
+ },
+ {
+  "day": "2026-11-03",
+  "order": 6,
+  "name": "Minnewater Park + waffles + lunch",
+  "area": "Centre, Bruges",
+  "lonlat": [
+   3.224,
+   51.1995
+  ],
+  "start": "11:55",
+  "end": "13:30",
+  "category": "sight",
+  "mode_to_next": "car",
+  "note": "Lake of Love; waffles 12:15, lunch 12:45 (Food page). Leave by 13:30.",
+  "url": "https://nl.wikipedia.org/wiki/Minnewater"
+ },
+ {
+  "day": "2026-11-03",
+  "order": 7,
+  "name": "Westerlicht lighthouse, Haamstede (photo stop)",
+  "area": "Burgh-Haamstede, Zeeland",
+  "lonlat": [
+   3.6916,
+   51.7089
+  ],
+  "start": "16:00",
+  "end": "16:30",
+  "category": "sight",
+  "mode_to_next": "car",
+  "note": "Red-and-white 53 m tower in the dunes; photo stop only. Via Westerschelde Tunnel and N57.",
+  "url": "https://nl.wikipedia.org/wiki/Westerlichttoren"
+ },
+ {
+  "day": "2026-11-03",
+  "order": 8,
+  "name": "In de Waag",
+  "area": "Nieuwmarkt, Amsterdam",
+  "lonlat": [
+   4.9003,
+   52.3728
+  ],
+  "start": "20:30",
+  "end": "21:50",
+  "category": "food",
+  "mode_to_next": "car",
+  "note": "Dinner, booked, in the 15th-century weigh house; park in a garage near Nieuwmarkt.",
+  "url": "https://www.indewaag.nl",
+  "booking": "Booked; manage via the restaurant's reservation page or phone."
+ },
+ {
+  "day": "2026-11-03",
+  "order": 9,
+  "name": "Badhoevedorp studio (Airbnb)",
+  "area": "Badhoevedorp, near Schiphol",
+  "lonlat": [
+   4.7935,
+   52.3389
+  ],
+  "start": "22:15",
+  "end": "",
+  "category": "lodging",
+  "mode_to_next": "",
+  "note": "Booked; late check-in fine, message host ETA; parking to confirm.",
+  "url": ""
+ },
+ {
+  "day": "2026-11-04",
+  "order": 1,
+  "name": "Badhoevedorp studio (Airbnb)",
+  "area": "Badhoevedorp, near Schiphol",
+  "lonlat": [
+   4.7935,
+   52.3389
+  ],
+  "start": "",
+  "end": "07:45",
+  "category": "lodging",
+  "mode_to_next": "car",
+  "note": "Breakfast to confirm with host; leave ~07:45.",
+  "url": ""
+ },
+ {
+  "day": "2026-11-04",
+  "order": 2,
+  "name": "Avis return + Schiphol (AMS)",
+  "area": "Schiphol, Amsterdam",
+  "lonlat": [
+   4.7415,
+   52.327
+  ],
+  "start": "08:00",
+  "end": "10:30",
+  "category": "transport",
+  "mode_to_next": "train",
+  "note": "Return car ~08:00 (due 09:00); SK 552 to CPH 10:30, then SK 925 (real mode: plane).",
+  "url": "https://www.schiphol.nl/en/"
+ },
+ {
+  "day": "2026-11-04",
+  "order": 3,
+  "name": "Washington Dulles International Airport (IAD)",
+  "area": "Dulles, VA, USA",
+  "lonlat": [
+   -77.4535,
+   38.9523
+  ],
+  "start": "17:15",
+  "end": "",
+  "category": "transport",
+  "mode_to_next": "",
+  "note": "Land 17:15 ET (local time).",
+  "url": "https://www.flydulles.com"
+ }
+]
