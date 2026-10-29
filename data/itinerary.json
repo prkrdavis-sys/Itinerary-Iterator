@@ -1,56 +1,13 @@
 {
   "trip": {
     "title": "Rotterdam Halloween",
-    "subtitle": "Late October from Dulles through Amsterdam, Rotterdam Halloween, Ghent, Damme, Bruges, Zeeland, and home.",
-    "start": "2026-10-29",
+    "subtitle": "Amsterdam through Rotterdam Halloween, Ghent, Damme, Bruges, and Zeeland, starting and ending at Schiphol.",
+    "start": "2026-10-30",
     "end": "2026-11-04",
     "travelers": "Two travelers",
-    "note": "Partner joins in Amsterdam on Friday 10/30. Tuesday night is the confirmed Badhoevedorp studio near Schiphol."
+    "note": "Day 1 starts at Schiphol. The last day ends back at Schiphol after the Avis return. Tuesday night is the Badhoevedorp studio near the airport."
   },
   "stops": [
-    {
-      "id": "iad-departure",
-      "city": "Dulles",
-      "name": "Washington Dulles International Airport (IAD)",
-      "coords": [
-        -77.4535,
-        38.9523
-      ],
-      "day": 1,
-      "start": "21:30",
-      "end": "21:30",
-      "category": "transit",
-      "emoji": "✈️",
-      "description": "SAS SK 926 to Copenhagen, overnight flight (real mode: plane).",
-      "url": "https://www.flydulles.com",
-      "photos": [
-        "/photos/us-evening.jpg"
-      ],
-      "photoCredit": "Neutral travel photo (substitute for Dulles area)",
-      "tips": []
-    },
-    {
-      "id": "cph-layover",
-      "city": "Copenhagen",
-      "name": "Copenhagen Airport (CPH)",
-      "coords": [
-        12.6494,
-        55.6296
-      ],
-      "day": 2,
-      "start": "11:00",
-      "end": "13:10",
-      "category": "transit",
-      "emoji": "🛂",
-      "description": "2h 10m layover, then SK 547 to Amsterdam (real mode: plane); times not in the itinerary details.",
-      "url": "https://www.cph.dk/en",
-      "photos": [
-        "/photos/cph-airport.jpg"
-      ],
-      "photoCredit": "CC BY-SA 3.0, Wikimedia Commons",
-      "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Copenhagen_Airport_Terminal_3.jpg",
-      "tips": []
-    },
     {
       "id": "ams-arrival",
       "city": "Amsterdam",
@@ -59,19 +16,19 @@
         4.7415,
         52.327
       ],
-      "day": 2,
+      "day": 1,
       "start": "14:15",
       "end": "14:40",
       "category": "transit",
-      "emoji": "🛬",
-      "description": "Land 14:15 on SK 547; NS train to Sloterdijk.",
+      "description": "Trip starts here at 14:15; NS train to Sloterdijk.",
       "url": "https://www.schiphol.nl/en/",
       "photos": [
         "/photos/schiphol-terminal.jpg"
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Schiphol_Plaza_2017.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🛬"
     },
     {
       "id": "holiday-inn-checkin-fri",
@@ -81,11 +38,10 @@
         4.8376,
         52.3882
       ],
-      "day": 2,
+      "day": 1,
       "start": "15:00",
       "end": "15:10",
       "category": "stay",
-      "emoji": "🛏️",
       "description": "Check in 15:00; reserved, breakfast included. NS train one stop to Centraal, then walk.",
       "note": "Booked.",
       "url": "https://www.ihg.com/holidayinnexpress/hotels/us/en/amsterdam/amsse/hoteldetail",
@@ -94,7 +50,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Amsterdam_Sloterdijk_station_2016.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🛏️"
     },
     {
       "id": "winkel-43",
@@ -104,11 +61,10 @@
         4.8862,
         52.3791
       ],
-      "day": 2,
+      "day": 1,
       "start": "15:30",
       "end": "16:30",
       "category": "food",
-      "emoji": "🥧",
       "description": "Planned late lunch: famous apple pie. Lunch options on the Food page.",
       "url": "https://winkel43.nl",
       "photos": [
@@ -118,7 +74,8 @@
       "photoCreditUrl": "https://www.google.com/maps/search/?api=1&query=52.379084,4.886234",
       "tips": [
         "Walk-in only, no reservations."
-      ]
+      ],
+      "emoji": "🥧"
     },
     {
       "id": "zipper",
@@ -128,11 +85,10 @@
         4.886,
         52.3688
       ],
-      "day": 2,
+      "day": 1,
       "start": "16:45",
       "end": "17:30",
       "category": "shopping",
-      "emoji": "👕",
       "description": "Thrift/vintage since 1984; Fri closing 18:30.",
       "url": "https://www.zipperstore.nl",
       "photos": [
@@ -140,7 +96,8 @@
       ],
       "photoCredit": "© Google Street View",
       "photoCreditUrl": "https://www.google.com/maps/search/?api=1&query=52.368757,4.885990",
-      "tips": []
+      "tips": [],
+      "emoji": "👕"
     },
     {
       "id": "dampkring",
@@ -150,11 +107,10 @@
         4.8905,
         52.3678
       ],
-      "day": 2,
+      "day": 1,
       "start": "17:40",
       "end": "18:45",
       "category": "nightlife",
-      "emoji": "☕",
       "description": "Coffeeshop, 18+ with ID; daily 10:00-01:00.",
       "url": "https://ogdampkring.com/",
       "photos": [
@@ -162,7 +118,8 @@
       ],
       "photoCredit": "© Google Street View",
       "photoCreditUrl": "https://www.google.com/maps/search/?api=1&query=52.367732,4.890481",
-      "tips": []
+      "tips": [],
+      "emoji": "☕"
     },
     {
       "id": "reguliersgracht-bridges",
@@ -172,11 +129,10 @@
         4.8962,
         52.3598
       ],
-      "day": 2,
+      "day": 1,
       "start": "18:55",
       "end": "19:05",
       "category": "sight",
-      "emoji": "🌉",
       "description": "Lit-up bridges en route to De Pijp; alternative tram 24 from Muntplein.",
       "url": "https://en.wikipedia.org/wiki/Reguliersgracht",
       "photos": [
@@ -184,7 +140,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Marco Ober, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Reguliersgracht,_Amsterdam.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🌉"
     },
     {
       "id": "katsu",
@@ -194,11 +151,10 @@
         4.8933,
         52.3548
       ],
-      "day": 2,
+      "day": 1,
       "start": "19:20",
       "end": "20:05",
       "category": "nightlife",
-      "emoji": "🌿",
       "description": "Coffeeshop near dinner, Fri 10:00-01:00; 8 min walk to dinner.",
       "url": "https://www.katsu.nl",
       "photos": [
@@ -206,7 +162,8 @@
       ],
       "photoCredit": "© Google Street View",
       "photoCreditUrl": "https://www.google.com/maps/search/?api=1&query=52.354831,4.893289",
-      "tips": []
+      "tips": [],
+      "emoji": "🌿"
     },
     {
       "id": "heemelrijck-de-pijp",
@@ -216,11 +173,10 @@
         4.8999,
         52.3568
       ],
-      "day": 2,
+      "day": 1,
       "start": "20:15",
       "end": "22:15",
       "category": "food",
-      "emoji": "🥘",
       "description": "Dinner, booked. Then De Pijp bars optional; back via metro 52 + NS train (real mode: metro).",
       "note": "Booked.",
       "url": "https://www.heemelrijck.nl",
@@ -231,7 +187,8 @@
       "photoCreditUrl": "https://www.google.com/maps/search/?api=1&query=52.356815,4.899901",
       "tips": [
         "Booked via OpenTable; manage in the OpenTable app."
-      ]
+      ],
+      "emoji": "🥘"
     },
     {
       "id": "holiday-inn-sleep-fri",
@@ -241,11 +198,10 @@
         4.8376,
         52.3882
       ],
-      "day": 2,
+      "day": 1,
       "start": "22:45",
       "end": "23:59",
       "category": "stay",
-      "emoji": "🛏️",
       "description": "Sleep.",
       "url": "https://www.ihg.com/holidayinnexpress/hotels/us/en/amsterdam/amsse/hoteldetail",
       "photos": [
@@ -253,7 +209,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Amsterdam_Sloterdijk_station_2016.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🛏️"
     },
     {
       "id": "holiday-inn-morning-sat",
@@ -263,11 +220,10 @@
         4.8376,
         52.3882
       ],
-      "day": 3,
+      "day": 2,
       "start": "09:45",
       "end": "10:00",
       "category": "stay",
-      "emoji": "🛏️",
       "description": "Check out, leave bags at front desk; train to Centraal then 19 min walk.",
       "url": "https://www.ihg.com/holidayinnexpress/hotels/us/en/amsterdam/amsse/hoteldetail",
       "photos": [
@@ -275,7 +231,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Amsterdam_Sloterdijk_station_2016.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🛏️"
     },
     {
       "id": "waterlooplein-episode",
@@ -285,11 +242,10 @@
         4.9018,
         52.3684
       ],
-      "day": 3,
+      "day": 2,
       "start": "10:30",
       "end": "12:30",
       "category": "shopping",
-      "emoji": "🧺",
       "description": "Outdoor market (Mon-Sat 9:30-18:00) and Episode thrift store; bring cash.",
       "url": "https://en.wikipedia.org/wiki/Waterlooplein",
       "photos": [
@@ -297,7 +253,8 @@
       ],
       "photoCredit": "© Google Street View",
       "photoCreditUrl": "https://www.google.com/maps/search/?api=1&query=52.369102,4.900853",
-      "tips": []
+      "tips": [],
+      "emoji": "🧺"
     },
     {
       "id": "bluebird-lunch",
@@ -307,11 +264,10 @@
         4.9009,
         52.37
       ],
-      "day": 3,
+      "day": 2,
       "start": "12:30",
       "end": "13:55",
       "category": "nightlife",
-      "emoji": "🐦",
       "description": "Coffeeshop (daily 9:30-01:00); lunch nearby, options on the Food page. Old website is defunct, link is its Instagram.",
       "url": "https://www.instagram.com/bluebirdcoffeeshopams/",
       "photos": [
@@ -319,7 +275,8 @@
       ],
       "photoCredit": "© Google Street View",
       "photoCreditUrl": "https://www.google.com/maps/search/?api=1&query=52.369998,4.900897",
-      "tips": []
+      "tips": [],
+      "emoji": "🐦"
     },
     {
       "id": "oude-kerk",
@@ -329,11 +286,10 @@
         4.8981,
         52.3744
       ],
-      "day": 3,
+      "day": 2,
       "start": "14:00",
       "end": "15:00",
       "category": "sight",
-      "emoji": "⛪",
       "description": "Amsterdam's oldest building (1306); 14:00 tower tour, last day of season; cashless, book slot.",
       "url": "https://oudekerk.nl/en/",
       "photos": [
@@ -341,7 +297,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Yair Haklai, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Exterior_view_of_the_Oude_Kerk_(Amsterdam).jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "⛪"
     },
     {
       "id": "amsterdam-centraal-sat",
@@ -351,11 +308,10 @@
         4.9006,
         52.3789
       ],
-      "day": 3,
+      "day": 2,
       "start": "15:10",
       "end": "16:30",
       "category": "transit",
-      "emoji": "🚆",
       "description": "Train to Sloterdijk for bags and back; NS Intercity to Rotterdam 16:30-17:00.",
       "url": "https://en.wikipedia.org/wiki/Amsterdam_Centraal_station",
       "photos": [
@@ -363,7 +319,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Amsterdam_Centraal_station_(2018).jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🚆"
     },
     {
       "id": "rotterdam-centraal-sat",
@@ -373,11 +330,10 @@
         4.4689,
         51.925
       ],
-      "day": 3,
+      "day": 2,
       "start": "17:40",
       "end": "17:50",
       "category": "transit",
-      "emoji": "🚄",
       "description": "Arrive ~1h10 later; tram/metro to the studio (real mode: tram/metro, check RET app).",
       "url": "https://en.wikipedia.org/wiki/Rotterdam_Centraal_station",
       "photos": [
@@ -385,7 +341,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Rotterdam_Centraal_Station_2014.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🚄"
     },
     {
       "id": "rotterdam-airbnb-checkin",
@@ -395,11 +352,10 @@
         4.4778,
         51.9244
       ],
-      "day": 3,
+      "day": 2,
       "start": "18:00",
       "end": "19:30",
       "category": "stay",
-      "emoji": "🏡",
       "description": "Check in after 15:00; reserved. Location approximate (city centre); exact location in your lodging app.",
       "note": "Booked.",
       "photos": [
@@ -407,7 +363,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons (Rotterdam skyline substitute)",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Rotterdam_skyline_2017.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🏡"
     },
     {
       "id": "grand-cafe-loos",
@@ -417,11 +374,10 @@
         4.4793,
         51.909
       ],
-      "day": 3,
+      "day": 2,
       "start": "20:00",
       "end": "22:30",
       "category": "food",
-      "emoji": "🍷",
       "description": "Dinner, booked. Then walk to Leuvehaven, metro D/E 2 stops to Maashaven (real mode: metro).",
       "note": "Booked.",
       "url": "https://loos-rotterdam.nl/",
@@ -432,7 +388,8 @@
       "photoCreditUrl": "https://www.google.com/maps/search/?api=1&query=51.909000,4.479300",
       "tips": [
         "Booked via SevenRooms; manage via the reservation details."
-      ]
+      ],
+      "emoji": "🍷"
     },
     {
       "id": "now-wow-rave",
@@ -442,11 +399,10 @@
         4.4946,
         51.8977
       ],
-      "day": 3,
+      "day": 2,
       "start": "23:00",
       "end": "23:59",
       "category": "nightlife",
-      "emoji": "🎃",
       "description": "Glow in the Dark Halloween Special rave, 18+ bring passport; tickets booked. Uber home.",
       "note": "Booked.",
       "url": "https://www.maassilo.com",
@@ -455,7 +411,8 @@
       ],
       "photoCredit": "© Google Street View",
       "photoCreditUrl": "https://www.google.com/maps/search/?api=1&query=51.897699,4.494644",
-      "tips": []
+      "tips": [],
+      "emoji": "🎃"
     },
     {
       "id": "rotterdam-airbnb-sunday-morning",
@@ -465,18 +422,18 @@
         4.4778,
         51.9244
       ],
-      "day": 4,
+      "day": 3,
       "start": "07:00",
       "end": "10:30",
       "category": "stay",
-      "emoji": "🏡",
       "description": "Sleep after rave; brunch 10:00-11:00 (options on Food page). Location approximate.",
       "photos": [
         "/photos/rotterdam-city.jpg"
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons (Rotterdam skyline substitute)",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Rotterdam_skyline_2017.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🏡"
     },
     {
       "id": "cube-houses",
@@ -486,11 +443,10 @@
         4.4901,
         51.9204
       ],
-      "day": 4,
+      "day": 3,
       "start": "11:15",
       "end": "12:00",
       "category": "sight",
-      "emoji": "🧊",
       "description": "Piet Blom's Cube Houses; optional Kijk-Kubus show cube; shoot from the Oude Haven quay.",
       "url": "https://www.kubuswoning.nl",
       "photos": [
@@ -498,7 +454,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Cube_house_in_Rotterdam.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🧊"
     },
     {
       "id": "waterbus-erasmus",
@@ -508,11 +465,10 @@
         4.481,
         51.9081
       ],
-      "day": 4,
+      "day": 3,
       "start": "12:15",
       "end": "12:30",
       "category": "transit",
-      "emoji": "⛴️",
       "description": "12:30 boat to Kinderdijk, ~30 min, €19.50 return (real mode: ferry/WaterShuttle). Buy tickets.",
       "url": "https://www.waterbus.nl",
       "photos": [
@@ -520,7 +476,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Erasmusbrug_bij_nacht.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "⛴️"
     },
     {
       "id": "kinderdijk",
@@ -530,11 +487,10 @@
         4.637,
         51.8886
       ],
-      "day": 4,
+      "day": 3,
       "start": "13:00",
       "end": "15:25",
       "category": "sight",
-      "emoji": "🌾",
       "description": "UNESCO windmills polder walk + lunch (Food page); 15:25 WaterShuttle back (real mode: ferry).",
       "url": "https://www.kinderdijk.com",
       "photos": [
@@ -542,7 +498,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Kinderdijk,_Molen.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🌾"
     },
     {
       "id": "waterbus-erasmus-return",
@@ -552,11 +509,10 @@
         4.481,
         51.9081
       ],
-      "day": 4,
+      "day": 3,
       "start": "15:55",
       "end": "16:00",
       "category": "transit",
-      "emoji": "⛴️",
       "description": "Tram to the Euromast (real mode: tram).",
       "url": "https://www.waterbus.nl",
       "photos": [
@@ -564,7 +520,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Erasmusbrug_bij_nacht.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "⛴️"
     },
     {
       "id": "euromast",
@@ -574,11 +531,10 @@
         4.4666,
         51.9054
       ],
-      "day": 4,
+      "day": 3,
       "start": "16:30",
       "end": "17:30",
       "category": "sight",
-      "emoji": "🗼",
       "description": "Golden hour, sunset 17:13; timed slot to book, card only.",
       "url": "https://euromast.nl/en/",
       "photos": [
@@ -586,7 +542,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, W. Bulach, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:.00_2435_Euromast_-_Rotterdam.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🗼"
     },
     {
       "id": "erasmus-bridge-blue-hour",
@@ -596,11 +553,10 @@
         4.4855,
         51.9096
       ],
-      "day": 4,
+      "day": 3,
       "start": "17:30",
       "end": "17:55",
       "category": "sight",
-      "emoji": "🌃",
       "description": "Walk across at blue hour to dinner.",
       "url": "https://en.wikipedia.org/wiki/Erasmusbrug",
       "photos": [
@@ -608,7 +564,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Erasmusbrug_bij_nacht.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🌃"
     },
     {
       "id": "hotel-new-york",
@@ -618,11 +575,10 @@
         4.4845,
         51.9041
       ],
-      "day": 4,
+      "day": 3,
       "start": "18:00",
       "end": "20:00",
       "category": "food",
-      "emoji": "🥂",
       "description": "Dinner, booked, in the old Holland America Line HQ. Tram/metro back (real mode: tram/metro).",
       "note": "Booked.",
       "url": "https://hotelnewyork.com",
@@ -633,7 +589,8 @@
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:02_Hotel_New_York_-_Rotterdam.jpg",
       "tips": [
         "Booked; manage via the reservation details or the hotel's café-restaurant page."
-      ]
+      ],
+      "emoji": "🥂"
     },
     {
       "id": "rotterdam-airbnb-sunday-night",
@@ -643,18 +600,18 @@
         4.4778,
         51.9244
       ],
-      "day": 4,
+      "day": 3,
       "start": "20:30",
       "end": "23:59",
       "category": "stay",
-      "emoji": "🏡",
       "description": "Sleep. Location approximate.",
       "photos": [
         "/photos/rotterdam-city.jpg"
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons (Rotterdam skyline substitute)",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Rotterdam_skyline_2017.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🏡"
     },
     {
       "id": "rotterdam-airbnb-monday-morning",
@@ -664,18 +621,18 @@
         4.4778,
         51.9244
       ],
-      "day": 5,
+      "day": 4,
       "start": "07:30",
       "end": "08:30",
       "category": "stay",
-      "emoji": "🏡",
       "description": "Breakfast 7:30 (Food page); check out ~8:15-8:30 with the bags, then to RTM (Avis desk opens 8:30). Location approximate.",
       "photos": [
         "/photos/rotterdam-city.jpg"
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons (Rotterdam skyline substitute)",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Rotterdam_skyline_2017.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🏡"
     },
     {
       "id": "rtm-avis-pickup",
@@ -685,11 +642,10 @@
         4.4323,
         51.9497
       ],
-      "day": 5,
+      "day": 4,
       "start": "09:00",
       "end": "09:15",
       "category": "transit",
-      "emoji": "🚗",
       "description": "Car rental booked; desk opens 8:30; drive ~2h20 to Ghent.",
       "note": "Booked.",
       "url": "https://www.avis.nl",
@@ -698,7 +654,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Rotterdam_The_Hague_Airport_terminal.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🚗"
     },
     {
       "id": "gravensteen",
@@ -708,11 +665,10 @@
         3.7208,
         51.0572
       ],
-      "day": 5,
+      "day": 4,
       "start": "11:30",
       "end": "13:00",
       "category": "sight",
-      "emoji": "🏰",
       "description": "Medieval Castle of the Counts; buy castle tickets.",
       "url": "https://historischehuizen.stad.gent",
       "photos": [
@@ -720,7 +676,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Gravensteen_Gent.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🏰"
     },
     {
       "id": "graslei-lunch",
@@ -730,11 +687,10 @@
         3.7208,
         51.0548
       ],
-      "day": 5,
+      "day": 4,
       "start": "13:00",
       "end": "14:45",
       "category": "sight",
-      "emoji": "🚣",
       "description": "Canal-side guild houses; lunch options on the Food page. Scenic drive via Eeklo/Maldegem, ~70 min (14:45-16:00).",
       "url": "https://visit.gent.be/en",
       "photos": [
@@ -742,7 +698,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Michielverbeek, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Gent,_de_Graslei_vanaf_de_Korenlei_met_oeg24758tm61%2B25159_IMG_0447_2021-08-13_18.37.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🚣"
     },
     {
       "id": "damme",
@@ -752,11 +709,10 @@
         3.2775,
         51.2505
       ],
-      "day": 5,
+      "day": 4,
       "start": "16:00",
       "end": "16:30",
       "category": "sight",
-      "emoji": "🚴",
       "description": "Short stop before dusk: tree-lined canal, windmill and old village; photos. ~15 min to the studio.",
       "url": "https://www.visitdamme.be",
       "photos": [
@@ -764,7 +720,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Damme,_Belgium.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🚴"
     },
     {
       "id": "bruges-studio-checkin",
@@ -774,11 +731,10 @@
         3.2557,
         51.1914
       ],
-      "day": 5,
+      "day": 4,
       "start": "16:45",
       "end": "17:15",
       "category": "stay",
-      "emoji": "🏠",
       "description": "Check in first (after 15:00); reserved; free parking and bikes, outside the centre. Then into the centre ~17:30 by bike or car.",
       "note": "Booked.",
       "photos": [
@@ -786,7 +742,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons (Bruges area substitute)",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Brugge_-_Bruges_-_panoramio.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🏠"
     },
     {
       "id": "bruges-markt-burg",
@@ -796,11 +753,10 @@
         3.2244,
         51.2087
       ],
-      "day": 5,
+      "day": 4,
       "start": "17:30",
       "end": "18:25",
       "category": "sight",
-      "emoji": "🐴",
       "description": "Illuminated medieval squares; Rozenhoedkaai night photos.",
       "url": "https://www.visitbruges.be/en",
       "photos": [
@@ -808,7 +764,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Brugge_Markt.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🐴"
     },
     {
       "id": "cambrinus",
@@ -818,11 +775,10 @@
         3.2261,
         51.2097
       ],
-      "day": 5,
+      "day": 4,
       "start": "18:30",
       "end": "20:30",
       "category": "food",
-      "emoji": "🍺",
       "description": "Dinner, booked (Zenchef); Belgian beer brasserie.",
       "note": "Booked.",
       "url": "https://www.bierbrasseriecambrinus.eu",
@@ -833,7 +789,8 @@
       "photoCreditUrl": "https://www.google.com/maps/search/?api=1&query=51.209632,3.226143",
       "tips": [
         "Booked on Zenchef; manage via the brasserie's contact page"
-      ]
+      ],
+      "emoji": "🍺"
     },
     {
       "id": "bruges-studio-sleep-mon",
@@ -843,18 +800,18 @@
         3.2557,
         51.1914
       ],
-      "day": 5,
+      "day": 4,
       "start": "20:45",
       "end": "23:59",
       "category": "stay",
-      "emoji": "🏠",
       "description": "Sleep.",
       "photos": [
         "/photos/bruges-canal.jpg"
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons (Bruges area substitute)",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Brugge_-_Bruges_-_panoramio.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🏠"
     },
     {
       "id": "bruges-studio-checkout",
@@ -864,18 +821,18 @@
         3.2557,
         51.1914
       ],
-      "day": 6,
+      "day": 5,
       "start": "08:15",
       "end": "08:25",
       "category": "stay",
-      "emoji": "🏠",
       "description": "Check out with the bags in the car, then drive ~10 min to a centre car park; breakfast 8:30 (Food page).",
       "photos": [
         "/photos/bruges-canal.jpg"
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons (Bruges area substitute)",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Brugge_-_Bruges_-_panoramio.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🏠"
     },
     {
       "id": "rozenhoedkaai",
@@ -885,11 +842,10 @@
         3.2271,
         51.207
       ],
-      "day": 6,
+      "day": 5,
       "start": "09:15",
       "end": "09:35",
       "category": "sight",
-      "emoji": "📸",
       "description": "Day photos. Most photographed spot in Bruges.",
       "url": "https://nl.wikipedia.org/wiki/Rozenhoedkaai",
       "photos": [
@@ -897,7 +853,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Ank Kumar, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Rozenhoedkaai_(canal)_and_Belfry_of_Bruges,_Bruges,_Belgium_(Ank_Kumar,_Infosys_Limited)_01.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "📸"
     },
     {
       "id": "boniface-bridge",
@@ -907,18 +864,18 @@
         3.2253,
         51.2049
       ],
-      "day": 6,
+      "day": 5,
       "start": "09:35",
       "end": "09:50",
       "category": "sight",
-      "emoji": "🪨",
       "description": "Photo stop before the crowds; no reliable page found.",
       "photos": [
         "/photos/boniface-bridge.jpg"
       ],
       "photoCredit": "CC BY-SA 4.0, Dietmar Rabich, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Br%C3%BCgge_(B),_Bonifatius-Br%C3%BCcke_--_2018_--_8605.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🪨"
     },
     {
       "id": "belfry-bruges",
@@ -928,11 +885,10 @@
         3.2248,
         51.2082
       ],
-      "day": 6,
+      "day": 5,
       "start": "10:00",
       "end": "10:45",
       "category": "sight",
-      "emoji": "🔔",
       "description": "Climb 366 steps (opens 10:00); then Burg square; buy tickets on the day.",
       "url": "https://www.museabrugge.be",
       "photos": [
@@ -940,7 +896,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Belfort_van_Brugge.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🔔"
     },
     {
       "id": "ezelpoort",
@@ -950,11 +907,10 @@
         3.2162,
         51.216
       ],
-      "day": 6,
+      "day": 5,
       "start": "11:15",
       "end": "11:45",
       "category": "sight",
-      "emoji": "🚪",
       "description": "Old gate with moat; ~10 min drive to Minnewater.",
       "url": "https://nl.wikipedia.org/wiki/Ezelpoort",
       "photos": [
@@ -962,7 +918,8 @@
       ],
       "photoCredit": "CC BY-SA 3.0, VWAmFot, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:%22Ezelpoort%22,_middeleeuwse_stadspoort,_Ezelstraat,_Brugge.JPG",
-      "tips": []
+      "tips": [],
+      "emoji": "🚪"
     },
     {
       "id": "minnewater-lunch",
@@ -972,11 +929,10 @@
         3.224,
         51.1995
       ],
-      "day": 6,
+      "day": 5,
       "start": "11:55",
       "end": "13:30",
       "category": "sight",
-      "emoji": "🦢",
       "description": "Lake of Love; waffles 12:15, lunch 12:45 (Food page). Leave by 13:30.",
       "url": "https://nl.wikipedia.org/wiki/Minnewater",
       "photos": [
@@ -984,7 +940,8 @@
       ],
       "photoCredit": "CC BY 3.0, Marc Ryckaert, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Brugge_Minnewater_R01.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🦢"
     },
     {
       "id": "haamstede-westerlicht",
@@ -994,11 +951,10 @@
         3.6916,
         51.7089
       ],
-      "day": 6,
+      "day": 5,
       "start": "16:00",
       "end": "16:30",
       "category": "sight",
-      "emoji": "🔦",
       "description": "Red-and-white 53 m tower in the dunes; photo stop only. Via Westerschelde Tunnel and N57.",
       "url": "https://nl.wikipedia.org/wiki/Westerlichttoren",
       "photos": [
@@ -1006,7 +962,8 @@
       ],
       "photoCredit": "CC BY-SA 2.0, Jeroen Looyé, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Nieuw_Haamstede_-_Vuurtoren_(33997226663).jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🔦"
     },
     {
       "id": "in-de-waag",
@@ -1016,11 +973,10 @@
         4.9003,
         52.3728
       ],
-      "day": 6,
+      "day": 5,
       "start": "20:30",
       "end": "21:50",
       "category": "food",
-      "emoji": "🧇",
       "description": "Dinner, booked, in the 15th-century weigh house; park in a garage near Nieuwmarkt.",
       "note": "Booked.",
       "url": "https://www.indewaag.nl",
@@ -1031,7 +987,8 @@
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Amsterdam_-_Nieuwmarkt_-_15th_Century_City_gate_that_was_transformed_into_De_Waag.jpg",
       "tips": [
         "Booked; manage via the restaurant's reservation page"
-      ]
+      ],
+      "emoji": "🧇"
     },
     {
       "id": "badhoevedorp-studio",
@@ -1041,11 +998,10 @@
         4.7935,
         52.3389
       ],
-      "day": 6,
+      "day": 5,
       "start": "22:15",
       "end": "23:59",
       "category": "stay",
-      "emoji": "🌙",
       "description": "Booked; late check-in fine, message host ETA; parking to confirm.",
       "note": "Booked.",
       "photos": [
@@ -1053,7 +1009,8 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons (Badhoevedorp area substitute)",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Badhoevedorp.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🌙"
     },
     {
       "id": "badhoevedorp-morning",
@@ -1063,18 +1020,18 @@
         4.7935,
         52.3389
       ],
-      "day": 7,
+      "day": 6,
       "start": "07:00",
       "end": "07:45",
       "category": "stay",
-      "emoji": "🌙",
       "description": "Breakfast to confirm with host; leave ~07:45.",
       "photos": [
         "/photos/badhoevedorp-area.jpg"
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons (Badhoevedorp area substitute)",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Badhoevedorp.jpg",
-      "tips": []
+      "tips": [],
+      "emoji": "🌙"
     },
     {
       "id": "schiphol-avis-return",
@@ -1084,57 +1041,22 @@
         4.7415,
         52.327
       ],
-      "day": 7,
+      "day": 6,
       "start": "08:00",
-      "end": "10:30",
+      "end": "09:00",
       "category": "transit",
-      "emoji": "🔑",
-      "description": "Return car ~08:00 (due 09:00); SK 552 to CPH 10:30, then SK 925 (real mode: plane).",
+      "description": "Return the car around 08:00 (due 09:00). The trip ends at Schiphol.",
       "url": "https://www.schiphol.nl/en/",
       "photos": [
         "/photos/schiphol-departures.jpg"
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Schiphol_Departures3.jpg",
-      "tips": []
-    },
-    {
-      "id": "iad-arrival",
-      "city": "Dulles",
-      "name": "Washington Dulles International Airport (IAD)",
-      "coords": [
-        -77.4535,
-        38.9523
-      ],
-      "day": 7,
-      "start": "17:15",
-      "end": "17:15",
-      "category": "transit",
-      "emoji": "🧳",
-      "description": "Land 17:15 ET (local time).",
-      "url": "https://www.flydulles.com",
-      "photos": [
-        "/photos/us-evening.jpg"
-      ],
-      "photoCredit": "Neutral travel photo (substitute for Dulles arrival)",
-      "tips": []
+      "tips": [],
+      "emoji": "🔑"
     }
   ],
   "legs": [
-    {
-      "from": "iad-departure",
-      "to": "cph-layover",
-      "mode": "train",
-      "notes": "Scheduled as train; real mode: plane."
-    },
-    {
-      "from": "cph-layover",
-      "to": "ams-arrival",
-      "mode": "train",
-      "depart": "13:10",
-      "arrive": "14:15",
-      "notes": "Scheduled as train; real mode: plane."
-    },
     {
       "from": "ams-arrival",
       "to": "holiday-inn-checkin-fri",
@@ -1458,14 +1380,6 @@
       "mode": "car",
       "depart": "07:45",
       "arrive": "08:00"
-    },
-    {
-      "from": "schiphol-avis-return",
-      "to": "iad-arrival",
-      "mode": "train",
-      "depart": "10:30",
-      "arrive": "17:15",
-      "notes": "Scheduled as train; real mode: plane."
     }
   ]
 }

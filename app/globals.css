@@ -560,8 +560,9 @@ body {
 }
 
 .stop-thumb {
-  width: 2.75rem;
-  height: 2.75rem;
+  width: 3.35rem;
+  height: 3.35rem;
+  object-position: center;
   flex: 0 0 auto;
   display: grid;
   place-items: center;
@@ -674,14 +675,25 @@ body {
   }
 }
 
-.stop-sheet-scrim {
-  background: linear-gradient(
-    180deg,
-    rgba(12, 10, 8, 0.2) 0%,
-    rgba(12, 10, 8, 0.34) 24%,
-    rgba(12, 10, 8, 0.58) 58%,
-    rgba(12, 10, 8, 0.78) 100%
-  );
+.stop-hero {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 12.5rem;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  background: #1c1814;
+  cursor: pointer;
+}
+
+.stop-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
 }
 
 .stop-sheet h2,

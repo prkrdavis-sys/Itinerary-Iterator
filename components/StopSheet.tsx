@@ -47,12 +47,20 @@ export function StopSheet({ stop, incoming, onClose }: StopSheetProps) {
       transition={{ type: "spring", stiffness: 340, damping: 34 }}
     >
       {cover ? (
-        <>
+        <button
+          type="button"
+          className="stop-hero"
+          aria-label={
+            photos.length === 1
+              ? `View photo of ${stop.name}`
+              : `View ${photos.length} photos of ${stop.name}`
+          }
+          onClick={() => setPhotosOpen(true)}
+        >
           {/* Place photos are local files or any https host, so they stay outside the image optimizer. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={cover} alt="" className="pointer-events-none absolute inset-0 z-0 h-full w-full rounded-[inherit] object-cover" />
-          <div className="stop-sheet-scrim pointer-events-none absolute inset-0 z-0 rounded-[inherit]" />
-        </>
+          <img src={cover} alt="" />
+        </button>
       ) : null}
       <button
         type="button"
@@ -60,9 +68,9 @@ export function StopSheet({ stop, incoming, onClose }: StopSheetProps) {
         aria-label="Drag to close"
         onPointerDown={(event) => dragControls.start(event)}
       >
-        <span className="h-1.5 w-10 rounded-full bg-white/25" />
+        <span className="h-1.5 w-10 rounded-full bg-white/70" />
       </button>
-      <div className="relative z-[1] flex items-center gap-2 px-4 pb-2">
+      <div className="relative z-[1] flex items-center gap-2 px-4 pt-3 pb-2">
         <button type="button" onClick={onClose} className="back-button">
           Back
         </button>
