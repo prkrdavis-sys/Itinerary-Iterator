@@ -157,9 +157,27 @@ export function smoothThrough(points: LngLat[], samples = 8): LngLat[] {
 
 const PIN_SNAP_METERS = 25;
 
+function closestIndex(coords: LngLat[], target: LngLat, fallback: number): number {
+  let best = fallback;
+  let bestDistance = Infinity;
+  coords.forEach((point, index) => {
+    const distance = haversine(point, target);
+    if (distance <= bestDistance) {
+      best = index;
+      bestDistance = distance;
+    }
+  });
+  return best;
+}
+
 export function anchorLine(coords: LngLat[], from: LngLat, to: LngLat): LngLat[] {
   if (coords.length === 0) return [from, to];
-  const line = coords.map((point) => [point[0], point[1]] as LngLat);
+  const endIndex = closestIndex(coords, to, 0);
+  const startIndex = closestIndex(coords.slice(0, endIndex + 1), from, 0);
+  const line = coords
+    .slice(startIndex, endIndex + 1)
+    .map((point) => [point[0], point[1]] as LngLat);
+  if (line.length === 0) return [from, to];
   if (haversine(line[0], from) > PIN_SNAP_METERS) line.unshift(from);
   else line[0] = from;
   const end = line.length - 1;

@@ -5,7 +5,7 @@ import { anchorLine, lineLength, type LngLat } from "./geo";
 import { findStop, getItinerary, legKey } from "./itinerary";
 import { coordSchema } from "./schema";
 
-export type RouteSource = "mapbox" | "osrm" | "sketch";
+export type RouteSource = "mapbox" | "osrm" | "rail" | "sketch";
 
 export type RouteGeometry = {
   coordinates: LngLat[];
@@ -18,7 +18,7 @@ export type RouteSet = Record<string, RouteGeometry>;
 const routeGeometrySchema = z.object({
   coordinates: z.array(coordSchema).min(2),
   distanceMeters: z.number().nonnegative(),
-  source: z.enum(["mapbox", "osrm", "sketch"]),
+  source: z.enum(["mapbox", "osrm", "rail", "sketch"]),
 });
 
 const routeFileSchema = z.record(z.string(), routeGeometrySchema);

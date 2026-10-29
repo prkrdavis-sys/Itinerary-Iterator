@@ -8,9 +8,9 @@ type IntroCardProps = {
 };
 
 const photos = [
-  { src: "/photos/us/dinner.jpg", focusX: 0.5, focusY: 0.46 },
-  { src: "/photos/us/wine.jpg", focusX: 0.5, focusY: 0.36 },
   { src: "/photos/us/evening.jpg", focusX: 0.48, focusY: 0.26 },
+  { src: "/photos/us/wine.jpg", focusX: 0.5, focusY: 0.36 },
+  { src: "/photos/us/dinner.jpg", focusX: 0.5, focusY: 0.46 },
   { src: "/photos/us/falls.jpg", focusX: 0.45, focusY: 0.48 },
 ];
 

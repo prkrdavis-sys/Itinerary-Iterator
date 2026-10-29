@@ -18,17 +18,21 @@ export type LineFeature = {
   };
 };
 
+type MapLayer = {
+  id: string;
+  type: "line" | "symbol";
+  source: string;
+  layout?: Record<string, string | number | boolean>;
+  paint: Record<string, unknown>;
+};
+
 type MapLike = {
   on: (event: string, listener: (event?: { originalEvent?: Event }) => void) => void;
   loaded: () => boolean;
   addSource: (id: string, source: { type: "geojson"; data: LineFeature }) => void;
-  addLayer: (layer: {
-    id: string;
-    type: "line";
-    source: string;
-    layout?: Record<string, string>;
-    paint: Record<string, unknown>;
-  }) => void;
+  addLayer: (layer: MapLayer) => void;
+  addImage: (id: string, image: ImageData, options?: { pixelRatio?: number }) => void;
+  hasImage: (id: string) => boolean;
   getSource: (id: string) => { setData: (data: LineFeature) => void } | undefined;
   setPaintProperty: (layer: string, name: string, value: unknown) => void;
   resize: () => void;
@@ -107,12 +111,20 @@ class BlobSource implements Source {
 
 let protocol: Protocol | null = null;
 
+const MISSING_TILE = "Tile not found.";
+
 function attachArchive(blob: Blob): void {
   if (!protocol) {
-    protocol = new Protocol();
+    // A missing tile must fail rather than come back empty: MapLibre then draws the
+    // nearest coarser tile in its place instead of a blank, water-coloured hole.
+    protocol = new Protocol({ errorOnMissingTile: true });
     addProtocol("pmtiles", protocol.tile);
   }
   protocol.add(new PMTiles(new BlobSource(blob, ARCHIVE_KEY)));
+}
+
+function isMissingTile(event: { error?: { message?: string } }): boolean {
+  return event.error?.message === MISSING_TILE;
 }
 
 const EUROPE: LngLat = [4.6, 51.45];
@@ -181,6 +193,21 @@ function createMapLibre(container: HTMLElement, archive: Blob): MapEngine {
     pitch: 0,
     fadeDuration: 0,
   });
+  let resyncQueued = false;
+  map.on("error", (event) => {
+    if (!isMissingTile(event)) {
+      console.error(event.error);
+      return;
+    }
+    // MapLibre only looks for a parent tile on its next source update, which may not
+    // come until the camera moves if this was the last tile to settle.
+    if (resyncQueued) return;
+    resyncQueued = true;
+    requestAnimationFrame(() => {
+      resyncQueued = false;
+      map._update();
+    });
+  });
   return {
     kind: "maplibre",
     map: map as unknown as MapLike,
@@ -230,6 +257,46 @@ export function readCamera(map: MapLike): { center: LngLat; zoom: number; pitch:
     zoom: map.getZoom(),
     pitch: map.getPitch(),
   };
+}
+
+export const ROUTE_CHEVRON = "route-chevron";
+
+export function registerRouteChevron(map: MapLike): void {
+  if (map.hasImage(ROUTE_CHEVRON)) return;
+  map.addImage(ROUTE_CHEVRON, routeChevronImage(), { pixelRatio: 2 });
+}
+
+function routeChevronImage(): ImageData {
+  const size = 64;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const context = canvas.getContext("2d");
+  if (!context) throw new Error("Could not draw the route chevron");
+
+  // Line placement aligns the icon's x-axis with the path, so the tip points right.
+  const chevron = (tipX: number, baseX: number, notchX: number, half: number) => {
+    context.beginPath();
+    context.moveTo(tipX, 32);
+    context.lineTo(baseX, 32 - half);
+    context.lineTo(notchX, 32);
+    context.lineTo(baseX, 32 + half);
+    context.closePath();
+  };
+
+  chevron(58, 8, 24, 24);
+  context.fillStyle = "#140f0b";
+  context.fill();
+
+  chevron(50, 18, 28, 15);
+  context.fillStyle = "#f4efe6";
+  context.fill();
+
+  chevron(50, 32, 40, 8);
+  context.fillStyle = "#f0b429";
+  context.fill();
+
+  return context.getImageData(0, 0, size, size);
 }
 
 export function lineFeature(coordinates: LngLat[]): LineFeature {

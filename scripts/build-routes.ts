@@ -21,13 +21,13 @@ const CORRIDOR_IMPROVEMENT_METERS = 5_000;
 function mapboxProfile(mode: Mode): "driving" | "cycling" | "walking" | null {
   switch (mode) {
     case "car":
+    case "bus":
       return "driving";
     case "bike":
       return "cycling";
     case "walk":
       return "walking";
     case "train":
-    case "bus":
       return null;
     default: {
       const neverMode: never = mode;
@@ -39,13 +39,13 @@ function mapboxProfile(mode: Mode): "driving" | "cycling" | "walking" | null {
 function osrmProfile(mode: Mode): "driving" | "bike" | "foot" | null {
   switch (mode) {
     case "car":
+    case "bus":
       return "driving";
     case "bike":
       return "bike";
     case "walk":
       return "foot";
     case "train":
-    case "bus":
       return null;
     default: {
       const neverMode: never = mode;
@@ -148,6 +148,222 @@ async function fetchOsrmRoutes(
     `https://router.project-osrm.org/route/v1/${profile}/${path}` +
     "?overview=full&geometries=geojson&alternatives=true";
   return geometriesOf(await fetchJson(url), "osrm");
+}
+
+const STATION_SEARCH_METERS = 3_000;
+const PLATFORM_METERS = 350;
+const WALK_GAP_METERS = 120;
+const RAIL_MARGIN_DEGREES = 0.04;
+const OVERPASS_URLS = [
+  "https://overpass-api.de/api/interpreter",
+  "https://overpass.kumi.systems/api/interpreter",
+];
+
+type OverpassElement =
+  | { type: "way"; nodes: number[]; geometry: { lat: number; lon: number }[] }
+  | { type: "node"; lat: number; lon: number };
+
+async function queryOverpass(url: string, query: string): Promise<OverpassElement[] | null> {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "User-Agent": "itinerary-iterator",
+      },
+      body: `data=${encodeURIComponent(query)}`,
+      signal: AbortSignal.timeout(150_000),
+    });
+    if (!response.ok) {
+      console.warn(`overpass responded ${response.status}`);
+      return null;
+    }
+    const payload = (await response.json()) as { elements?: OverpassElement[]; remark?: string };
+    if (payload.remark) {
+      console.warn(`overpass remark: ${payload.remark}`);
+      return null;
+    }
+    return payload.elements ?? [];
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "request failed";
+    console.warn(`overpass request failed: ${message}`);
+    return null;
+  }
+}
+
+async function fetchRailNetwork(points: LngLat[]): Promise<OverpassElement[]> {
+  const lngs = points.map((point) => point[0]);
+  const lats = points.map((point) => point[1]);
+  const bbox = [
+    Math.min(...lats) - RAIL_MARGIN_DEGREES,
+    Math.min(...lngs) - RAIL_MARGIN_DEGREES,
+    Math.max(...lats) + RAIL_MARGIN_DEGREES,
+    Math.max(...lngs) + RAIL_MARGIN_DEGREES,
+  ].join(",");
+  const query =
+    `[out:json][timeout:120];(` +
+    `way["railway"~"^(rail|subway|light_rail)$"]["service"!~"^(yard|siding|spur)$"](${bbox});` +
+    `node["railway"~"^(station|halt)$"](${bbox});` +
+    `);out geom;`;
+  for (let attempt = 0; attempt < OVERPASS_URLS.length * 2; attempt += 1) {
+    const elements = await queryOverpass(OVERPASS_URLS[attempt % OVERPASS_URLS.length], query);
+    if (elements) return elements;
+    await new Promise((resolve) => setTimeout(resolve, 5_000 * (attempt + 1)));
+  }
+  return [];
+}
+
+class MinHeap {
+  private items: [number, number][] = [];
+
+  get size(): number {
+    return this.items.length;
+  }
+
+  push(item: [number, number]): void {
+    const items = this.items;
+    items.push(item);
+    let index = items.length - 1;
+    while (index > 0) {
+      const parent = (index - 1) >> 1;
+      if (items[parent][0] <= items[index][0]) break;
+      [items[parent], items[index]] = [items[index], items[parent]];
+      index = parent;
+    }
+  }
+
+  pop(): [number, number] | undefined {
+    const items = this.items;
+    const top = items[0];
+    const last = items.pop();
+    if (items.length > 0 && last) {
+      items[0] = last;
+      let index = 0;
+      for (;;) {
+        const left = index * 2 + 1;
+        const right = left + 1;
+        let smallest = index;
+        if (left < items.length && items[left][0] < items[smallest][0]) smallest = left;
+        if (right < items.length && items[right][0] < items[smallest][0]) smallest = right;
+        if (smallest === index) break;
+        [items[smallest], items[index]] = [items[index], items[smallest]];
+        index = smallest;
+      }
+    }
+    return top;
+  }
+}
+
+async function walkBetween(from: LngLat, to: LngLat): Promise<LngLat[]> {
+  if (haversine(from, to) < WALK_GAP_METERS) return [from, to];
+  const walk = (await fetchOsrmRoutes("foot", [from, to]))[0];
+  return walk ? [from, ...walk.coordinates, to] : [from, to];
+}
+
+async function fetchRailRoute(from: LngLat, to: LngLat): Promise<RouteGeometry | null> {
+  const elements = await fetchRailNetwork([from, to]);
+  const coords = new Map<number, LngLat>();
+  const edges = new Map<number, [number, number][]>();
+  const stations: LngLat[] = [];
+  const link = (a: number, b: number, meters: number) => {
+    const list = edges.get(a) ?? [];
+    list.push([b, meters]);
+    edges.set(a, list);
+  };
+  for (const element of elements) {
+    if (element.type === "node") {
+      stations.push([element.lon, element.lat]);
+      continue;
+    }
+    if (element.geometry?.length !== element.nodes?.length) continue;
+    element.nodes.forEach((id, index) => {
+      const point = element.geometry[index];
+      coords.set(id, [point.lon, point.lat]);
+      if (index === 0) return;
+      const prevId = element.nodes[index - 1];
+      const prevPoint = element.geometry[index - 1];
+      const meters = haversine([prevPoint.lon, prevPoint.lat], [point.lon, point.lat]);
+      link(prevId, id, meters);
+      link(id, prevId, meters);
+    });
+  }
+  if (coords.size === 0) return null;
+
+  const stationsNear = (target: LngLat): LngLat[] =>
+    stations
+      .map((station) => ({ station, distance: haversine(station, target) }))
+      .filter((entry) => entry.distance <= STATION_SEARCH_METERS)
+      .sort((x, y) => x.distance - y.distance)
+      .slice(0, 15)
+      .map((entry) => entry.station);
+  const platformNodes = (station: LngLat): Set<number> => {
+    const ids = new Set<number>();
+    for (const [id, point] of coords) {
+      if (haversine(point, station) <= PLATFORM_METERS) ids.add(id);
+    }
+    return ids;
+  };
+
+  const endStations = stationsNear(to).map((station) => ({ station, platforms: platformNodes(station) }));
+  let reached: number | null = null;
+  let prev = new Map<number, number>();
+  let startStation: LngLat | null = null;
+  let endStation: LngLat | null = null;
+  for (const candidate of stationsNear(from)) {
+    const sources = platformNodes(candidate);
+    if (sources.size === 0) continue;
+    const dist = new Map<number, number>();
+    prev = new Map<number, number>();
+    const heap = new MinHeap();
+    for (const id of sources) {
+      dist.set(id, 0);
+      heap.push([0, id]);
+    }
+    while (heap.size > 0) {
+      const [cost, node] = heap.pop()!;
+      if (cost > (dist.get(node) ?? Infinity)) continue;
+      for (const [next, meters] of edges.get(node) ?? []) {
+        const nextCost = cost + meters;
+        if (nextCost < (dist.get(next) ?? Infinity)) {
+          dist.set(next, nextCost);
+          prev.set(next, node);
+          heap.push([nextCost, next]);
+        }
+      }
+    }
+    let bestScore = Infinity;
+    for (const { station, platforms } of endStations) {
+      const straight = haversine(candidate, station);
+      if (straight < 500) continue;
+      for (const id of platforms) {
+        const meters = dist.get(id);
+        if (meters === undefined || meters > straight * 2.5 + 2_000) continue;
+        const score = meters + haversine(station, to) * 4;
+        if (score < bestScore) {
+          bestScore = score;
+          reached = id;
+          startStation = candidate;
+          endStation = station;
+        }
+      }
+    }
+    if (reached !== null) break;
+  }
+  if (reached === null || !startStation || !endStation) return null;
+
+  const track: LngLat[] = [];
+  for (let node: number | undefined = reached; node !== undefined; node = prev.get(node)) {
+    const point = coords.get(node);
+    if (point) track.unshift(point);
+  }
+  if (track.length < 2) return null;
+
+  const line = joinLines([
+    await walkBetween(from, track[0]),
+    track,
+    await walkBetween(track[track.length - 1], to),
+  ]);
+  return geometry(line, "rail");
 }
 
 function eastOfEnds(from: LngLat, to: LngLat, coords: LngLat[]): number {
@@ -345,22 +561,27 @@ async function buildLeg(
   existing: RouteSet,
 ): Promise<RouteGeometry> {
   const key = legKey(leg.from, leg.to);
-  if ((leg.mode === "train" || leg.mode === "bus") && leg.via && leg.via.length > 0) {
-    return finish(geometry(curved(from, leg.via, to), "sketch"), from, to);
+  const saved = keepExisting(existing, key);
+  if (leg.mode === "train") {
+    if (saved?.source === "rail") return finish(saved, from, to);
+    const rail =
+      (await fetchRailRoute(from, to)) ??
+      (await fetchOsrmRoutes("driving", [from, to]))[0] ??
+      null;
+    return finish(rail ?? geometry(curved(from, leg.via, to), "sketch"), from, to);
   }
 
-  const saved = keepExisting(existing, key);
   if (!osrmProfile(leg.mode)) {
     return finish(saved ?? geometry(curved(from, leg.via, to), "sketch"), from, to);
   }
 
-  if (saved && !needsRepair(leg, from, to, saved)) {
+  if (saved && saved.source !== "sketch" && !needsRepair(leg, from, to, saved)) {
     return finish(saved, from, to);
   }
 
   const replacement = chooseReplacement(
     leg,
-    saved,
+    saved?.source === "sketch" ? null : saved,
     await collectCandidates(leg, from, to, token),
     from,
     to,
@@ -369,7 +590,7 @@ async function buildLeg(
     console.log(`  replaced ${key}`);
     return finish(replacement, from, to);
   }
-  if (saved) return finish(saved, from, to);
+  if (saved && saved.source !== "sketch") return finish(saved, from, to);
   return finish(geometry(curved(from, leg.via, to), "sketch"), from, to);
 }
 

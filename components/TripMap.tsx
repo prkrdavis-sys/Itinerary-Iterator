@@ -5,7 +5,7 @@ import { spotEmoji } from "@/lib/categories";
 import { boundsOf, pointAlong, sliceLine, type LngLat } from "@/lib/geo";
 import { findStop, legKey, stopShownOnDay } from "@/lib/itinerary";
 import {
-  cityColor,
+  dayColor,
   followZoom,
   followZoomAt,
   iconRotation,
@@ -21,6 +21,8 @@ import {
   lineFeature,
   mapboxStyleReachable,
   readCamera,
+  registerRouteChevron,
+  ROUTE_CHEVRON,
   type Basemap,
   type MapEngine,
   type MarkerHandle,
@@ -87,10 +89,11 @@ function frameCoords(coords: LngLat[]): [LngLat, LngLat] {
 }
 
 function setLayerVisibility(engine: MapEngine, id: string, visible: boolean) {
+  const arrows = id.endsWith("-arrows");
   const opacity = visible ? (id.endsWith("-casing") ? 0.55 : 0.95) : 0;
   try {
     engine.map.setLayoutProperty(id, "visibility", visible ? "visible" : "none");
-    engine.map.setPaintProperty(id, "line-opacity", opacity);
+    engine.map.setPaintProperty(id, arrows ? "icon-opacity" : "line-opacity", opacity);
   } catch {
     // Layers are added once the style has loaded.
   }
@@ -296,6 +299,7 @@ export function TripMap({
 
     const boot = () => {
       if (dead) return;
+      registerRouteChevron(engine.map);
       for (const leg of itinerary.legs) {
         const key = legKey(leg.from, leg.to);
         const route = routes[key];
@@ -329,13 +333,30 @@ export function TripMap({
             ...(style.dash.length > 0 ? { "line-dasharray": style.dash } : {}),
           },
         });
+        engine.map.addLayer({
+          id: `${id}-arrows`,
+          type: "symbol",
+          source: id,
+          layout: {
+            "symbol-placement": "line",
+            "symbol-spacing": 48,
+            "icon-image": ROUTE_CHEVRON,
+            "icon-size": 0.72,
+            "icon-allow-overlap": true,
+            "icon-rotation-alignment": "map",
+            "icon-pitch-alignment": "map",
+          },
+          paint: {
+            "icon-opacity": 0.95,
+          },
+        });
       }
 
       for (const stop of itinerary.stops) {
         const button = document.createElement("button");
         button.type = "button";
         button.className = "stop-marker";
-        button.style.setProperty("--city", cityColor(stop.city));
+        button.style.setProperty("--day", dayColor(stop.day));
         button.setAttribute("aria-label", `${stop.name}, ${stop.city}`);
         const pulse = document.createElement("span");
         pulse.className = "pulse";
@@ -583,6 +604,7 @@ export function TripMap({
       const key = legKey(leg.from, leg.to);
       setLayerVisibility(engine, `leg-${key}`, visible);
       setLayerVisibility(engine, `leg-${key}-casing`, visible);
+      setLayerVisibility(engine, `leg-${key}-arrows`, visible);
     }
 
     if (daySeen.current === day) return;

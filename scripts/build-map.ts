@@ -2,25 +2,25 @@ import { spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import {
   chmodSync,
+  copyFileSync,
   existsSync,
   mkdirSync,
   readFileSync,
   readdirSync,
+  rmSync,
   statSync,
   writeFileSync,
 } from "node:fs";
 import path from "node:path";
 import { PMTiles, type RangeResponse, type Source } from "pmtiles";
 import { haversine, type LngLat } from "../lib/geo";
-import { getItinerary } from "../lib/itinerary";
+import { getItinerary, legKey } from "../lib/itinerary";
 import { getRoutes } from "../lib/routes";
 
 const PMTILES_VERSION = "1.31.2";
 const MAX_BYTES = 50 * 1024 * 1024;
-const ZOOM_CHOICES = [15, 14, 13, 12, 11, 10] as const;
-const SOURCE_VERSION = "3";
-const BUFFER_METERS = 4_000;
-const SAMPLE_METERS = 2_000;
+const SOURCE_VERSION = "4";
+const CLOSE_LEG_METERS = 25_000;
 const FONT_STACKS = ["Noto Sans Regular", "Noto Sans Italic", "Noto Sans Medium"] as const;
 const FONT_RANGES = ["0-255", "256-511", "512-767", "768-1023"] as const;
 const SPRITES = ["dark.json", "dark.png", "dark@2x.json", "dark@2x.png"] as const;
@@ -30,7 +30,6 @@ const cacheDir = path.join(root, "scripts", ".cache");
 const mapsDir = path.join(root, "public", "maps");
 const archivePath = path.join(mapsDir, "trip.pmtiles");
 const archiveMetaPath = path.join(mapsDir, "archive.json");
-const regionPath = path.join(cacheDir, "region.geojson");
 const assetsDir = path.join(root, "public", "map-assets");
 
 type ArchiveMeta = {
@@ -40,11 +39,45 @@ type ArchiveMeta = {
   source: string;
 };
 
-function bufferRing(point: LngLat): LngLat[] {
+// "trip" follows every stop and route. "close" follows only the places the camera
+// zooms into: stops, walking, biking, and bus legs, and short hops of any mode.
+type Reach = "trip" | "close";
+
+type Band = {
+  minZoom: number;
+  maxZoom: number;
+  reach: Reach;
+  bufferMeters: number;
+};
+
+// Each band covers enough ground for the pitched camera at that zoom to see tiles to
+// the edge of the screen. Plans run widest first; the first that fits the budget wins.
+function plan(kilometers: [number, number, number, number, number, number, number]): Band[] {
+  const [world, z8, z9, z10, z11, z12, z13] = kilometers.map((km) => km * 1000);
+  return [
+    { minZoom: 0, maxZoom: 7, reach: "trip", bufferMeters: world },
+    { minZoom: 8, maxZoom: 8, reach: "trip", bufferMeters: z8 },
+    { minZoom: 9, maxZoom: 9, reach: "trip", bufferMeters: z9 },
+    { minZoom: 10, maxZoom: 10, reach: "trip", bufferMeters: z10 },
+    { minZoom: 11, maxZoom: 11, reach: "trip", bufferMeters: z11 },
+    { minZoom: 12, maxZoom: 12, reach: "close", bufferMeters: z12 },
+    { minZoom: 13, maxZoom: 13, reach: "close", bufferMeters: z13 },
+  ];
+}
+
+const PLANS: Band[][] = [
+  plan([200, 100, 60, 30, 16, 9, 5]),
+  plan([150, 80, 50, 25, 12, 6, 3]),
+  plan([150, 80, 45, 22, 10, 5, 2.5]),
+  plan([120, 60, 40, 18, 8, 4, 2]),
+  plan([100, 50, 30, 14, 6, 3, 1.5]),
+];
+
+function bufferRing(point: LngLat, meters: number): LngLat[] {
   const [lng, lat] = point;
   const latRad = (lat * Math.PI) / 180;
-  const dLat = BUFFER_METERS / 111_320;
-  const dLng = BUFFER_METERS / (111_320 * Math.cos(latRad));
+  const dLat = meters / 111_320;
+  const dLng = meters / (111_320 * Math.cos(latRad));
   return [
     [lng - dLng, lat - dLat],
     [lng + dLng, lat - dLat],
@@ -54,7 +87,7 @@ function bufferRing(point: LngLat): LngLat[] {
   ];
 }
 
-function sampleLine(coords: LngLat[]): LngLat[] {
+function sampleLine(coords: LngLat[], spacing: number): LngLat[] {
   const kept: LngLat[] = [];
   for (const point of coords) {
     const last = kept[kept.length - 1];
@@ -64,7 +97,7 @@ function sampleLine(coords: LngLat[]): LngLat[] {
     }
     const distance = haversine(last, point);
     if (distance === 0) continue;
-    const steps = Math.max(1, Math.ceil(distance / SAMPLE_METERS));
+    const steps = Math.max(1, Math.ceil(distance / spacing));
     for (let step = 1; step <= steps; step += 1) {
       const t = step / steps;
       kept.push([
@@ -86,7 +119,24 @@ function tileKey(lng: number, lat: number, zoom: number): string {
   return `${zoom}/${x}/${y}`;
 }
 
-async function assertRouteCovered(zoom: number): Promise<void> {
+function reachLines(reach: Reach): LngLat[][] {
+  const itinerary = getItinerary();
+  const routes = getRoutes();
+  const lines: LngLat[][] = itinerary.stops.map((stop) => [stop.coords]);
+  for (const leg of itinerary.legs) {
+    const route = routes[legKey(leg.from, leg.to)];
+    if (!route) continue;
+    const close =
+      leg.mode === "walk" ||
+      leg.mode === "bike" ||
+      leg.mode === "bus" ||
+      route.distanceMeters <= CLOSE_LEG_METERS;
+    if (reach === "trip" || close) lines.push(route.coordinates);
+  }
+  return lines;
+}
+
+async function assertRouteCovered(bands: Band[]): Promise<void> {
   const bytes = readFileSync(archivePath);
   const source: Source = {
     getKey: () => "trip.pmtiles",
@@ -98,41 +148,48 @@ async function assertRouteCovered(zoom: number): Promise<void> {
     },
   };
   const archive = new PMTiles(source);
-  const itinerary = getItinerary();
-  const routes = getRoutes();
-  const coords: LngLat[] = itinerary.stops.map((stop) => stop.coords);
-  for (const route of Object.values(routes)) coords.push(...route.coordinates);
-  const missing = new Set<string>();
   const seen = new Set<string>();
-  for (const [lng, lat] of coords) {
-    const key = tileKey(lng, lat, zoom);
-    if (seen.has(key)) continue;
-    seen.add(key);
-    const [z, x, y] = key.split("/").map(Number);
-    const tile = await archive.getZxy(z, x, y);
-    if (!tile) missing.add(key);
+  const missing: string[] = [];
+  for (const band of bands) {
+    const coords = reachLines(band.reach).flat();
+    for (let zoom = band.minZoom; zoom <= band.maxZoom; zoom += 1) {
+      for (const [lng, lat] of coords) {
+        const key = tileKey(lng, lat, zoom);
+        if (seen.has(key)) continue;
+        seen.add(key);
+        const [z, x, y] = key.split("/").map(Number);
+        const tile = await archive.getZxy(z, x, y);
+        if (!tile) missing.push(key);
+      }
+    }
   }
-  if (missing.size > 0) {
+  if (missing.length > 0) {
     throw new Error(
-      `Map extract is missing ${missing.size} tiles under the route at zoom ${zoom}`,
+      `Map extract is missing ${missing.length} tiles under the route, first ${missing[0]}`,
     );
   }
-  console.log(`route coverage ${seen.size} tiles at zoom ${zoom}`);
+  console.log(`route coverage ${seen.size} tiles`);
 }
 
-function regionJson(): string {
-  const itinerary = getItinerary();
-  const routes = getRoutes();
-  const points: LngLat[] = itinerary.stops.map((stop) => stop.coords);
-  for (const route of Object.values(routes)) {
-    points.push(...sampleLine(route.coordinates));
-  }
+function regionJson(band: Band): string {
+  const spacing = band.bufferMeters / 2;
+  const points = reachLines(band.reach).flatMap((line) => sampleLine(line, spacing));
   const features = points.map((point) => ({
     type: "Feature",
     properties: {},
-    geometry: { type: "Polygon", coordinates: [bufferRing(point)] },
+    geometry: { type: "Polygon", coordinates: [bufferRing(point, band.bufferMeters)] },
   }));
   return JSON.stringify({ type: "FeatureCollection", features });
+}
+
+function bandName(band: Band): string {
+  return `band-${band.minZoom}-${band.maxZoom}-${band.reach}-${band.bufferMeters}`;
+}
+
+function writeRegion(band: Band): string {
+  const file = path.join(cacheDir, `${bandName(band)}.geojson`);
+  writeFileSync(file, regionJson(band));
+  return file;
 }
 
 function sha256(value: string | Buffer): string {
@@ -270,15 +327,23 @@ function archiveSize(log: string): number | null {
   }
 }
 
-function estimateBytes(binary: string, planet: string, zoom: number): number {
+function bandArgs(band: Band, region: string): string[] {
+  return [`--region=${region}`, `--minzoom=${band.minZoom}`, `--maxzoom=${band.maxZoom}`];
+}
+
+const estimates = new Map<string, number>();
+
+function estimateBytes(binary: string, planet: string, band: Band): number {
+  const name = bandName(band);
+  const known = estimates.get(name);
+  if (known !== undefined) return known;
   const result = spawnSync(
     binary,
     [
       "extract",
       planet,
       path.join(cacheDir, "estimate.pmtiles"),
-      `--region=${regionPath}`,
-      `--maxzoom=${zoom}`,
+      ...bandArgs(band, writeRegion(band)),
       "--dry-run",
     ],
     { encoding: "utf8" },
@@ -286,10 +351,23 @@ function estimateBytes(binary: string, planet: string, zoom: number): number {
   const log = `${result.stdout ?? ""}\n${result.stderr ?? ""}`;
   const bytes = archiveSize(log);
   if (result.status !== 0 || bytes === null) {
-    throw new Error(`Could not estimate zoom ${zoom}\n${log}`);
+    throw new Error(`Could not estimate ${name}\n${log}`);
   }
-  console.log(`zoom 0–${zoom} is about ${Math.ceil(bytes / (1024 * 1024))} MB`);
+  estimates.set(name, bytes);
   return bytes;
+}
+
+function planBytes(binary: string, planet: string, bands: Band[]): number {
+  return bands.reduce((total, band) => total + estimateBytes(binary, planet, band), 0);
+}
+
+function describe(bands: Band[]): string {
+  return bands
+    .map((band) => {
+      const zooms = band.minZoom === band.maxZoom ? `z${band.minZoom}` : `z${band.minZoom}–${band.maxZoom}`;
+      return `${zooms} ${band.reach} ${band.bufferMeters / 1000} km`;
+    })
+    .join(", ");
 }
 
 async function latestPlanet(): Promise<string> {
@@ -334,8 +412,8 @@ async function vendorAssets(): Promise<void> {
 async function main(): Promise<void> {
   mkdirSync(mapsDir, { recursive: true });
   await vendorAssets();
-  const region = regionJson();
-  const source = sha256(`${SOURCE_VERSION}\n${region}`);
+  const regions = PLANS.flat().map((band) => `${bandName(band)}\n${regionJson(band)}`);
+  const source = sha256(`${SOURCE_VERSION}\n${regions.join("\n")}`);
   const existing = readArchiveMeta();
   if (
     existing?.source === source &&
@@ -349,39 +427,39 @@ async function main(): Promise<void> {
   }
 
   mkdirSync(cacheDir, { recursive: true });
-  writeFileSync(regionPath, region);
   const binary = await ensureCli();
   const planet = await latestPlanet();
-  let zoom: (typeof ZOOM_CHOICES)[number] | null = null;
-  for (const choice of ZOOM_CHOICES) {
-    if (estimateBytes(binary, planet, choice) <= MAX_BYTES) {
-      zoom = choice;
+  let chosen: Band[] | null = null;
+  for (const bands of PLANS) {
+    const bytes = planBytes(binary, planet, bands);
+    console.log(`${describe(bands)} is about ${Math.ceil(bytes / (1024 * 1024))} MB`);
+    if (bytes <= MAX_BYTES) {
+      chosen = bands;
       break;
     }
   }
-  if (zoom === null) {
-    throw new Error(
-      `The trip corridor does not fit in 50 MB even at zoom ${ZOOM_CHOICES[ZOOM_CHOICES.length - 1]}`,
-    );
+  if (!chosen) {
+    throw new Error("The trip corridor does not fit in 50 MB even with the narrowest plan");
   }
 
-  console.log(`extracting zoom 0–${zoom} from ${planet}`);
-  const extracted = spawnSync(
-    binary,
-    [
-      "extract",
-      planet,
-      archivePath,
-      `--region=${regionPath}`,
-      `--maxzoom=${zoom}`,
-      "--download-threads=8",
-    ],
-    { stdio: "inherit" },
-  );
-  if (extracted.status !== 0) {
-    throw new Error("pmtiles extract failed");
+  console.log(`extracting ${describe(chosen)} from ${planet}`);
+  const parts: string[] = [];
+  for (const band of chosen) {
+    const part = path.join(cacheDir, `${bandName(band)}.pmtiles`);
+    const extracted = spawnSync(
+      binary,
+      ["extract", planet, part, ...bandArgs(band, writeRegion(band)), "--download-threads=8"],
+      { stdio: "inherit" },
+    );
+    if (extracted.status !== 0) throw new Error(`pmtiles extract failed for ${bandName(band)}`);
+    parts.push(part);
   }
-  await assertRouteCovered(zoom);
+  const mergedPath = path.join(cacheDir, "merged.pmtiles");
+  rmSync(mergedPath, { force: true });
+  const merged = spawnSync(binary, ["merge", ...parts, mergedPath], { stdio: "inherit" });
+  if (merged.status !== 0) throw new Error("pmtiles merge failed");
+  copyFileSync(mergedPath, archivePath);
+  await assertRouteCovered(chosen);
   writeArchiveMeta(source);
 }
 

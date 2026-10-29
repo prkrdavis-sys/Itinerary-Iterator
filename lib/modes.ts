@@ -154,16 +154,18 @@ export function followZoomAt(mode: Mode, meters: number, along: number): number 
   return followZoom(mode, meters) - zoomPullback(meters) * bulge;
 }
 
-const cityColors: Record<string, string> = {
-  Amsterdam: "#e07a3d",
-  Rotterdam: "#2b6f9a",
-  Bruges: "#a33b32",
-  Kinderdijk: "#6d7c38",
-  Antwerp: "#8d5b34",
-};
+const dayColors = [
+  "#e07a3d",
+  "#3b8fd4",
+  "#d4566e",
+  "#5ea36a",
+  "#c9842a",
+  "#7b6ad4",
+];
 
-export function cityColor(city: string): string {
-  return cityColors[city] ?? "#d7c4a3";
+export function dayColor(day: number): string {
+  const index = Math.max(0, day - 1);
+  return dayColors[index % dayColors.length] ?? dayColors[0];
 }
 
 export function cityEmoji(city: string): string {
