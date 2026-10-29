@@ -10,6 +10,7 @@ import {
   followZoomAt,
   iconRotation,
   legDuration,
+  legStyle,
   modeStyle,
   playbackProgress,
 } from "@/lib/modes";
@@ -50,8 +51,10 @@ type TripMapProps = {
   onSaveStatus: (status: MapSaveStatus) => void;
 };
 
-const PADDING = { top: 156, bottom: 148, left: 28, right: 28 };
+const PADDING = { top: 156, bottom: 148, left: 40, right: 40 };
 const SAVED_NOTICE_MS = 4000;
+const OVERVIEW_DRAW_MS = 5200;
+const OVERVIEW_LEG_FLOOR_MS = 40;
 
 function legIsVisible(day: number | null, toDay: number | undefined): boolean {
   if (day === null) return true;
@@ -290,12 +293,17 @@ export function TripMap({
       if (!leg || !coords || !vehicle || !handle) return;
       const sample = pointAlong(coords, along);
       vehicle.hidden = false;
-      vehicle.textContent = modeStyle(leg.mode).emoji;
+      vehicle.textContent = legStyle(leg).emoji;
       vehicle.className = `vehicle vehicle-${leg.mode}`;
       vehicle.style.transform = `rotate(${iconRotation(leg.mode, sample.bearing)}deg)`;
       handle.setLngLat(sample.point);
       return sample.point;
     };
+
+    let markBooted = () => {};
+    const bootedOnce = new Promise<void>((resolve) => {
+      markBooted = resolve;
+    });
 
     const boot = () => {
       if (dead) return;
@@ -409,6 +417,7 @@ export function TripMap({
         }
       }
       setBooted(true);
+      markBooted();
     };
 
     let pointerStart: { x: number; y: number; at: number } | null = null;
@@ -437,12 +446,8 @@ export function TripMap({
     if (engine.map.loaded()) boot();
     else engine.map.on("load", boot);
 
-    const whenReady = async () => {
-      if (engine.map.loaded()) return;
-      await new Promise<void>((resolve) => {
-        engine.map.on("load", () => resolve());
-      });
-    };
+    // map.loaded() is false whenever tiles are in flight, and "load" fires only once.
+    const whenReady = () => bootedOnce;
 
     overviewRef.current = async () => {
       const token = ++runRef.current;
@@ -476,13 +481,19 @@ export function TripMap({
         return;
       }
       await wait(380);
+      const totalMeters = itinerary.legs.reduce(
+        (sum, leg) => sum + (routes[legKey(leg.from, leg.to)]?.distanceMeters ?? 0),
+        0,
+      );
+      const msPerMeter =
+        Math.max(0, OVERVIEW_DRAW_MS - OVERVIEW_LEG_FLOOR_MS * itinerary.legs.length) /
+        Math.max(1, totalMeters);
       for (let index = 0; index < itinerary.legs.length; index += 1) {
         if (!isCurrent()) return;
         const leg = itinerary.legs[index];
         const route = routes[legKey(leg.from, leg.to)];
-        const duration = Math.min(
-          760,
-          Math.round(legDuration(leg.mode, route?.distanceMeters ?? 1000) * 0.28),
+        const duration = Math.round(
+          OVERVIEW_LEG_FLOOR_MS + (route?.distanceMeters ?? 0) * msPerMeter,
         );
         await tween(duration, isCurrent, (progress) => {
           if (route) setLine(legKey(leg.from, leg.to), sliceLine(route.coordinates, progress));
@@ -557,13 +568,26 @@ export function TripMap({
     focusRef.current = (id: string) => {
       const stop = findStop(itinerary, id);
       if (!stop) return;
-      engine.map.flyTo({
-        center: stop.coords,
-        zoom: 14.5,
-        pitch: reducedRef.current ? 0 : 48,
-        duration: reducedRef.current ? 0 : 1400,
-        essential: true,
-        padding: { top: 170, bottom: 300, left: 24, right: 24 },
+      // Wait a frame so the stop sheet is mounted and the pin can sit in the gap above it.
+      requestAnimationFrame(() => {
+        if (dead) return;
+        const phone = container.parentElement;
+        const height = container.clientHeight;
+        const chrome = phone
+          ? Number.parseFloat(getComputedStyle(phone).getPropertyValue("--chrome-bottom"))
+          : Number.NaN;
+        const top = (Number.isFinite(chrome) ? chrome : 150) + 12;
+        const sheet = phone?.querySelector<HTMLElement>(".stop-sheet");
+        const sheetTop = sheet ? sheet.offsetTop : height - 300;
+        const bottom = Math.max(0, Math.min(height - sheetTop + 12, height - top - 72));
+        engine.map.flyTo({
+          center: stop.coords,
+          zoom: 14.5,
+          pitch: reducedRef.current ? 0 : 48,
+          duration: reducedRef.current ? 0 : 1400,
+          essential: true,
+          padding: { top, bottom, left: 24, right: 24 },
+        });
       });
     };
 

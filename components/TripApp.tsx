@@ -24,7 +24,7 @@ import {
   writeMapSettings,
   type MapSettings,
 } from "@/lib/map-settings";
-import { cityEmoji, modeStyle } from "@/lib/modes";
+import { cityEmoji, legStyle } from "@/lib/modes";
 import { type MapSaveStatus } from "@/lib/offline-archive";
 import type { Itinerary } from "@/lib/schema";
 import type { RouteSet } from "@/lib/routes";
@@ -229,7 +229,7 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
     if (!leg || !destination) return;
     setPlaying(true);
     setCelebrate(false);
-    setStatus(`${modeStyle(leg.mode).verb} to ${destination.name}`);
+    setStatus(`${legStyle(leg).verb} to ${destination.name}`);
     await mapRef.current?.playLeg(index);
   }
 
@@ -253,6 +253,8 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
     }
     if (playToken.current !== token) return;
     setPlaying(false);
+    const finalLeg = itinerary.legs[indexes[indexes.length - 1]];
+    if (finalLeg) mapRef.current?.focusStop(finalLeg.to);
     if (scope === null) {
       const last = itinerary.stops[itinerary.stops.length - 1];
       if (last?.city === "Bruges") {
@@ -277,9 +279,12 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
     if (playToken.current !== token) return;
     const nextDay = destination && day !== null && destination.day !== day ? destination.day : day;
     if (nextDay !== day) setDay(nextDay);
-    if (leg) setSelectedId(leg.to);
     setPlaying(false);
     setStatus(tripStatus(nextDay));
+    if (leg) {
+      setSelectedId(leg.to);
+      mapRef.current?.focusStop(leg.to);
+    }
   }
 
   function togglePlay() {
@@ -288,7 +293,9 @@ export function TripApp({ itinerary, routes }: TripAppProps) {
       return;
     }
     if (day !== null) {
-      void playLegs(legIndexesOnDay(itinerary, day), day);
+      const dayLegs = legIndexesOnDay(itinerary, day);
+      const resumeAt = dayLegs.indexOf(outgoingIndex);
+      void playLegs(resumeAt > 0 ? dayLegs.slice(resumeAt) : dayLegs, day);
       return;
     }
     if (selectedId) {

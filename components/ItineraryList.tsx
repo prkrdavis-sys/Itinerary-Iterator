@@ -11,7 +11,7 @@ import {
   legInto,
   stopsOnDay,
 } from "@/lib/itinerary";
-import { modeStyle } from "@/lib/modes";
+import { legStyle } from "@/lib/modes";
 import type { Itinerary } from "@/lib/schema";
 
 type ItineraryListProps = {
@@ -54,7 +54,7 @@ export function ItineraryList({ itinerary, day, onClose, onPick }: ItineraryList
             <ol>
               {stopsOnDay(itinerary, value).map((stop, index) => {
                 const incoming = legInto(itinerary, stop.id);
-                const style = incoming ? modeStyle(incoming.mode) : null;
+                const style = incoming ? legStyle(incoming) : null;
                 const photo = stopPhotos(stop)[0];
                 return (
                   <li key={stop.id}>

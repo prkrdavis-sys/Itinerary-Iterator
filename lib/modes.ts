@@ -1,4 +1,4 @@
-import type { Mode } from "./schema";
+import type { Leg, Mode } from "./schema";
 
 export type ModeStyle = {
   label: string;
@@ -67,6 +67,21 @@ export function modeStyle(mode: Mode): ModeStyle {
       return neverMode;
     }
   }
+}
+
+const REAL_MODES: Record<string, Pick<ModeStyle, "label" | "verb" | "emoji">> = {
+  ferry: { label: "Ferry", verb: "By ferry", emoji: "⛴️" },
+  metro: { label: "Metro", verb: "By metro", emoji: "🚇" },
+  tram: { label: "Tram", verb: "By tram", emoji: "🚋" },
+};
+
+// The schema only knows five modes, so a ferry or tram leg is scheduled as a bus or
+// train and names its real mode in notes ("real mode: ferry/WaterShuttle").
+export function legStyle(leg: Pick<Leg, "mode" | "notes">): ModeStyle {
+  const style = modeStyle(leg.mode);
+  const real = leg.notes?.match(/real mode: ([a-z]+)/i)?.[1]?.toLowerCase();
+  const override = real ? REAL_MODES[real] : undefined;
+  return override ? { ...style, ...override } : style;
 }
 
 export function legDuration(mode: Mode, meters: number): number {

@@ -6,7 +6,7 @@ import { PhotoViewer } from "@/components/PhotoViewer";
 import { categoryLabel, stopPhotos } from "@/lib/categories";
 import { appleMapsUrl } from "@/lib/geo";
 import { formatClockRange } from "@/lib/itinerary";
-import { modeStyle } from "@/lib/modes";
+import { legStyle } from "@/lib/modes";
 import type { Leg, Stop } from "@/lib/schema";
 
 type StopSheetProps = {
@@ -18,7 +18,7 @@ type StopSheetProps = {
 export function StopSheet({ stop, incoming, onClose }: StopSheetProps) {
   const dragControls = useDragControls();
   const [photosOpen, setPhotosOpen] = useState(false);
-  const incomingStyle = incoming ? modeStyle(incoming.mode) : null;
+  const incomingStyle = incoming ? legStyle(incoming) : null;
   const arrived =
     incoming && incomingStyle
       ? incoming.depart && incoming.arrive

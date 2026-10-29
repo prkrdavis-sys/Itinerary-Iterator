@@ -428,7 +428,10 @@ function sanitizeDescription(text: string): string {
   return text
     .replace(/exact address in the Airbnb app/gi, "exact location in your lodging app")
     .replace(/booking email/gi, "itinerary details")
-    .replace(/;\s*booked/gi, "; reserved");
+    .replace(/;\s*booked/gi, "; reserved")
+    .replace(/\s*\(real mode: [^,)]+(?:,\s*([^)]+))?\)/gi, (_, rest?: string) =>
+      rest ? ` (${rest.trim()})` : "",
+    );
 }
 
 function resolveTimes(
@@ -447,8 +450,8 @@ function resolveTimes(
   };
   if (overrides[id]) return overrides[id];
 
-  let s = start.trim();
-  let e = end.trim();
+  const s = start.trim();
+  const e = end.trim();
   if (!s && !e) return { start: "12:00", end: "12:30" };
   if (!s && e) return { start: e, end: e };
   if (s && !e) {
@@ -547,7 +550,7 @@ function main() {
       Math.abs(from.coords[1] - to.coords[1]) < 0.0001;
     if (!sameCoords) {
       const depart = from.end;
-      let arrive = to.start;
+      const arrive = to.start;
       if (arrive >= depart) {
         leg.depart = depart;
         leg.arrive = arrive;

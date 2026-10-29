@@ -193,6 +193,11 @@ function createMapLibre(container: HTMLElement, archive: Blob): MapEngine {
     pitch: 0,
     fadeDuration: 0,
   });
+  // The Protomaps POI layer names a few icons the bundled sprite does not ship.
+  map.setMissingStyleImageResolver(async (id) => {
+    if (map.hasImage(id)) return;
+    map.addImage(id, { width: 1, height: 1, data: new Uint8Array(4) });
+  });
   let resyncQueued = false;
   map.on("error", (event) => {
     if (!isMissingTile(event)) {

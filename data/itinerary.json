@@ -177,7 +177,7 @@
       "start": "20:15",
       "end": "22:15",
       "category": "food",
-      "description": "Dinner, booked. Then De Pijp bars optional; back via metro 52 + NS train (real mode: metro).",
+      "description": "Dinner, booked. Then De Pijp bars optional; back via metro 52 + NS train.",
       "note": "Booked.",
       "url": "https://www.heemelrijck.nl",
       "photos": [
@@ -334,7 +334,7 @@
       "start": "17:40",
       "end": "17:50",
       "category": "transit",
-      "description": "Arrive ~1h10 later; tram/metro to the studio (real mode: tram/metro, check RET app).",
+      "description": "Arrive ~1h10 later; tram/metro to the studio (check RET app).",
       "url": "https://en.wikipedia.org/wiki/Rotterdam_Centraal_station",
       "photos": [
         "/photos/rotterdam-centraal.jpg"
@@ -378,7 +378,7 @@
       "start": "20:00",
       "end": "22:30",
       "category": "food",
-      "description": "Dinner, booked. Then walk to Leuvehaven, metro D/E 2 stops to Maashaven (real mode: metro).",
+      "description": "Dinner, booked. Then walk to Leuvehaven, metro D/E 2 stops to Maashaven.",
       "note": "Booked.",
       "url": "https://loos-rotterdam.nl/",
       "photos": [
@@ -469,7 +469,7 @@
       "start": "12:15",
       "end": "12:30",
       "category": "transit",
-      "description": "12:30 boat to Kinderdijk, ~30 min, €19.50 return (real mode: ferry/WaterShuttle). Buy tickets.",
+      "description": "12:30 boat to Kinderdijk, ~30 min, €19.50 return. Buy tickets.",
       "url": "https://www.waterbus.nl",
       "photos": [
         "/photos/erasmusbrug-night.jpg"
@@ -491,7 +491,7 @@
       "start": "13:00",
       "end": "15:25",
       "category": "sight",
-      "description": "UNESCO windmills polder walk + lunch (Food page); 15:25 WaterShuttle back (real mode: ferry).",
+      "description": "UNESCO windmills polder walk + lunch (Food page); 15:25 WaterShuttle back.",
       "url": "https://www.kinderdijk.com",
       "photos": [
         "/photos/kinderdijk.jpg"
@@ -513,7 +513,7 @@
       "start": "15:55",
       "end": "16:00",
       "category": "transit",
-      "description": "Tram to the Euromast (real mode: tram).",
+      "description": "Tram to the Euromast.",
       "url": "https://www.waterbus.nl",
       "photos": [
         "/photos/erasmusbrug-night.jpg"
@@ -579,7 +579,7 @@
       "start": "18:00",
       "end": "20:00",
       "category": "food",
-      "description": "Dinner, booked, in the old Holland America Line HQ. Tram/metro back (real mode: tram/metro).",
+      "description": "Dinner, booked, in the old Holland America Line HQ. Tram/metro back.",
       "note": "Booked.",
       "url": "https://hotelnewyork.com",
       "photos": [

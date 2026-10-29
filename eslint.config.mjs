@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Copied map workers and the generated service worker.
+    "public/*.js",
   ]),
 ]);
 
