@@ -8103,7 +8103,7 @@
     "distanceMeters": 2127,
     "source": "osrm"
   },
-  "rotterdam-airbnb-sunday__rtm-sixt-pickup": {
+  "rotterdam-airbnb-sunday__rtm-avis-pickup": {
     "coordinates": [
       [
         4.4637,
@@ -8241,7 +8241,7 @@
     "distanceMeters": 6387,
     "source": "sketch"
   },
-  "rtm-sixt-pickup__ghent": {
+  "rtm-avis-pickup__ghent": {
     "coordinates": [
       [
         4.435851,
@@ -39229,7 +39229,7 @@
     "distanceMeters": 23219,
     "source": "osrm"
   },
-  "badhoevedorp-studio__schiphol-sixt-return": {
+  "badhoevedorp-studio__schiphol-avis-return": {
     "coordinates": [
       [
         4.776907,
@@ -40087,7 +40087,7 @@
     "distanceMeters": 6470,
     "source": "osrm"
   },
-  "schiphol-sixt-return__schiphol-departure": {
+  "schiphol-avis-return__schiphol-departure": {
     "coordinates": [
       [
         4.763471,

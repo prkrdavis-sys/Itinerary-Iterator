@@ -433,7 +433,7 @@
       ]
     },
     {
-      "id": "rtm-sixt-pickup",
+      "id": "rtm-avis-pickup",
       "city": "Rotterdam",
       "name": "Rotterdam The Hague Airport",
       "coords": [
@@ -444,7 +444,7 @@
       "start": "09:00",
       "end": "09:35",
       "category": "transit",
-      "description": "Pick up the Sixt car at RTM and point it southeast toward Ghent. Traffic and coffee stops belong in the two-and-a-half-hour window.",
+      "description": "Pick up the Avis car at RTM and point it southeast toward Ghent. Traffic and coffee stops belong in the two-and-a-half-hour window.",
       "photos": [
         "/photos/rtm-airport.jpg"
       ],
@@ -709,9 +709,9 @@
       ]
     },
     {
-      "id": "schiphol-sixt-return",
+      "id": "schiphol-avis-return",
       "city": "Amsterdam",
-      "name": "Sixt return (Schiphol Plaza)",
+      "name": "Avis return (Aankomstpassage, Schiphol Plaza)",
       "coords": [
         4.7655,
         52.3088
@@ -720,14 +720,14 @@
       "start": "08:00",
       "end": "08:30",
       "category": "transit",
-      "description": "Return the rental at the Sixt desk at Schiphol Plaza by the arrivals hall. Fill the tank, keep the receipt, then head into the terminal for the ten-thirty flight.",
+      "description": "Return the Avis rental at Schiphol by nine am at the Aankomstpassage desk in the Schiphol Plaza area. Fill the tank, keep the receipt, and use the key box at the return location if the desk is closed after hours.",
       "photos": [
         "/photos/schiphol-terminal.jpg"
       ],
-      "note": "Car return at Schiphol Sixt (24h return available). The current rental booking still lists an Amsterdam-Centrum 11:00 drop-off, which does not work with the 10:30 flight. Rebook to Schiphol before Fri 10/30.",
+      "note": "Avis return at Schiphol is due by 09:00. If the desk is closed, leave the keys in the key box at the return location. Flight SK 552 departs at 10:30.",
       "tips": [
         "Leave Badhoevedorp around seven-forty-five.",
-        "Allow time to walk from the desk to check-in."
+        "Allow time to walk from the return desk to check-in."
       ]
     },
     {
@@ -748,7 +748,7 @@
       ],
       "tips": [
         "SAS Light means paid bags and seats if you want them.",
-        "Walk from the plaza return desk into departures."
+        "Walk from the Avis return into departures."
       ]
     }
   ],
@@ -1045,7 +1045,7 @@
     },
     {
       "from": "rotterdam-airbnb-sunday",
-      "to": "rtm-sixt-pickup",
+      "to": "rtm-avis-pickup",
       "mode": "train",
       "depart": "08:20",
       "arrive": "08:55",
@@ -1066,7 +1066,7 @@
       ]
     },
     {
-      "from": "rtm-sixt-pickup",
+      "from": "rtm-avis-pickup",
       "to": "ghent",
       "mode": "car",
       "depart": "09:40",
@@ -1159,19 +1159,19 @@
     },
     {
       "from": "badhoevedorp-studio",
-      "to": "schiphol-sixt-return",
+      "to": "schiphol-avis-return",
       "mode": "car",
       "depart": "07:45",
       "arrive": "08:00",
-      "notes": "Short morning drive from Badhoevedorp to Schiphol Plaza for the Sixt return."
+      "notes": "Short morning drive from Badhoevedorp to Schiphol Plaza for the Avis return."
     },
     {
-      "from": "schiphol-sixt-return",
+      "from": "schiphol-avis-return",
       "to": "schiphol-departure",
       "mode": "walk",
       "depart": "08:35",
       "arrive": "08:50",
-      "notes": "Walk from the plaza desk into the departures hall for check-in."
+      "notes": "Walk from the Avis return desk into the departures hall for check-in."
     }
   ]
 }
