@@ -411,6 +411,17 @@ async function vendorAssets(): Promise<void> {
 
 async function main(): Promise<void> {
   mkdirSync(mapsDir, { recursive: true });
+  if (process.env.VERCEL === "1") {
+    if (!existsSync(archivePath)) {
+      throw new Error(
+        "public/maps/trip.pmtiles is missing. Commit the offline map extract for Vercel builds.",
+      );
+    }
+    console.log("Using committed map extract on Vercel");
+    await vendorAssets();
+    return;
+  }
+
   await vendorAssets();
   const regions = PLANS.flat().map((band) => `${bandName(band)}\n${regionJson(band)}`);
   const source = sha256(`${SOURCE_VERSION}\n${regions.join("\n")}`);
