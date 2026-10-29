@@ -61,14 +61,14 @@ const IDS: Record<string, string> = {
   "2026-11-02|3": "gravensteen",
   "2026-11-02|4": "graslei-lunch",
   "2026-11-02|5": "damme",
-  "2026-11-02|6": "bruges-guesthouse-checkin",
+  "2026-11-02|6": "bruges-studio-checkin",
   "2026-11-02|7": "bruges-markt-burg",
   "2026-11-02|8": "cambrinus",
-  "2026-11-02|9": "bruges-guesthouse-sleep-mon",
-  "2026-11-03|1": "rozenhoedkaai",
-  "2026-11-03|2": "boniface-bridge",
-  "2026-11-03|3": "belfry-bruges",
-  "2026-11-03|4": "bruges-guesthouse-checkout",
+  "2026-11-02|9": "bruges-studio-sleep-mon",
+  "2026-11-03|1": "bruges-studio-checkout",
+  "2026-11-03|2": "rozenhoedkaai",
+  "2026-11-03|3": "boniface-bridge",
+  "2026-11-03|4": "belfry-bruges",
   "2026-11-03|5": "ezelpoort",
   "2026-11-03|6": "minnewater-lunch",
   "2026-11-03|7": "haamstede-westerlicht",
@@ -249,7 +249,7 @@ const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string
     credit: "CC BY-SA 4.0, Wikimedia Commons",
     creditUrl: "https://commons.wikimedia.org/wiki/File:Damme,_Belgium.jpg",
   },
-  "bruges-guesthouse-checkin": {
+  "bruges-studio-checkin": {
     photo: "/photos/bruges-canal.jpg",
     credit: "CC BY-SA 4.0, Wikimedia Commons (Bruges area substitute)",
     creditUrl: "https://commons.wikimedia.org/wiki/File:Brugge_-_Bruges_-_panoramio.jpg",
@@ -264,7 +264,7 @@ const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string
     credit: "CC BY-SA 4.0, Wikimedia Commons (Bruges centre substitute)",
     creditUrl: "https://commons.wikimedia.org/wiki/File:Brugge_-_Rozenhoedkaai.jpg",
   },
-  "bruges-guesthouse-sleep-mon": {
+  "bruges-studio-sleep-mon": {
     photo: "/photos/bruges-canal.jpg",
     credit: "CC BY-SA 4.0, Wikimedia Commons (Bruges area substitute)",
     creditUrl: "https://commons.wikimedia.org/wiki/File:Brugge_-_Bruges_-_panoramio.jpg",
@@ -284,7 +284,7 @@ const PHOTOS: Record<string, { photo: string; credit: string; creditUrl?: string
     credit: "CC BY-SA 4.0, Wikimedia Commons",
     creditUrl: "https://commons.wikimedia.org/wiki/File:Belfort_van_Brugge.jpg",
   },
-  "bruges-guesthouse-checkout": {
+  "bruges-studio-checkout": {
     photo: "/photos/bruges-canal.jpg",
     credit: "CC BY-SA 4.0, Wikimedia Commons (Bruges area substitute)",
     creditUrl: "https://commons.wikimedia.org/wiki/File:Brugge_-_Bruges_-_panoramio.jpg",
@@ -409,7 +409,7 @@ function resolveTimes(
     "holiday-inn-sleep-fri": { start: "22:45", end: "23:59" },
     "rotterdam-airbnb-sunday-morning": { start: "07:00", end: "10:30" },
     "rotterdam-airbnb-sunday-night": { start: "20:30", end: "23:59" },
-    "bruges-guesthouse-sleep-mon": { start: "20:45", end: "23:59" },
+    "bruges-studio-sleep-mon": { start: "20:45", end: "23:59" },
     "badhoevedorp-studio": { start: "22:15", end: "23:59" },
     "badhoevedorp-morning": { start: "07:00", end: "07:45" },
     "iad-arrival": { start: "17:15", end: "17:15" },

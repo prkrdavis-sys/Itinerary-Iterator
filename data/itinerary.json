@@ -449,7 +449,7 @@
       "start": "07:00",
       "end": "10:30",
       "category": "stay",
-      "description": "Sleep after rave; brunch ~11:00 (options on Food page). Location approximate.",
+      "description": "Sleep after rave; brunch 10:00-11:00 (options on Food page). Location approximate.",
       "photos": [
         "/photos/rotterdam-city.jpg"
       ],
@@ -636,10 +636,10 @@
         51.9244
       ],
       "day": 5,
-      "start": "07:45",
+      "start": "07:30",
       "end": "08:30",
       "category": "stay",
-      "description": "Breakfast first (Food page); checkout by 11:00, plan for bags vs car pick-up still open. Location approximate.",
+      "description": "Breakfast 7:30 (Food page); check out ~8:15-8:30 with the bags, then to RTM (Avis desk opens 8:30). Location approximate.",
       "photos": [
         "/photos/rotterdam-city.jpg"
       ],
@@ -659,7 +659,7 @@
       "start": "09:00",
       "end": "09:15",
       "category": "transit",
-      "description": "Car rental booked; drive ~2h20 to Ghent.",
+      "description": "Car rental booked; desk opens 8:30; drive ~2h20 to Ghent.",
       "note": "Booked.",
       "url": "https://www.avis.nl",
       "photos": [
@@ -700,9 +700,9 @@
       ],
       "day": 5,
       "start": "13:00",
-      "end": "15:00",
+      "end": "14:45",
       "category": "sight",
-      "description": "Canal-side guild houses; lunch options on the Food page. Scenic drive via Eeklo/Maldegem.",
+      "description": "Canal-side guild houses; lunch options on the Food page. Scenic drive via Eeklo/Maldegem, ~70 min (14:45-16:00).",
       "url": "https://visit.gent.be/en",
       "photos": [
         "/photos/graslei.jpg"
@@ -721,9 +721,9 @@
       ],
       "day": 5,
       "start": "16:00",
-      "end": "16:45",
+      "end": "16:30",
       "category": "sight",
-      "description": "Tree-lined canal, windmill and old village; photos. ~15 min to Bruges.",
+      "description": "Short stop before dusk: tree-lined canal, windmill and old village; photos. ~15 min to the studio.",
       "url": "https://www.visitdamme.be",
       "photos": [
         "/photos/damme-windmill.jpg"
@@ -733,18 +733,18 @@
       "tips": []
     },
     {
-      "id": "bruges-guesthouse-checkin",
+      "id": "bruges-studio-checkin",
       "city": "Bruges",
-      "name": "Bruges guesthouse (Airbnb)",
+      "name": "Bruges studio (Airbnb)",
       "coords": [
         3.2557,
         51.1914
       ],
       "day": 5,
-      "start": "17:00",
-      "end": "17:30",
+      "start": "16:45",
+      "end": "17:15",
       "category": "stay",
-      "description": "Check in after 15:00; reserved; free parking and bikes.",
+      "description": "Check in first (after 15:00); reserved; free parking and bikes, outside the centre. Then into the centre ~17:30 by bike or car.",
       "note": "Booked.",
       "photos": [
         "/photos/bruges-canal.jpg"
@@ -762,10 +762,10 @@
         51.2087
       ],
       "day": 5,
-      "start": "17:45",
+      "start": "17:30",
       "end": "18:25",
       "category": "sight",
-      "description": "Illuminated medieval squares; Rozenhoedkaai photos.",
+      "description": "Illuminated medieval squares; Rozenhoedkaai night photos.",
       "url": "https://www.visitbruges.be/en",
       "photos": [
         "/photos/bruges-markt.jpg"
@@ -799,9 +799,9 @@
       ]
     },
     {
-      "id": "bruges-guesthouse-sleep-mon",
+      "id": "bruges-studio-sleep-mon",
       "city": "Bruges",
-      "name": "Bruges guesthouse (Airbnb)",
+      "name": "Bruges studio (Airbnb)",
       "coords": [
         3.2557,
         51.1914
@@ -811,6 +811,26 @@
       "end": "23:59",
       "category": "stay",
       "description": "Sleep.",
+      "photos": [
+        "/photos/bruges-canal.jpg"
+      ],
+      "photoCredit": "CC BY-SA 4.0, Wikimedia Commons (Bruges area substitute)",
+      "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Brugge_-_Bruges_-_panoramio.jpg",
+      "tips": []
+    },
+    {
+      "id": "bruges-studio-checkout",
+      "city": "Bruges",
+      "name": "Bruges studio (Airbnb)",
+      "coords": [
+        3.2557,
+        51.1914
+      ],
+      "day": 6,
+      "start": "08:15",
+      "end": "08:25",
+      "category": "stay",
+      "description": "Check out with the bags in the car, then drive ~10 min to a centre car park; breakfast 8:30 (Food page).",
       "photos": [
         "/photos/bruges-canal.jpg"
       ],
@@ -830,7 +850,7 @@
       "start": "09:15",
       "end": "09:35",
       "category": "sight",
-      "description": "Breakfast 8:30 first (Food page). Most photographed spot in Bruges.",
+      "description": "Day photos. Most photographed spot in Bruges.",
       "url": "https://nl.wikipedia.org/wiki/Rozenhoedkaai",
       "photos": [
         "/photos/rozenhoedkaai.jpg"
@@ -878,26 +898,6 @@
       ],
       "photoCredit": "CC BY-SA 4.0, Wikimedia Commons",
       "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Belfort_van_Brugge.jpg",
-      "tips": []
-    },
-    {
-      "id": "bruges-guesthouse-checkout",
-      "city": "Bruges",
-      "name": "Bruges guesthouse (Airbnb)",
-      "coords": [
-        3.2557,
-        51.1914
-      ],
-      "day": 6,
-      "start": "10:50",
-      "end": "11:00",
-      "category": "stay",
-      "description": "Load the car and check out by 11:00.",
-      "photos": [
-        "/photos/bruges-canal.jpg"
-      ],
-      "photoCredit": "CC BY-SA 4.0, Wikimedia Commons (Bruges area substitute)",
-      "photoCreditUrl": "https://commons.wikimedia.org/wiki/File:Brugge_-_Bruges_-_panoramio.jpg",
       "tips": []
     },
     {
@@ -1303,22 +1303,22 @@
       "from": "graslei-lunch",
       "to": "damme",
       "mode": "car",
-      "depart": "15:00",
+      "depart": "14:45",
       "arrive": "16:00"
     },
     {
       "from": "damme",
-      "to": "bruges-guesthouse-checkin",
+      "to": "bruges-studio-checkin",
       "mode": "car",
-      "depart": "16:45",
-      "arrive": "17:00"
+      "depart": "16:30",
+      "arrive": "16:45"
     },
     {
-      "from": "bruges-guesthouse-checkin",
+      "from": "bruges-studio-checkin",
       "to": "bruges-markt-burg",
       "mode": "car",
-      "depart": "17:30",
-      "arrive": "17:45"
+      "depart": "17:15",
+      "arrive": "17:30"
     },
     {
       "from": "bruges-markt-burg",
@@ -1329,16 +1329,23 @@
     },
     {
       "from": "cambrinus",
-      "to": "bruges-guesthouse-sleep-mon",
+      "to": "bruges-studio-sleep-mon",
       "mode": "car",
       "depart": "20:30",
       "arrive": "20:45"
     },
     {
-      "from": "bruges-guesthouse-sleep-mon",
+      "from": "bruges-studio-sleep-mon",
+      "to": "bruges-studio-checkout",
+      "mode": "walk",
+      "notes": "Overnight at the same stay."
+    },
+    {
+      "from": "bruges-studio-checkout",
       "to": "rozenhoedkaai",
-      "mode": "train",
-      "notes": "Leave around 23:59; aim to arrive by 09:15."
+      "mode": "car",
+      "depart": "08:25",
+      "arrive": "09:15"
     },
     {
       "from": "rozenhoedkaai",
@@ -1356,16 +1363,9 @@
     },
     {
       "from": "belfry-bruges",
-      "to": "bruges-guesthouse-checkout",
-      "mode": "car",
-      "depart": "10:45",
-      "arrive": "10:50"
-    },
-    {
-      "from": "bruges-guesthouse-checkout",
       "to": "ezelpoort",
       "mode": "car",
-      "depart": "11:00",
+      "depart": "10:45",
       "arrive": "11:15"
     },
     {

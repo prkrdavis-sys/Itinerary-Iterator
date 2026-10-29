@@ -335,7 +335,7 @@
   "end": "10:30",
   "category": "lodging",
   "mode_to_next": "bus",
-  "note": "Sleep after rave; brunch ~11:00 (options on Food page). Location approximate.",
+  "note": "Sleep after rave; brunch 10:00-11:00 (options on Food page). Location approximate.",
   "url": ""
  },
  {
@@ -476,11 +476,11 @@
    4.4778,
    51.9244
   ],
-  "start": "07:45",
+  "start": "07:30",
   "end": "08:30",
   "category": "lodging",
   "mode_to_next": "car",
-  "note": "Breakfast first (Food page); checkout by 11:00, plan for bags vs car pick-up still open. Location approximate.",
+  "note": "Breakfast 7:30 (Food page); check out ~8:15-8:30 with the bags, then to RTM (Avis desk opens 8:30). Location approximate.",
   "url": ""
  },
  {
@@ -496,7 +496,7 @@
   "end": "09:15",
   "category": "transport",
   "mode_to_next": "car",
-  "note": "Car rental booked; drive ~2h20 to Ghent.",
+  "note": "Car rental booked; desk opens 8:30; drive ~2h20 to Ghent.",
   "url": "https://www.avis.nl"
  },
  {
@@ -525,10 +525,10 @@
    51.0548
   ],
   "start": "13:00",
-  "end": "15:00",
+  "end": "14:45",
   "category": "sight",
   "mode_to_next": "car",
-  "note": "Canal-side guild houses; lunch options on the Food page. Scenic drive via Eeklo/Maldegem.",
+  "note": "Canal-side guild houses; lunch options on the Food page. Scenic drive via Eeklo/Maldegem, ~70 min (14:45-16:00).",
   "url": "https://visit.gent.be/en"
  },
  {
@@ -541,26 +541,26 @@
    51.2505
   ],
   "start": "16:00",
-  "end": "16:45",
+  "end": "16:30",
   "category": "sight",
   "mode_to_next": "car",
-  "note": "Tree-lined canal, windmill and old village; photos. ~15 min to Bruges.",
+  "note": "Short stop before dusk: tree-lined canal, windmill and old village; photos. ~15 min to the studio.",
   "url": "https://www.visitdamme.be"
  },
  {
   "day": "2026-11-02",
   "order": 6,
-  "name": "Bruges guesthouse (Airbnb)",
+  "name": "Bruges studio (Airbnb)",
   "area": "Assebroek, Bruges",
   "lonlat": [
    3.2557,
    51.1914
   ],
-  "start": "17:00",
-  "end": "17:30",
+  "start": "16:45",
+  "end": "17:15",
   "category": "lodging",
   "mode_to_next": "car",
-  "note": "Check in after 15:00; booked; free parking and bikes.",
+  "note": "Check in first (after 15:00); booked; free parking and bikes, outside the centre. Then into the centre ~17:30 by bike or car.",
   "url": ""
  },
  {
@@ -572,11 +572,11 @@
    3.2244,
    51.2087
   ],
-  "start": "17:45",
+  "start": "17:30",
   "end": "18:25",
   "category": "sight",
   "mode_to_next": "walk",
-  "note": "Illuminated medieval squares; Rozenhoedkaai photos.",
+  "note": "Illuminated medieval squares; Rozenhoedkaai night photos.",
   "url": "https://www.visitbruges.be/en"
  },
  {
@@ -599,7 +599,7 @@
  {
   "day": "2026-11-02",
   "order": 9,
-  "name": "Bruges guesthouse (Airbnb)",
+  "name": "Bruges studio (Airbnb)",
   "area": "Assebroek, Bruges",
   "lonlat": [
    3.2557,
@@ -615,6 +615,22 @@
  {
   "day": "2026-11-03",
   "order": 1,
+  "name": "Bruges studio (Airbnb)",
+  "area": "Assebroek, Bruges",
+  "lonlat": [
+   3.2557,
+   51.1914
+  ],
+  "start": "08:15",
+  "end": "08:25",
+  "category": "lodging",
+  "mode_to_next": "car",
+  "note": "Check out with the bags in the car, then drive ~10 min to a centre car park; breakfast 8:30 (Food page).",
+  "url": ""
+ },
+ {
+  "day": "2026-11-03",
+  "order": 2,
   "name": "Rozenhoedkaai",
   "area": "Centre, Bruges",
   "lonlat": [
@@ -625,12 +641,12 @@
   "end": "09:35",
   "category": "sight",
   "mode_to_next": "walk",
-  "note": "Breakfast 8:30 first (Food page). Most photographed spot in Bruges.",
+  "note": "Day photos. Most photographed spot in Bruges.",
   "url": "https://nl.wikipedia.org/wiki/Rozenhoedkaai"
  },
  {
   "day": "2026-11-03",
-  "order": 2,
+  "order": 3,
   "name": "Boniface Bridge",
   "area": "Centre, Bruges",
   "lonlat": [
@@ -646,7 +662,7 @@
  },
  {
   "day": "2026-11-03",
-  "order": 3,
+  "order": 4,
   "name": "Belfry of Bruges",
   "area": "Markt, Bruges",
   "lonlat": [
@@ -659,22 +675,6 @@
   "mode_to_next": "car",
   "note": "Climb 366 steps (opens 10:00); then Burg square; buy tickets on the day.",
   "url": "https://www.museabrugge.be"
- },
- {
-  "day": "2026-11-03",
-  "order": 4,
-  "name": "Bruges guesthouse (Airbnb)",
-  "area": "Assebroek, Bruges",
-  "lonlat": [
-   3.2557,
-   51.1914
-  ],
-  "start": "10:50",
-  "end": "11:00",
-  "category": "lodging",
-  "mode_to_next": "car",
-  "note": "Load the car and check out by 11:00.",
-  "url": ""
  },
  {
   "day": "2026-11-03",
